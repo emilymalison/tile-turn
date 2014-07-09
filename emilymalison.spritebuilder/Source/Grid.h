@@ -8,6 +8,8 @@
 
 #import "CCNode.h"
 
-@interface Grid : CCNode
+@interface Grid : CCNodeColor
+
+-(void)setUpGrid;
 
 @end

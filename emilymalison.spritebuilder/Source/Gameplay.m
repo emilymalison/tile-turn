@@ -7,7 +7,11 @@
 //
 
 #import "Gameplay.h"
+#import "Grid.h"
 
-@implementation Gameplay
+@implementation Gameplay{
+    Grid *_grid;
+
+}
 
 @end
