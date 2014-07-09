@@ -40,11 +40,11 @@
 		<key>children</key>
 		<array/>
 		<key>customClass</key>
-		<string>Dot</string>
+		<string></string>
 		<key>displayName</key>
 		<string>CCSprite</string>
 		<key>memberVarAssignmentName</key>
-		<string>dot2</string>
+		<string></string>
 		<key>memberVarAssignmentType</key>
 		<integer>1</integer>
 		<key>properties</key>

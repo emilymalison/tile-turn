@@ -138,10 +138,10 @@
 								<string>Color3</string>
 								<key>value</key>
 								<array>
-									<real>0.80000001192092896</real>
-									<real>0.80000001192092896</real>
-									<real>0.80000001192092896</real>
-									<real>0.5</real>
+									<real>0.90196079015731812</real>
+									<real>0.90196079015731812</real>
+									<real>0.90196079015731812</real>
+									<real>1</real>
 								</array>
 							</dict>
 							<dict>
@@ -150,7 +150,7 @@
 								<key>type</key>
 								<string>Float</string>
 								<key>value</key>
-								<real>0.5</real>
+								<real>1</real>
 							</dict>
 						</array>
 						<key>selected</key>
