@@ -25,12 +25,16 @@ static const int TILE_SIZE=3;
     [super onEnter];
     
     [self setUpTile];
+    
+    self.userInteractionEnabled = YES;
 }
 
 -(void)setUpTile{
     _tileColumnHeight=self.contentSize.height/3;
     _tileColumnWidth=self.contentSize.width/3;
     
+    float _dotBorderHorizontal=(self.contentSize.width)/2;
+    float _dotBorderVertical=(self.contentSize.height)/2;
     
     _dotMarginHorizontal=_tileColumnWidth/TILE_SIZE;
     _dotMarginVertical=_tileColumnHeight/TILE_SIZE;
@@ -74,6 +78,18 @@ static const int TILE_SIZE=3;
         y+=_tileColumnHeight;
     }
     
+}
+
+-(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
+    self.userInteractionEnabled=NO;
+    [NSTimer scheduledTimerWithTimeInterval:.5 target:self selector:@selector(enableTouch) userInfo:nil repeats:NO];
+    CCActionRotateBy *rotateTile= [CCActionRotateBy actionWithDuration:.5 angle:90];
+    [self runAction:rotateTile];
+    
+}
+
+-(void)enableTouch{
+    self.userInteractionEnabled=YES;
 }
 
 

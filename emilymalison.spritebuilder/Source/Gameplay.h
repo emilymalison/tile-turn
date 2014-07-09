@@ -10,4 +10,7 @@
 
 @interface Gameplay : CCNode
 
+
+-(void)timerExpired;
+
 @end

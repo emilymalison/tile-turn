@@ -7,6 +7,8 @@
 //
 
 #import "Grid.h"
+#import "MainScene.h"
+#import "Tile.h"
 
 static const int GRID_SIZE=3;
 
@@ -20,21 +22,18 @@ static const int GRID_SIZE=3;
 
 - (void)onEnter
 {
-    
     [super onEnter];
     
     [self setUpGrid];
-    
-    // accept touches on the grid
-    self.userInteractionEnabled = YES;
 }
 
 -(void)setUpGrid{
-    //_tileMarginHorizontal=(self.contentSize.width - (GRID_SIZE *_columnWidth))/(GRID_SIZE+1);
-    //_tileMarginVertical=(self.contentSize.height - (GRID_SIZE *_columnHeight))/(GRID_SIZE+1);
     
-    _tileMarginVertical=0;
-    _tileMarginHorizontal=0;
+    _columnWidth=(self.contentSize.width/GRID_SIZE);
+    _columnHeight=(self.contentSize.height/GRID_SIZE);
+    
+    _tileMarginVertical=(_columnWidth/2);
+    _tileMarginHorizontal=(_columnHeight/2);
     
     float x=_tileMarginHorizontal;
     float y=_tileMarginVertical;
@@ -45,23 +44,18 @@ static const int GRID_SIZE=3;
         
         
         for (int j=0; j<GRID_SIZE; j++) {
-            CCNode *tile= [CCBReader load:@"Tile"];
-            _columnWidth=(self.contentSize.width/GRID_SIZE);
-            _columnHeight=(self.contentSize.height/GRID_SIZE);
+            Tile *tile= (Tile*)[CCBReader load:@"Tile"];
             
             [tile setScaleX:((_columnWidth)/tile.contentSize.width)];
             [tile setScaleY:((_columnHeight)/tile.contentSize.height)];
             
-            _tileMarginHorizontal=(self.contentSize.width - (GRID_SIZE *_columnWidth))/(GRID_SIZE+1);
-            _tileMarginVertical=(self.contentSize.height - (GRID_SIZE *_columnHeight))/(GRID_SIZE+1);
-            
             [self addChild:tile];
-            tile.contentSize = CGSizeMake(_columnWidth, _columnHeight);
+            //tile.contentSize = CGSizeMake(_columnWidth, _columnHeight);
 			tile.position = ccp(x, y);
             
-			x+= _columnWidth + _tileMarginHorizontal;
+			x+= _columnWidth;
 		}
-		y += _columnHeight + _tileMarginVertical;
+		y += _columnHeight;
     }
     
 }
