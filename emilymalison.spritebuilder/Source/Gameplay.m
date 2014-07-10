@@ -13,21 +13,26 @@
     Grid *_grid;
     int timeRemaining;
     CCLabelTTF *_timer;
+    NSTimer *myTimer;
 
 }
 
 -(void)onEnter{
     [super onEnter];
     
-    [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(timerExpired) userInfo:nil repeats:NO];
-    [self schedule:@selector(second) interval:1.f];
+    myTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(second) userInfo:nil repeats:YES];
     timeRemaining=60;
-
 }
 
 -(void)second{
-    _timer.string= [NSString stringWithFormat:@"%d", timeRemaining];
     timeRemaining-=1;
+    _timer.string= [NSString stringWithFormat:@"%d", timeRemaining];
+    if (timeRemaining==0) {
+        [myTimer invalidate];
+        myTimer=nil;
+        [self timerExpired];
+    }
+    
 }
 
 -(void)timerExpired{
