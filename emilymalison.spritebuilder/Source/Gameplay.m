@@ -17,12 +17,16 @@
 
 }
 
+#pragma mark - Timer
+
 -(void)onEnter{
     [super onEnter];
     
     myTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(second) userInfo:nil repeats:YES];
     timeRemaining=60;
 }
+
+#pragma mark - Score
 
 -(void)second{
     timeRemaining-=1;

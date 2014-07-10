@@ -7,16 +7,17 @@
 //
 
 #import "Tile.h"
+#import "Dot.h"
 
 static const int TILE_SIZE=3;
 
 @implementation Tile{
-    NSMutableArray *_dotArray;
     NSMutableArray *_tileArray;
     CGFloat _dotMarginHorizontal;
     CGFloat _dotMarginVertical;
     CGFloat _tileColumnWidth;
     CGFloat _tileColumnHeight;
+    Dot *dot;
 }
 
 - (void)onEnter
@@ -27,14 +28,18 @@ static const int TILE_SIZE=3;
     [self setUpTile];
     
     self.userInteractionEnabled = YES;
+    
+    self.rotation=0;
 }
+
+#pragma mark - Filling Tile with Dots
 
 -(void)setUpTile{
     _tileColumnHeight=self.contentSize.height/3;
     _tileColumnWidth=self.contentSize.width/3;
     
-    float _dotBorderHorizontal=(self.contentSize.width)/2;
-    float _dotBorderVertical=(self.contentSize.height)/2;
+    //float _dotBorderHorizontal=(self.contentSize.width)/2;
+    //float _dotBorderVertical=(self.contentSize.height)/2;
     
     _dotMarginHorizontal=_tileColumnWidth/TILE_SIZE;
     _dotMarginVertical=_tileColumnHeight/TILE_SIZE;
@@ -42,35 +47,51 @@ static const int TILE_SIZE=3;
     float x=_dotMarginHorizontal;
     float y=_dotMarginVertical;
     
+    self.dotColorArray=[NSMutableArray array];
+    _tileArray=[NSMutableArray array];
+    
+    
+    
     
     for (int i=0; i<3; i++) {
+        [self.dotColorArray addObject:[NSMutableArray array]];
+        _tileArray[i]=[NSMutableArray array];
         x=_dotMarginHorizontal;
         
         for (int j=0; j<3; j++) {
             int numberDot=arc4random()%3;
             if (numberDot==0) {
-                CCSprite *dot=(CCSprite*)[CCBReader load:@"Dot1"];
+                dot=(Dot*)[CCBReader load:@"Dot1"];
+                dot.DotColor=blue;
                 [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2];
                 [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2];
                 [self addChild:dot];
                 dot.contentSize = CGSizeMake(_tileColumnWidth, _tileColumnHeight);
                 dot.position = ccp(x, y);
+                _tileArray[i][j]=dot;
+                [self.dotColorArray[i] addObject:[NSNumber numberWithInteger: dot.DotColor]];
             }
             else if(numberDot==1){
-                CCSprite *dot=(CCSprite*)[CCBReader load: @"Dot2"];
+                dot=(Dot*)[CCBReader load: @"Dot2"];
+                dot.DotColor=green;
                 [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2];
                 [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2];
                 [self addChild:dot];
                 dot.contentSize=CGSizeMake(_tileColumnWidth, _tileColumnHeight);
                 dot.position=ccp(x, y);
+                [self.dotColorArray[i] addObject:[NSNumber numberWithInteger:dot.DotColor]];
+                _tileArray[i][j]=dot;
             }
             else if(numberDot==2){
-                CCSprite *dot=(CCSprite*)[CCBReader load: @"Dot3"];
+                dot=(Dot*)[CCBReader load: @"Dot3"];
+                dot.DotColor=white;
                 [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2];
                 [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2];
                 [self addChild:dot];
                 dot.contentSize=CGSizeMake(_tileColumnWidth, _tileColumnHeight);
                 dot.position=ccp(x, y);
+                [self.dotColorArray[i] addObject:[NSNumber numberWithInteger:dot.DotColor]];
+                _tileArray[i][j]=dot;
             }
             
             x+=_tileColumnWidth;
@@ -80,20 +101,34 @@ static const int TILE_SIZE=3;
     
 }
 
+#pragma mark - Rotating Tile
+
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
     self.userInteractionEnabled=NO;
     [NSTimer scheduledTimerWithTimeInterval:.5 target:self selector:@selector(enableTouch) userInfo:nil repeats:NO];
     CCActionRotateBy *rotateTile= [CCActionRotateBy actionWithDuration:.5 angle:90];
     [self runAction:rotateTile];
     
+    //TODO: Fix Array Rotation
+    /*NSMutableArray *oldColorArray=self.dotColorArray;
+    for (int i=2; i>=0; i--) {
+        for (int j=0; j<=2; j++) {
+            self.dotColorArray[i][j]=oldColorArray[j][TILE_SIZE-1-i];
+        }
+    }*/
+    
+    self.dotColorArray=[self rotateMatrix:self.dotColorArray];
 }
+
+
 
 -(void)enableTouch{
     self.userInteractionEnabled=YES;
 }
 
-
-
+-(NSMutableArray*)rotateMatrix:(NSMutableArray*)matrix{
+    return [NSMutableArray arrayWithObjects:[NSMutableArray arrayWithObjects:matrix[0][2], matrix[1][2], matrix[2][2], nil], [NSMutableArray arrayWithObjects:matrix[0][1], matrix[1][1], matrix[2][1], nil], [NSMutableArray arrayWithObjects:matrix[0][0], matrix[1][0], matrix[2][0], nil], nil];
+}
 
 
 

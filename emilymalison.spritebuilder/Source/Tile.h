@@ -10,5 +10,6 @@
 
 @interface Tile: CCNode
 
+@property(nonatomic, strong)NSMutableArray* dotColorArray;
 
 @end

@@ -12,6 +12,8 @@
 
 }
 
+#pragma mark - Loading Gameplay Scene
+
 -(void) startGame{
     CCScene *gameplayScene=[CCBReader loadAsScene:@"Gameplay"];
     [[CCDirector sharedDirector] replaceScene:gameplayScene];

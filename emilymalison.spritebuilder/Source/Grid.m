@@ -9,6 +9,7 @@
 #import "Grid.h"
 #import "MainScene.h"
 #import "Tile.h"
+#import "Dot.h"
 
 static const int GRID_SIZE=3;
 
@@ -26,6 +27,8 @@ static const int GRID_SIZE=3;
     
     [self setUpGrid];
 }
+
+#pragma mark - Filling Grid with Tiles
 
 -(void)setUpGrid{
     
@@ -60,5 +63,14 @@ static const int GRID_SIZE=3;
     
 }
 
+#pragma mark - Checking for Matches
+
+/*-(void)checkNeighbors{
+    for (int i=0; i<3; i++) {
+        for (int j=0; j<3; j++) {
+
+        }
+    }
+}*/
 @end
 
