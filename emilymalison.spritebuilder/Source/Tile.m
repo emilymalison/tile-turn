@@ -7,12 +7,12 @@
 //
 
 #import "Tile.h"
+#import "Grid.h"
 #import "Dot.h"
 
 static const int TILE_SIZE=3;
 
 @implementation Tile{
-    NSMutableArray *_tileArray;
     CGFloat _dotMarginHorizontal;
     CGFloat _dotMarginVertical;
     CGFloat _tileColumnWidth;
@@ -29,7 +29,7 @@ static const int TILE_SIZE=3;
     
     self.userInteractionEnabled = YES;
     
-    self.rotation=0;
+    self.tileRotation=0;
 }
 
 #pragma mark - Filling Tile with Dots
@@ -48,14 +48,14 @@ static const int TILE_SIZE=3;
     float y=_dotMarginVertical;
     
     self.dotColorArray=[NSMutableArray array];
-    _tileArray=[NSMutableArray array];
+    self.tileArray=[NSMutableArray array];
     
     
     
     
     for (int i=0; i<3; i++) {
         [self.dotColorArray addObject:[NSMutableArray array]];
-        _tileArray[i]=[NSMutableArray array];
+        self.tileArray[i]=[NSMutableArray array];
         x=_dotMarginHorizontal;
         
         for (int j=0; j<3; j++) {
@@ -68,7 +68,9 @@ static const int TILE_SIZE=3;
                 [self addChild:dot];
                 dot.contentSize = CGSizeMake(_tileColumnWidth, _tileColumnHeight);
                 dot.position = ccp(x, y);
-                _tileArray[i][j]=dot;
+                self.tileArray[i][j]=dot;
+                dot.dotX=i;
+                dot.dotY=j;
                 [self.dotColorArray[i] addObject:[NSNumber numberWithInteger: dot.DotColor]];
             }
             else if(numberDot==1){
@@ -80,7 +82,9 @@ static const int TILE_SIZE=3;
                 dot.contentSize=CGSizeMake(_tileColumnWidth, _tileColumnHeight);
                 dot.position=ccp(x, y);
                 [self.dotColorArray[i] addObject:[NSNumber numberWithInteger:dot.DotColor]];
-                _tileArray[i][j]=dot;
+                self.tileArray[i][j]=dot;
+                dot.dotX=i;
+                dot.dotY=j;
             }
             else if(numberDot==2){
                 dot=(Dot*)[CCBReader load: @"Dot3"];
@@ -91,13 +95,16 @@ static const int TILE_SIZE=3;
                 dot.contentSize=CGSizeMake(_tileColumnWidth, _tileColumnHeight);
                 dot.position=ccp(x, y);
                 [self.dotColorArray[i] addObject:[NSNumber numberWithInteger:dot.DotColor]];
-                _tileArray[i][j]=dot;
+                self.tileArray[i][j]=dot;
+                dot.dotX=i;
+                dot.dotY=j;
             }
             
             x+=_tileColumnWidth;
         }
         y+=_tileColumnHeight;
     }
+    //NSLog(@"%@", self.tileArray);
     
 }
 
@@ -105,19 +112,21 @@ static const int TILE_SIZE=3;
 
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
     self.userInteractionEnabled=NO;
-    [NSTimer scheduledTimerWithTimeInterval:.5 target:self selector:@selector(enableTouch) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:.51 target:self selector:@selector(enableTouch) userInfo:nil repeats:NO];
     CCActionRotateBy *rotateTile= [CCActionRotateBy actionWithDuration:.5 angle:90];
     [self runAction:rotateTile];
     
-    //TODO: Fix Array Rotation
-    /*NSMutableArray *oldColorArray=self.dotColorArray;
-    for (int i=2; i>=0; i--) {
-        for (int j=0; j<=2; j++) {
-            self.dotColorArray[i][j]=oldColorArray[j][TILE_SIZE-1-i];
-        }
-    }*/
+    self.tileRotation+=1;
     
-    self.dotColorArray=[self rotateMatrix:self.dotColorArray];
+    if (self.tileRotation==4) {
+        self.tileRotation=0;
+    }
+    
+    NSLog(@"%d", self.tileRotation);
+    //TODO: Fix Array Rotation
+    self.dotColorArray=[self rotateColorMatrix:self.dotColorArray];
+    
+    [(Grid*)self.parent checkTile:self];
 }
 
 
@@ -126,7 +135,7 @@ static const int TILE_SIZE=3;
     self.userInteractionEnabled=YES;
 }
 
--(NSMutableArray*)rotateMatrix:(NSMutableArray*)matrix{
+-(NSMutableArray*)rotateColorMatrix:(NSMutableArray*)matrix{
     return [NSMutableArray arrayWithObjects:[NSMutableArray arrayWithObjects:matrix[0][2], matrix[1][2], matrix[2][2], nil], [NSMutableArray arrayWithObjects:matrix[0][1], matrix[1][1], matrix[2][1], nil], [NSMutableArray arrayWithObjects:matrix[0][0], matrix[1][0], matrix[2][0], nil], nil];
 }
 

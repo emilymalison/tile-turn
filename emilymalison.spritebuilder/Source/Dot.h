@@ -18,6 +18,9 @@ typedef enum {
 
 @property (nonatomic, assign)NSInteger matchingNeighbors;
 @property (nonatomic, assign)NSUInteger DotColor;
+@property (nonatomic, assign)int dotX;
+@property (nonatomic, assign)int dotY;
+
 
 
 @end

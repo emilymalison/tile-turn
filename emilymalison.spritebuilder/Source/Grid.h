@@ -7,9 +7,13 @@
 //
 
 #import "CCNode.h"
+#import "Tile.h"
 
 @interface Grid : CCNodeColor
 
 -(void)setUpGrid;
+-(void)checkTile:(Tile*)rotatedTile;
+
+
 
 @end
