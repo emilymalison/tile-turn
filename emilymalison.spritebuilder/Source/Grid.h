@@ -15,6 +15,4 @@
 -(void)setUpGrid;
 -(void)checkTile:(Tile*)rotatedTile;
 
-@property (nonatomic, weak) Gameplay *gameplay;
-
 @end

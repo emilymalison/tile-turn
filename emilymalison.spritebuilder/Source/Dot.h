@@ -16,12 +16,8 @@ typedef enum {
 
 @interface Dot : CCSprite
 
-@property (nonatomic, assign)NSInteger matchingNeighbors;
 @property (nonatomic, assign)NSUInteger DotColor;
 @property (nonatomic, assign)int dotX;
 @property (nonatomic, assign)int dotY;
-@property (nonatomic, assign)BOOL dotChecked;
-
-
 
 @end

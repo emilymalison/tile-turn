@@ -31,7 +31,8 @@ static const int TILE_SIZE=3;
     self.userInteractionEnabled = YES;
     canTouch = YES;
     
-    self.tileRotation=0;
+    self.remove=NO;
+    
 }
 
 #pragma mark - Filling Tile with Dots
@@ -74,7 +75,6 @@ static const int TILE_SIZE=3;
                 dot.dotX=i;
                 dot.dotY=j;
                 [self.dotColorArray[i] addObject:[NSNumber numberWithInteger: dot.DotColor]];
-                dot.dotChecked=false;
             }
             else if(numberDot==1){
                 dot=(Dot*)[CCBReader load: @"Dot2"];
@@ -88,7 +88,6 @@ static const int TILE_SIZE=3;
                 self.tileArray[i][j]=dot;
                 dot.dotX=i;
                 dot.dotY=j;
-                dot.dotChecked=false;
             }
             else if(numberDot==2){
                 dot=(Dot*)[CCBReader load: @"Dot3"];
@@ -102,7 +101,6 @@ static const int TILE_SIZE=3;
                 self.tileArray[i][j]=dot;
                 dot.dotX=i;
                 dot.dotY=j;
-                dot.dotChecked=false;
             }
             
             x+=_tileColumnWidth;
@@ -123,16 +121,12 @@ static const int TILE_SIZE=3;
             canTouch= YES;
         }];
         [self runAction:[CCActionSequence actionOne:rotateTile two:resetTouch]];
-        
-        self.tileRotation+=1;
-        
-        if (self.tileRotation==4) {
-            self.tileRotation=0;
-        }
+    
         //TODO: Fix Array Rotation
         self.dotColorArray=[self rotateColorMatrix:self.dotColorArray];
         
         [(Grid*)self.parent checkTile:self];
+        
     }
 }
 

@@ -14,6 +14,6 @@
 @property(nonatomic, strong)NSMutableArray* tileArray;
 @property(nonatomic, assign)int tileX;
 @property(nonatomic, assign)int tileY;
-@property(nonatomic, assign)int tileRotation;
+@property(nonatomic, assign)BOOL remove;
 
 @end
