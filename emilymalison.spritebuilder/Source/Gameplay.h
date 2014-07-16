@@ -12,5 +12,6 @@
 
 
 -(void)timerExpired;
+-(void)updateScore:(int)score;
 
 @end

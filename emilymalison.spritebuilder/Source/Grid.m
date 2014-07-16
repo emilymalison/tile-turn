@@ -23,6 +23,7 @@ static const int GRID_SIZE=3;
     NSMutableArray *_gridArray;
     Tile *tileRotated;
     int score;
+    
 }
 
 - (void)onEnter
@@ -76,7 +77,6 @@ static const int GRID_SIZE=3;
 #pragma mark - Checking for Matches
 
 -(void)checkTile:(Tile *)rotatedTile{
-    score=0;
     int match;
     BOOL firstDot;
     for (int j=0; j<3; j++) {
@@ -100,7 +100,6 @@ static const int GRID_SIZE=3;
                                     else if (match>4){
                                         score+=1;
                                     }
-                                    NSLog(@"score: %i", score);
                                 }
                             }
                             else{
@@ -121,7 +120,6 @@ static const int GRID_SIZE=3;
                                     else if (match>4){
                                         score+=1;
                                     }
-                                    NSLog(@"score: %i", score);
                                 }
                             }
                             else{
@@ -158,7 +156,6 @@ static const int GRID_SIZE=3;
                                     else if (match>4){
                                         score+=1;
                                     }
-                                    NSLog(@"score: %i", score);
                                 }
                             }
                             else{
@@ -178,7 +175,6 @@ static const int GRID_SIZE=3;
                                     else if (match>4){
                                         score+=1;
                                     }
-                                    NSLog(@"score: %i", score);
                                 }
                             }
                             else{
@@ -193,7 +189,10 @@ static const int GRID_SIZE=3;
             }
         }
     }
-    NSLog(@"final score: %i", score);
+    //Gameplay* gameplay=[[Gameplay alloc] init];
+    //[gameplay updateScore:score];
+    _totalScore=score;
+    NSLog(@"score: %d",score);
 }
 
 @end

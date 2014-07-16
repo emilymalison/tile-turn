@@ -14,24 +14,22 @@
     int timeRemaining;
     CCLabelTTF *_timer;
     NSTimer *myTimer;
+    CCLabelTTF *_score;
+    int gameplayScore;
 
 }
 
 #pragma mark - Timer
-
--(void)didLoadFromCCB
-{
-
-}
 
 -(void)onEnter{
     [super onEnter];
     
     myTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(second) userInfo:nil repeats:YES];
     timeRemaining=60;
+    
+    [self schedule:@selector(updateScore) interval:0.5f];
 }
 
-#pragma mark - Score
 
 -(void)second{
     timeRemaining-=1;
@@ -47,5 +45,12 @@
 -(void)timerExpired{
     
 }
+
+#pragma mark - Score
+
+-(void)updateScore{
+    _score.string=[NSString stringWithFormat:@"%i", _grid.totalScore];
+}
+
 
 @end

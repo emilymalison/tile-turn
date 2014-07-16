@@ -15,4 +15,5 @@
 -(void)setUpGrid;
 -(void)checkTile:(Tile*)rotatedTile;
 
+@property(nonatomic, assign)int totalScore;
 @end
