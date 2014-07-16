@@ -943,7 +943,7 @@
 				<key>displayName</key>
 				<string>score</string>
 				<key>memberVarAssignmentName</key>
-				<string></string>
+				<string>_score</string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>properties</key>
@@ -1158,6 +1158,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
@@ -1230,8 +1232,6 @@
 				</array>
 			</dict>
 		</array>
-		<key>selected</key>
-		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>

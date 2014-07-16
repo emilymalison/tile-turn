@@ -18,6 +18,7 @@ static const int TILE_SIZE=3;
     CGFloat _tileColumnWidth;
     CGFloat _tileColumnHeight;
     Dot *dot;
+    BOOL canTouch;
 }
 
 - (void)onEnter
@@ -28,6 +29,7 @@ static const int TILE_SIZE=3;
     [self setUpTile];
     
     self.userInteractionEnabled = YES;
+    canTouch = YES;
     
     self.tileRotation=0;
 }
@@ -72,6 +74,7 @@ static const int TILE_SIZE=3;
                 dot.dotX=i;
                 dot.dotY=j;
                 [self.dotColorArray[i] addObject:[NSNumber numberWithInteger: dot.DotColor]];
+                dot.dotChecked=false;
             }
             else if(numberDot==1){
                 dot=(Dot*)[CCBReader load: @"Dot2"];
@@ -85,6 +88,7 @@ static const int TILE_SIZE=3;
                 self.tileArray[i][j]=dot;
                 dot.dotX=i;
                 dot.dotY=j;
+                dot.dotChecked=false;
             }
             else if(numberDot==2){
                 dot=(Dot*)[CCBReader load: @"Dot3"];
@@ -98,6 +102,7 @@ static const int TILE_SIZE=3;
                 self.tileArray[i][j]=dot;
                 dot.dotX=i;
                 dot.dotY=j;
+                dot.dotChecked=false;
             }
             
             x+=_tileColumnWidth;
@@ -111,28 +116,24 @@ static const int TILE_SIZE=3;
 #pragma mark - Rotating Tile
 
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
-    self.userInteractionEnabled=NO;
-    [NSTimer scheduledTimerWithTimeInterval:.51 target:self selector:@selector(enableTouch) userInfo:nil repeats:NO];
-    CCActionRotateBy *rotateTile= [CCActionRotateBy actionWithDuration:.5 angle:90];
-    [self runAction:rotateTile];
-    
-    self.tileRotation+=1;
-    
-    if (self.tileRotation==4) {
-        self.tileRotation=0;
+    if (canTouch) {
+        canTouch = NO;
+        CCActionRotateBy *rotateTile= [CCActionRotateBy actionWithDuration:.4 angle:90];
+        CCActionCallBlock *resetTouch = [CCActionCallBlock actionWithBlock:^{
+            canTouch= YES;
+        }];
+        [self runAction:[CCActionSequence actionOne:rotateTile two:resetTouch]];
+        
+        self.tileRotation+=1;
+        
+        if (self.tileRotation==4) {
+            self.tileRotation=0;
+        }
+        //TODO: Fix Array Rotation
+        self.dotColorArray=[self rotateColorMatrix:self.dotColorArray];
+        
+        [(Grid*)self.parent checkTile:self];
     }
-    
-    NSLog(@"%d", self.tileRotation);
-    //TODO: Fix Array Rotation
-    self.dotColorArray=[self rotateColorMatrix:self.dotColorArray];
-    
-    [(Grid*)self.parent checkTile:self];
-}
-
-
-
--(void)enableTouch{
-    self.userInteractionEnabled=YES;
 }
 
 -(NSMutableArray*)rotateColorMatrix:(NSMutableArray*)matrix{

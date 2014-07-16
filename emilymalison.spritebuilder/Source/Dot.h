@@ -20,6 +20,7 @@ typedef enum {
 @property (nonatomic, assign)NSUInteger DotColor;
 @property (nonatomic, assign)int dotX;
 @property (nonatomic, assign)int dotY;
+@property (nonatomic, assign)BOOL dotChecked;
 
 
 

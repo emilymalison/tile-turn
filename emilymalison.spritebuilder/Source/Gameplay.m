@@ -14,10 +14,17 @@
     int timeRemaining;
     CCLabelTTF *_timer;
     NSTimer *myTimer;
+    CCLabelTTF *_score;
+    int totalScore;
 
 }
 
 #pragma mark - Timer
+
+-(void)didLoadFromCCB
+{
+    _grid.gameplay = self;
+}
 
 -(void)onEnter{
     [super onEnter];
@@ -41,6 +48,11 @@
 
 -(void)timerExpired{
     
+}
+
+-(void)addScore:(int)score{
+    totalScore+=score;
+    _score.string= [NSString stringWithFormat:@"%d", totalScore];
 }
 
 @end

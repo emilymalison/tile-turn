@@ -8,12 +8,13 @@
 
 #import "CCNode.h"
 #import "Tile.h"
+@class Gameplay;
 
 @interface Grid : CCNodeColor
 
 -(void)setUpGrid;
 -(void)checkTile:(Tile*)rotatedTile;
 
-
+@property (nonatomic, weak) Gameplay *gameplay;
 
 @end
