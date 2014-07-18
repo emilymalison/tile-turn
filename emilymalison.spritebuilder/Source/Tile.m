@@ -126,7 +126,6 @@ static const int TILE_SIZE=3;
         self.dotColorArray=[self rotateColorMatrix:self.dotColorArray];
         
         [(Grid*)self.parent checkTile:self];
-        
     }
 }
 

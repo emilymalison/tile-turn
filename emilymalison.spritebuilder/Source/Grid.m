@@ -189,10 +189,20 @@ static const int GRID_SIZE=3;
             }
         }
     }
-    //Gameplay* gameplay=[[Gameplay alloc] init];
-    //[gameplay updateScore:score];
     _totalScore=score;
-    NSLog(@"score: %d",score);
+    CCTimer* myTimer=[NSTimer scheduledTimerWithTimeInterval:.7 target:self selector:@selector(removeTiles) userInfo:nil repeats:NO];
+}
+
+-(void)removeTiles{
+    for (int i=0; i<3; i++) {
+        for (int j=0; j<3; j++) {
+            Tile* tile=_gridArray[i][j];
+            if (tile.remove==true) {
+                tile.remove=false;
+                [self removeChild: tile];
+            }
+        }
+    }
 }
 
 @end
