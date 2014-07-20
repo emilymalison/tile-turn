@@ -199,7 +199,20 @@ static const int GRID_SIZE=3;
             Tile* tile=_gridArray[i][j];
             if (tile.remove==true) {
                 tile.remove=false;
-                [self removeChild: tile];
+                [self removeChild:tile];
+                
+                Tile* newTile= (Tile*)[CCBReader load:@"Tile"];
+                 
+                [newTile setScaleX:((_columnWidth)/tile.contentSize.width)];
+                [newTile setScaleY:((_columnHeight)/tile.contentSize.height)];
+                
+                newTile.position = tile.position;
+                _gridArray[i][j]=newTile;
+                newTile.tileX=tile.tileX;
+                newTile.tileY=tile.tileY;
+                newTile.remove=false;
+                
+                [self addChild: newTile];
             }
         }
     }
