@@ -71,7 +71,6 @@ static const int GRID_SIZE=3;
 		}
 		y += _columnHeight;
     }
-    
 }
 
 #pragma mark - Checking for Matches
@@ -103,7 +102,6 @@ static const int GRID_SIZE=3;
                                 }
                             }
                             else{
-                                
                                 match=1;
                             }
                         }
@@ -213,10 +211,12 @@ static const int GRID_SIZE=3;
                 newTile.remove=false;
                 
                 [self addChild: newTile];
+                [self checkTile:newTile];
             }
         }
     }
 }
+
 
 @end
 

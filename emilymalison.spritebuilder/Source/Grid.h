@@ -17,4 +17,5 @@
 -(void)removeTiles;
 
 @property(nonatomic, assign)int totalScore;
+
 @end

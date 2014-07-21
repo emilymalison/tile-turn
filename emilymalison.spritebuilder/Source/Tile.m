@@ -107,8 +107,6 @@ static const int TILE_SIZE=3;
         }
         y+=_tileColumnHeight;
     }
-    //NSLog(@"%@", self.tileArray);
-    
 }
 
 #pragma mark - Rotating Tile
@@ -128,6 +126,7 @@ static const int TILE_SIZE=3;
         [(Grid*)self.parent checkTile:self];
     }
 }
+
 
 -(NSMutableArray*)rotateColorMatrix:(NSMutableArray*)matrix{
     return [NSMutableArray arrayWithObjects:[NSMutableArray arrayWithObjects:matrix[0][2], matrix[1][2], matrix[2][2], nil], [NSMutableArray arrayWithObjects:matrix[0][1], matrix[1][1], matrix[2][1], nil], [NSMutableArray arrayWithObjects:matrix[0][0], matrix[1][0], matrix[2][0], nil], nil];

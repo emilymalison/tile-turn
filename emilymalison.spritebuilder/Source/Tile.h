@@ -15,5 +15,6 @@
 @property(nonatomic, assign)int tileX;
 @property(nonatomic, assign)int tileY;
 @property(nonatomic, assign)BOOL remove;
+@property(nonatomic, assign)BOOL rotate;
 
 @end
