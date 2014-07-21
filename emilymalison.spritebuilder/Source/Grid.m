@@ -71,6 +71,12 @@ static const int GRID_SIZE=3;
 		}
 		y += _columnHeight;
     }
+    [self checkHorizontallyTile:_gridArray[0][1]];
+    [self checkHorizontallyTile:_gridArray[1][1]];
+    [self checkHorizontallyTile:_gridArray[2][1]];
+    [self checkVerticallyTile:_gridArray[1][0]];
+    [self checkVerticallyTile:_gridArray[1][1]];
+    [self checkVerticallyTile:_gridArray[1][2]];
 }
 
 #pragma mark - Checking for Matches
@@ -81,7 +87,7 @@ static const int GRID_SIZE=3;
     for (int j=0; j<3; j++) {
         match=1;
         firstDot=true;
-        for (int i=-1; i<2; i++) {
+        for (int i=-2; i<3; i++) {
             if (rotatedTile.tileY+i>=0 && rotatedTile.tileY+i<=2) {
                 Tile* currentTile=_gridArray[rotatedTile.tileX][rotatedTile.tileY+i];
                 for (int k=0; k<3; k++) {
@@ -89,14 +95,14 @@ static const int GRID_SIZE=3;
                         if (k!=0) {
                             if (currentTile.dotColorArray[j][k]==currentTile.dotColorArray[j][k-1]) {
                                 match++;
-                                if (match>=4) {
+                                if (match>=5) {
                                     currentTile.remove=true;
                                     Tile* tileBefore=_gridArray[currentTile.tileX][currentTile.tileY-1];
                                     tileBefore.remove=true;
-                                    if (match==4) {
-                                        score+=4;
+                                    if (match==5) {
+                                        score+=5;
                                     }
-                                    else if (match>4){
+                                    else if (match>5){
                                         score+=1;
                                     }
                                 }
@@ -109,13 +115,13 @@ static const int GRID_SIZE=3;
                             Tile* tileBefore=_gridArray[currentTile.tileX][currentTile.tileY-1];
                             if (currentTile.dotColorArray[j][k]==tileBefore.dotColorArray[j][2]) {
                                 match++;
-                                if (match>=4) {
+                                if (match>=5) {
                                     currentTile.remove=true;
                                     tileBefore.remove=true;
-                                    if (match==4) {
-                                        score+=4;
+                                    if (match==5) {
+                                        score+=5;
                                     }
-                                    else if (match>4){
+                                    else if (match>5){
                                         score+=1;
                                     }
                                 }
@@ -136,7 +142,7 @@ static const int GRID_SIZE=3;
     for (int j=0; j<3; j++) {
         match=1;
         firstDot=true;
-        for (int i=-1; i<2; i++) {
+        for (int i=-2; i<3; i++) {
             if (rotatedTile.tileX+i>=0 && rotatedTile.tileX+i<=2) {
                 Tile* currentTile=_gridArray[rotatedTile.tileX+i][rotatedTile.tileY];
                 for (int k=0; k<3; k++) {
@@ -144,14 +150,14 @@ static const int GRID_SIZE=3;
                         if (k!=0) {
                             if (currentTile.dotColorArray[k][j]==currentTile.dotColorArray[k-1][j]) {
                                 match++;
-                                if (match>=4) {
+                                if (match>=5) {
                                     currentTile.remove=true;
                                     Tile* tileBefore=_gridArray[currentTile.tileX-1][currentTile.tileY];
                                     tileBefore.remove=true;
-                                    if (match==4) {
-                                        score+=4;
+                                    if (match==5) {
+                                        score+=5;
                                     }
-                                    else if (match>4){
+                                    else if (match>5){
                                         score+=1;
                                     }
                                 }
@@ -164,13 +170,13 @@ static const int GRID_SIZE=3;
                             Tile* tileBefore=_gridArray[currentTile.tileX-1][currentTile.tileY];
                             if (currentTile.dotColorArray[k][j]==tileBefore.dotColorArray[2][j]) {
                                 match++;
-                                if (match>=4) {
+                                if (match>=5) {
                                     currentTile.remove=true;
                                     tileBefore.remove=true;
-                                    if (match==4) {
+                                    if (match==5) {
                                         score+=4;
                                     }
-                                    else if (match>4){
+                                    else if (match>5){
                                         score+=1;
                                     }
                                 }
@@ -190,6 +196,8 @@ static const int GRID_SIZE=3;
     _totalScore=score;
     CCTimer* myTimer=[NSTimer scheduledTimerWithTimeInterval:.7 target:self selector:@selector(removeTiles) userInfo:nil repeats:NO];
 }
+
+#pragma mark - Remove Tiles
 
 -(void)removeTiles{
     for (int i=0; i<3; i++) {
@@ -212,6 +220,100 @@ static const int GRID_SIZE=3;
                 
                 [self addChild: newTile];
                 [self checkTile:newTile];
+            }
+        }
+    }
+}
+
+#pragma mark - Checking Original Grid For Matches
+
+-(void)checkHorizontallyTile:(Tile*)tile{
+    int match;
+    BOOL firstDot;
+    for (int j=0; j<3; j++) {
+        match=1;
+        firstDot=true;
+        for (int i=-2; i<3; i++) {
+            if (tile.tileY+i>=0 && tile.tileY+i<=2) {
+                Tile* currentTile=_gridArray[tile.tileX][tile.tileY+i];
+                for (int k=0; k<3; k++) {
+                    if (!firstDot){
+                        if (k!=0) {
+                            if (currentTile.dotColorArray[j][k]==currentTile.dotColorArray[j][k-1]) {
+                                match++;
+                                if (match>=5) {
+                                    [currentTile rotateBackwards];
+                                    match=1;
+                                }
+                            }
+                            else{
+                                match=1;
+                            }
+                        }
+                        else if (k==0){
+                            Tile* tileBefore=_gridArray[currentTile.tileX][currentTile.tileY-1];
+                            if (currentTile.dotColorArray[j][k]==tileBefore.dotColorArray[j][2]) {
+                                match++;
+                                if (match>=5) {
+                                    [currentTile rotateBackwards];
+                                    match=1;
+                                }
+                            }
+                            else{
+                                match=1;
+                            }
+                        }
+                    }
+                    else{
+                        firstDot=false;
+                    }
+                }
+            }
+        }
+    }
+}
+
+-(void)checkVerticallyTile:(Tile*)tile{
+    int match;
+    BOOL firstDot;
+    for (int j=0; j<3; j++) {
+        match=1;
+        firstDot=true;
+        for (int i=-2; i<3; i++) {
+            if (tile.tileX+i>=0 && tile.tileX+i<=2) {
+                Tile* currentTile=_gridArray[tile.tileX+i][tile.tileY];
+                for (int k=0; k<3; k++) {
+                    if (!firstDot) {
+                        if (k!=0) {
+                            if (currentTile.dotColorArray[k][j]==currentTile.dotColorArray[k-1][j]) {
+                                match++;
+                                if (match>=5) {
+                                    [currentTile rotateBackwards];
+                                    match=1;
+                                }
+                            }
+                            else{
+                                match=1;
+                            }
+                        }
+                        else if (k==0){
+                            Tile* tileBefore=_gridArray[currentTile.tileX-1][currentTile.tileY];
+                            if (currentTile.dotColorArray[k][j]==tileBefore.dotColorArray[2][j]) {
+                                match++;
+                                if (match>=5) {
+                                    [currentTile rotateBackwards];
+                                    match=1;
+                                }
+                            }
+                            else{
+                                match=1;
+                            }
+                        }
+                    }
+                    else{
+                        firstDot=false;
+                    }
+                }
             }
         }
     }

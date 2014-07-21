@@ -10,6 +10,8 @@
 
 @interface Tile: CCNode
 
+-(void)rotateBackwards;
+
 @property(nonatomic, strong)NSMutableArray* dotColorArray;
 @property(nonatomic, strong)NSMutableArray* tileArray;
 @property(nonatomic, assign)int tileX;
