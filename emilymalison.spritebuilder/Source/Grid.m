@@ -178,7 +178,7 @@ static const int GRID_SIZE=3;
                                     currentTile.remove=true;
                                     tileBefore.remove=true;
                                     if (match==5) {
-                                        score+=4;
+                                        score+=5;
                                     }
                                     else if (match>5){
                                         score+=1;
@@ -351,6 +351,8 @@ static const int GRID_SIZE=3;
                                             if (match>=5) {
                                                 currentTile.match=YES;
                                                 possibleMatch=YES;
+                                                NSLog(@"%i, %i", currentTile.tileX, currentTile.tileY);
+
                                             }
                                             
                                         }
@@ -365,6 +367,7 @@ static const int GRID_SIZE=3;
                                             if (match>=5) {
                                                 currentTile.match=YES;
                                                 possibleMatch=YES;
+                                                NSLog(@"%i, %i", currentTile.tileX, currentTile.tileY);
                                             }
                                         }
                                         else{
@@ -394,6 +397,8 @@ static const int GRID_SIZE=3;
                                             if (match>=5) {
                                                 currentTile.match=YES;
                                                 possibleMatch=YES;
+                                                NSLog(@"%i, %i", currentTile.tileX, currentTile.tileY);
+
                                             }
                                         }
                                         else{
@@ -407,6 +412,8 @@ static const int GRID_SIZE=3;
                                             if (match>=5) {
                                                 currentTile.match=YES;
                                                 possibleMatch=YES;
+                                                NSLog(@"%i, %i", currentTile.tileX, currentTile.tileY);
+
                                             }
                                         }
                                         else{
@@ -428,8 +435,14 @@ static const int GRID_SIZE=3;
         }
     }
     if (possibleMatch==NO) {
-        NSLog(@"No possible moves");
-        //[self setUpGrid];
+        NSLog(@"No possible matches");
+        for (int x=0; x<3; x++) {
+            for (int y=0; y<3; y++) {
+                Tile* tile=_gridArray[x][y];
+                [self removeChild:tile];
+            }
+        }
+        [self setUpGrid];
     }
     else if (possibleMatch==YES){
         possibleMatch=NO;
