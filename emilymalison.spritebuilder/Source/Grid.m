@@ -23,14 +23,15 @@ static const int GRID_SIZE=3;
     NSMutableArray *_gridArray;
     Tile *tileRotated;
     int score;
+    BOOL possibleMatch;
 }
 
 - (void)onEnter
 {
     [super onEnter];
-    [self setUpGrid];
+    possibleMatch=NO;
     
-    //self.visible=NO;
+    [self setUpGrid];
 }
 
 
@@ -78,6 +79,7 @@ static const int GRID_SIZE=3;
     [self checkVerticallyTile:_gridArray[0][0]];
     [self checkVerticallyTile:_gridArray[0][1]];
     [self checkVerticallyTile:_gridArray[0][2]];
+    [self checkForMoves];
 }
 
 #pragma mark - Checking for Matches
@@ -107,6 +109,7 @@ static const int GRID_SIZE=3;
                                         score+=1;
                                     }
                                 }
+
                             }
                             else{
                                 match=1;
@@ -201,10 +204,12 @@ static const int GRID_SIZE=3;
 #pragma mark - Remove Tiles
 
 -(void)removeTiles{
+    BOOL removed=NO;
     for (int i=0; i<3; i++) {
         for (int j=0; j<3; j++) {
             Tile* tile=_gridArray[i][j];
             if (tile.remove==true) {
+                removed=YES;
                 tile.remove=false;
                 [self removeChild:tile];
                 
@@ -223,6 +228,9 @@ static const int GRID_SIZE=3;
                 [self checkTile:newTile];
             }
         }
+    }
+    if (removed==YES) {
+        [self checkForMoves];
     }
 }
 
@@ -321,7 +329,111 @@ static const int GRID_SIZE=3;
 }
 
 -(void)checkForMoves{
-    
+    NSLog(@"checking");
+    for (int x=0; x<3; x++) {
+        for (int y=0; y<3; y++){
+            Tile* tile=_gridArray[x][y];
+            for (int z=1; z<4; z++) {
+                tile.dotColorArrayCopy=[tile rotateColorMatrix:tile.dotColorArrayCopy];
+                int match;
+                BOOL firstDot;
+                for (int j=0; j<3; j++) {
+                    match=1;
+                    firstDot=true;
+                    for (int i=-2; i<3; i++) {
+                        if (tile.tileY+i>=0 && tile.tileY+i<=2) {
+                            Tile* currentTile=_gridArray[tile.tileX][tile.tileY+i];
+                            for (int k=0; k<3; k++) {
+                                if (!firstDot){
+                                    if (k!=0) {
+                                        if (currentTile.dotColorArrayCopy[j][k]==currentTile.dotColorArrayCopy[j][k-1]) {
+                                            match++;
+                                            if (match>=5) {
+                                                currentTile.match=YES;
+                                                possibleMatch=YES;
+                                            }
+                                            
+                                        }
+                                        else{
+                                            match=1;
+                                        }
+                                    }
+                                    else if (k==0){
+                                        Tile* tileBefore=_gridArray[currentTile.tileX][currentTile.tileY-1];
+                                        if (currentTile.dotColorArrayCopy[j][k]==tileBefore.dotColorArrayCopy[j][2]) {
+                                            match++;
+                                            if (match>=5) {
+                                                currentTile.match=YES;
+                                                possibleMatch=YES;
+                                            }
+                                        }
+                                        else{
+                                            match=1;
+                                        }
+                                    }
+                                }
+                                else{
+                                    firstDot=false;
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                for (int j=0; j<3; j++) {
+                    match=1;
+                    firstDot=true;
+                    for (int i=-2; i<3; i++) {
+                        if (tile.tileX+i>=0 && tile.tileX+i<=2) {
+                            Tile* currentTile=_gridArray[tile.tileX+i][tile.tileY];
+                            for (int k=0; k<3; k++) {
+                                if (!firstDot) {
+                                    if (k!=0) {
+                                        if (currentTile.dotColorArrayCopy[k][j]==currentTile.dotColorArrayCopy[k-1][j]) {
+                                            match++;
+                                            if (match>=5) {
+                                                currentTile.match=YES;
+                                                possibleMatch=YES;
+                                            }
+                                        }
+                                        else{
+                                            match=1;
+                                        }
+                                    }
+                                    else if (k==0){
+                                        Tile* tileBefore=_gridArray[currentTile.tileX-1][currentTile.tileY];
+                                        if (currentTile.dotColorArrayCopy[k][j]==tileBefore.dotColorArrayCopy[2][j]) {
+                                            match++;
+                                            if (match>=5) {
+                                                currentTile.match=YES;
+                                                possibleMatch=YES;
+                                            }
+                                        }
+                                        else{
+                                            match=1;
+                                        }
+                                    }
+                                }
+                                else{
+                                    firstDot=false;
+                                }
+                            }
+                        }
+                    }
+                }
+                if (z==3) {
+                    tile.dotColorArrayCopy=tile.dotColorArray;
+                }
+            }
+        }
+    }
+    if (possibleMatch==NO) {
+        NSLog(@"No possible moves");
+        //[self setUpGrid];
+    }
+    else if (possibleMatch==YES){
+        possibleMatch=NO;
+    }
 }
 
 

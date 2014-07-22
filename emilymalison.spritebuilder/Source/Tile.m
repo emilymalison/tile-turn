@@ -32,8 +32,8 @@ static const int TILE_SIZE=3;
     canTouch = YES;
     
     self.remove=NO;
-    
-    
+    self.rotationMeasure=0;
+    self.match=NO;
 }
 
 #pragma mark - Filling Tile with Dots
@@ -41,9 +41,6 @@ static const int TILE_SIZE=3;
 -(void)setUpTile{
     _tileColumnHeight=self.contentSize.height/3;
     _tileColumnWidth=self.contentSize.width/3;
-    
-    //float _dotBorderHorizontal=(self.contentSize.width)/2;
-    //float _dotBorderVertical=(self.contentSize.height)/2;
     
     _dotMarginHorizontal=_tileColumnWidth/TILE_SIZE;
     _dotMarginVertical=_tileColumnHeight/TILE_SIZE;
@@ -108,6 +105,7 @@ static const int TILE_SIZE=3;
         }
         y+=_tileColumnHeight;
     }
+    self.dotColorArrayCopy=self.dotColorArray;
 }
 
 #pragma mark - Rotating Tile When Tapped
@@ -123,6 +121,7 @@ static const int TILE_SIZE=3;
     
         //TODO: Fix Array Rotation
         self.dotColorArray=[self rotateColorMatrix:self.dotColorArray];
+        self.dotColorArrayCopy=self.dotColorArray;
         
         [(Grid*)self.parent checkTile:self];
     }
@@ -136,6 +135,11 @@ static const int TILE_SIZE=3;
 
 -(void)rotateBackwards{
     self.rotation -= 90;
+    self.rotationMeasure+=1;
+    if (self.rotationMeasure==3) {
+        self.remove=YES;
+        [(Grid*)self.parent removeTiles];
+    }
     self.dotColorArray=[self rotateColorMatrix:self.dotColorArray];
     self.dotColorArray=[self rotateColorMatrix:self.dotColorArray];
     self.dotColorArray=[self rotateColorMatrix:self.dotColorArray];

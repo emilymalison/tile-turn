@@ -17,6 +17,7 @@
 -(void)removeTiles;
 -(void)checkHorizontallyTile:(Tile*)tile;
 -(void)checkVerticallyTile:(Tile*)tile;
+-(void)checkForMoves;
 
 
 @property(nonatomic, assign)int totalScore;
