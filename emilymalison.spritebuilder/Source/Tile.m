@@ -33,6 +33,7 @@ static const int TILE_SIZE=3;
     
     self.remove=NO;
     
+    
 }
 
 #pragma mark - Filling Tile with Dots
@@ -134,11 +135,14 @@ static const int TILE_SIZE=3;
 #pragma mark - Rotating Tile Backwards
 
 -(void)rotateBackwards{
-    CCActionRotateBy *rotateBackwards=[CCActionRotateBy actionWithDuration:0 angle:-90];
-    [self runAction:rotateBackwards];
+    self.rotation -= 90;
     self.dotColorArray=[self rotateColorMatrix:self.dotColorArray];
     self.dotColorArray=[self rotateColorMatrix:self.dotColorArray];
     self.dotColorArray=[self rotateColorMatrix:self.dotColorArray];
+    
+    [(Grid*)self.parent checkVerticallyTile:self];
+    [(Grid*)self.parent checkHorizontallyTile:self];
+    
 }
 
 

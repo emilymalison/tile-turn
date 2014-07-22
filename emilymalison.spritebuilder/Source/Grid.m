@@ -23,15 +23,16 @@ static const int GRID_SIZE=3;
     NSMutableArray *_gridArray;
     Tile *tileRotated;
     int score;
-    
 }
 
 - (void)onEnter
 {
     [super onEnter];
-    
     [self setUpGrid];
+    
+    //self.visible=NO;
 }
+
 
 #pragma mark - Filling Grid with Tiles
 
@@ -71,12 +72,12 @@ static const int GRID_SIZE=3;
 		}
 		y += _columnHeight;
     }
-    [self checkHorizontallyTile:_gridArray[0][1]];
-    [self checkHorizontallyTile:_gridArray[1][1]];
-    [self checkHorizontallyTile:_gridArray[2][1]];
-    [self checkVerticallyTile:_gridArray[1][0]];
-    [self checkVerticallyTile:_gridArray[1][1]];
-    [self checkVerticallyTile:_gridArray[1][2]];
+    [self checkHorizontallyTile:_gridArray[0][0]];
+    [self checkHorizontallyTile:_gridArray[1][0]];
+    [self checkHorizontallyTile:_gridArray[2][0]];
+    [self checkVerticallyTile:_gridArray[0][0]];
+    [self checkVerticallyTile:_gridArray[0][1]];
+    [self checkVerticallyTile:_gridArray[0][2]];
 }
 
 #pragma mark - Checking for Matches
@@ -317,6 +318,10 @@ static const int GRID_SIZE=3;
             }
         }
     }
+}
+
+-(void)checkForMoves{
+    
 }
 
 

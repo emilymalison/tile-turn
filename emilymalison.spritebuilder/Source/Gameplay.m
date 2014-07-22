@@ -16,7 +16,6 @@
     NSTimer *myTimer;
     CCLabelTTF *_score;
     int gameplayScore;
-
 }
 
 #pragma mark - Timer
