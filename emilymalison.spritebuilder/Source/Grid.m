@@ -22,9 +22,12 @@ static const int GRID_SIZE=3;
     CCSprite *tileSprite;
     NSMutableArray *_gridArray;
     Tile *tileRotated;
+    Tile *indicatedTile;
     int score;
     BOOL possibleMatch;
     NSMutableArray *_tileMatchArray;
+    BOOL moveIndicated;
+    CCTimer* indicateTimer;
 }
 
 - (void)onEnter
@@ -33,6 +36,8 @@ static const int GRID_SIZE=3;
     possibleMatch=NO;
     
     [self setUpGrid];
+    
+    moveIndicated=NO;
 }
 
 
@@ -430,7 +435,7 @@ static const int GRID_SIZE=3;
                 }
             }
             if (tile.match==YES) {
-                NSLog(@"%i, %i", tile.tileX, tile.tileY);
+                //NSLog(@"%i, %i", tile.tileX, tile.tileY);
                 [_tileMatchArray addObject:tile];
                 tile.match=NO;
             }
@@ -448,9 +453,34 @@ static const int GRID_SIZE=3;
     else if (possibleMatch==YES){
         possibleMatch=NO;
     }
-    NSLog(@"break");
+    [indicateTimer invalidate];
+    indicatedTile=[_tileMatchArray objectAtIndex:(arc4random()% [_tileMatchArray count])];
+    indicateTimer=[NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(indicateMove) userInfo:nil repeats:YES];
 }
 
+#pragma mark - Indicate Move
+
+-(void)indicateMove{
+    NSLog(@"%i, %i", indicatedTile.tileX, indicatedTile.tileY);
+    [indicatedTile.animationManager runAnimationsForSequenceNamed:(@"Animation")];
+    CCTimer* myTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(resetAnimation) userInfo:nil repeats:NO];
+    /*for (int x=0; x<3; x++) {
+        for (int y=0; y<3; y++) {
+            Dot* dot=indicatedTile.tileArray[x][y];
+            [dot.animationManager runAnimationsForSequenceNamed:(@"Animation")];
+         }
+         }*/
+}
+
+-(void)resetAnimation{
+    [indicatedTile.animationManager runAnimationsForSequenceNamed:(@"Default Timeline")];
+    /*for (int x=0; x<3; x++) {
+        for (int y=0; y<3; y++) {
+            Dot* dot=indicatedTile.tileArray[x][y];
+            [dot.animationManager runAnimationsForSequenceNamed:(@"Default Timeline")];
+        }
+    }*/
+}
 
 @end
 

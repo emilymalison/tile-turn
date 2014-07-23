@@ -62,7 +62,7 @@ static const int TILE_SIZE=3;
         for (int j=0; j<3; j++) {
             int numberDot=arc4random()%3;
             if (numberDot==0) {
-                dot=(Dot*)[CCBReader load:@"Dot1"];
+                dot=(Dot*)[CCBReader load:@"BlueDot"];
                 dot.DotColor=blue;
                 [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2];
                 [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2];
@@ -75,7 +75,7 @@ static const int TILE_SIZE=3;
                 [self.dotColorArray[i] addObject:[NSNumber numberWithInteger: dot.DotColor]];
             }
             else if(numberDot==1){
-                dot=(Dot*)[CCBReader load: @"Dot2"];
+                dot=(Dot*)[CCBReader load: @"GreenDot"];
                 dot.DotColor=green;
                 [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2];
                 [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2];
@@ -88,7 +88,7 @@ static const int TILE_SIZE=3;
                 dot.dotY=j;
             }
             else if(numberDot==2){
-                dot=(Dot*)[CCBReader load: @"Dot3"];
+                dot=(Dot*)[CCBReader load: @"WhiteDot"];
                 dot.DotColor=white;
                 [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2];
                 [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2];
