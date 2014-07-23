@@ -24,6 +24,7 @@ static const int GRID_SIZE=3;
     Tile *tileRotated;
     int score;
     BOOL possibleMatch;
+    NSMutableArray *_tileMatchArray;
 }
 
 - (void)onEnter
@@ -90,7 +91,7 @@ static const int GRID_SIZE=3;
     for (int j=0; j<3; j++) {
         match=1;
         firstDot=true;
-        for (int i=-2; i<3; i++) {
+        for (int i=-2; i<GRID_SIZE; i++) {
             if (rotatedTile.tileY+i>=0 && rotatedTile.tileY+i<=2) {
                 Tile* currentTile=_gridArray[rotatedTile.tileX][rotatedTile.tileY+i];
                 for (int k=0; k<3; k++) {
@@ -146,7 +147,7 @@ static const int GRID_SIZE=3;
     for (int j=0; j<3; j++) {
         match=1;
         firstDot=true;
-        for (int i=-2; i<3; i++) {
+        for (int i=-2; i<GRID_SIZE; i++) {
             if (rotatedTile.tileX+i>=0 && rotatedTile.tileX+i<=2) {
                 Tile* currentTile=_gridArray[rotatedTile.tileX+i][rotatedTile.tileY];
                 for (int k=0; k<3; k++) {
@@ -328,11 +329,14 @@ static const int GRID_SIZE=3;
     }
 }
 
+#pragma mark - Checking For Possible Moves
+
 -(void)checkForMoves{
-    NSLog(@"checking");
-    for (int x=0; x<3; x++) {
-        for (int y=0; y<3; y++){
+    _tileMatchArray=[NSMutableArray array];
+     for (int x=0; x<GRID_SIZE; x++) {
+        for (int y=0; y<GRID_SIZE; y++){
             Tile* tile=_gridArray[x][y];
+            tile.match=NO;
             for (int z=1; z<4; z++) {
                 tile.dotColorArrayCopy=[tile rotateColorMatrix:tile.dotColorArrayCopy];
                 int match;
@@ -340,7 +344,7 @@ static const int GRID_SIZE=3;
                 for (int j=0; j<3; j++) {
                     match=1;
                     firstDot=true;
-                    for (int i=-2; i<3; i++) {
+                    for (int i=-2; i<GRID_SIZE; i++) {
                         if (tile.tileY+i>=0 && tile.tileY+i<=2) {
                             Tile* currentTile=_gridArray[tile.tileX][tile.tileY+i];
                             for (int k=0; k<3; k++) {
@@ -349,10 +353,8 @@ static const int GRID_SIZE=3;
                                         if (currentTile.dotColorArrayCopy[j][k]==currentTile.dotColorArrayCopy[j][k-1]) {
                                             match++;
                                             if (match>=5) {
-                                                currentTile.match=YES;
                                                 possibleMatch=YES;
-                                                NSLog(@"%i, %i", currentTile.tileX, currentTile.tileY);
-
+                                                tile.match=YES;
                                             }
                                             
                                         }
@@ -365,9 +367,8 @@ static const int GRID_SIZE=3;
                                         if (currentTile.dotColorArrayCopy[j][k]==tileBefore.dotColorArrayCopy[j][2]) {
                                             match++;
                                             if (match>=5) {
-                                                currentTile.match=YES;
                                                 possibleMatch=YES;
-                                                NSLog(@"%i, %i", currentTile.tileX, currentTile.tileY);
+                                                tile.match=YES;
                                             }
                                         }
                                         else{
@@ -386,7 +387,7 @@ static const int GRID_SIZE=3;
                 for (int j=0; j<3; j++) {
                     match=1;
                     firstDot=true;
-                    for (int i=-2; i<3; i++) {
+                    for (int i=-2; i<GRID_SIZE; i++) {
                         if (tile.tileX+i>=0 && tile.tileX+i<=2) {
                             Tile* currentTile=_gridArray[tile.tileX+i][tile.tileY];
                             for (int k=0; k<3; k++) {
@@ -395,10 +396,8 @@ static const int GRID_SIZE=3;
                                         if (currentTile.dotColorArrayCopy[k][j]==currentTile.dotColorArrayCopy[k-1][j]) {
                                             match++;
                                             if (match>=5) {
-                                                currentTile.match=YES;
                                                 possibleMatch=YES;
-                                                NSLog(@"%i, %i", currentTile.tileX, currentTile.tileY);
-
+                                                tile.match=YES;
                                             }
                                         }
                                         else{
@@ -410,10 +409,8 @@ static const int GRID_SIZE=3;
                                         if (currentTile.dotColorArrayCopy[k][j]==tileBefore.dotColorArrayCopy[2][j]) {
                                             match++;
                                             if (match>=5) {
-                                                currentTile.match=YES;
                                                 possibleMatch=YES;
-                                                NSLog(@"%i, %i", currentTile.tileX, currentTile.tileY);
-
+                                                tile.match=YES;
                                             }
                                         }
                                         else{
@@ -432,12 +429,16 @@ static const int GRID_SIZE=3;
                     tile.dotColorArrayCopy=tile.dotColorArray;
                 }
             }
+            if (tile.match==YES) {
+                NSLog(@"%i, %i", tile.tileX, tile.tileY);
+                [_tileMatchArray addObject:tile];
+                tile.match=NO;
+            }
         }
     }
     if (possibleMatch==NO) {
-        NSLog(@"No possible matches");
-        for (int x=0; x<3; x++) {
-            for (int y=0; y<3; y++) {
+        for (int x=0; x<GRID_SIZE; x++) {
+            for (int y=0; y<GRID_SIZE; y++) {
                 Tile* tile=_gridArray[x][y];
                 [self removeChild:tile];
             }
@@ -447,6 +448,7 @@ static const int GRID_SIZE=3;
     else if (possibleMatch==YES){
         possibleMatch=NO;
     }
+    NSLog(@"break");
 }
 
 
