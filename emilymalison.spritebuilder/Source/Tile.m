@@ -19,6 +19,7 @@ static const int TILE_SIZE=3;
     CGFloat _tileColumnHeight;
     Dot *dot;
     BOOL canTouch;
+    CCSprite *_tile;
 }
 
 - (void)onEnter
@@ -66,7 +67,7 @@ static const int TILE_SIZE=3;
                 dot.DotColor=blue;
                 [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2];
                 [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2];
-                [self addChild:dot];
+                [_tile addChild:dot];
                 dot.contentSize = CGSizeMake(_tileColumnWidth, _tileColumnHeight);
                 dot.position = ccp(x, y);
                 self.tileArray[i][j]=dot;
@@ -79,7 +80,7 @@ static const int TILE_SIZE=3;
                 dot.DotColor=green;
                 [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2];
                 [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2];
-                [self addChild:dot];
+                [_tile addChild:dot];
                 dot.contentSize=CGSizeMake(_tileColumnWidth, _tileColumnHeight);
                 dot.position=ccp(x, y);
                 [self.dotColorArray[i] addObject:[NSNumber numberWithInteger:dot.DotColor]];
@@ -92,7 +93,7 @@ static const int TILE_SIZE=3;
                 dot.DotColor=white;
                 [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2];
                 [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2];
-                [self addChild:dot];
+                [_tile addChild:dot];
                 dot.contentSize=CGSizeMake(_tileColumnWidth, _tileColumnHeight);
                 dot.position=ccp(x, y);
                 [self.dotColorArray[i] addObject:[NSNumber numberWithInteger:dot.DotColor]];
