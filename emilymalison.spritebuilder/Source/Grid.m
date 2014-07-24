@@ -20,7 +20,7 @@ static const int GRID_SIZE=3;
     CGFloat _tileMarginVertical;
     CGFloat _tileMarginHorizontal;
     CCSprite *tileSprite;
-    //NSMutableArray *_gridArray;
+    NSMutableArray *_gridArray;
     Tile *tileRotated;
     Tile *indicatedTile;
     int score;
@@ -45,7 +45,7 @@ static const int GRID_SIZE=3;
 
 -(void)setUpGrid{
     
-    self.gridArray=[NSMutableArray array];
+    _gridArray=[NSMutableArray array];
     
     _columnWidth=(self.contentSize.width/GRID_SIZE);
     _columnHeight=(self.contentSize.height/GRID_SIZE);
@@ -59,7 +59,7 @@ static const int GRID_SIZE=3;
     for (int i=0; i<GRID_SIZE; i++) {
         
         x=_tileMarginHorizontal;
-        self.gridArray[i]=[NSMutableArray array];
+        _gridArray[i]=[NSMutableArray array];
         
         
         for (int j=0; j<GRID_SIZE; j++) {
@@ -71,7 +71,7 @@ static const int GRID_SIZE=3;
             [self addChild:tile];
             //tile.contentSize = CGSizeMake(_columnWidth, _columnHeight);
 			tile.position = ccp(x, y);
-            self.gridArray[i][j]=tile;
+            _gridArray[i][j]=tile;
             tile.tileX=i;
             tile.tileY=j;
             
@@ -79,12 +79,12 @@ static const int GRID_SIZE=3;
 		}
 		y += _columnHeight;
     }
-    [self checkHorizontallyTile:self.gridArray[0][0]];
-    [self checkHorizontallyTile:self.gridArray[1][0]];
-    [self checkHorizontallyTile:self.gridArray[2][0]];
-    [self checkVerticallyTile:self.gridArray[0][0]];
-    [self checkVerticallyTile:self.gridArray[0][1]];
-    [self checkVerticallyTile:self.gridArray[0][2]];
+    [self checkHorizontallyTile:_gridArray[0][0]];
+    [self checkHorizontallyTile:_gridArray[1][0]];
+    [self checkHorizontallyTile:_gridArray[2][0]];
+    [self checkVerticallyTile:_gridArray[0][0]];
+    [self checkVerticallyTile:_gridArray[0][1]];
+    [self checkVerticallyTile:_gridArray[0][2]];
     [self checkForMoves];
 }
 
@@ -98,7 +98,7 @@ static const int GRID_SIZE=3;
         firstDot=true;
         for (int i=-2; i<GRID_SIZE; i++) {
             if (rotatedTile.tileY+i>=0 && rotatedTile.tileY+i<=2) {
-                Tile* currentTile=self.gridArray[rotatedTile.tileX][rotatedTile.tileY+i];
+                Tile* currentTile=_gridArray[rotatedTile.tileX][rotatedTile.tileY+i];
                 for (int k=0; k<3; k++) {
                     if (!firstDot){
                         if (k!=0) {
@@ -106,7 +106,7 @@ static const int GRID_SIZE=3;
                                 match++;
                                 if (match>=5) {
                                     currentTile.remove=true;
-                                    Tile* tileBefore=self.gridArray[currentTile.tileX][currentTile.tileY-1];
+                                    Tile* tileBefore=_gridArray[currentTile.tileX][currentTile.tileY-1];
                                     tileBefore.remove=true;
                                     if (match==5) {
                                         score+=5;
@@ -122,7 +122,7 @@ static const int GRID_SIZE=3;
                             }
                         }
                         else if (k==0){
-                            Tile* tileBefore=self.gridArray[currentTile.tileX][currentTile.tileY-1];
+                            Tile* tileBefore=_gridArray[currentTile.tileX][currentTile.tileY-1];
                             if (currentTile.dotColorArray[j][k]==tileBefore.dotColorArray[j][2]) {
                                 match++;
                                 if (match>=5) {
@@ -154,7 +154,7 @@ static const int GRID_SIZE=3;
         firstDot=true;
         for (int i=-2; i<GRID_SIZE; i++) {
             if (rotatedTile.tileX+i>=0 && rotatedTile.tileX+i<=2) {
-                Tile* currentTile=self.gridArray[rotatedTile.tileX+i][rotatedTile.tileY];
+                Tile* currentTile=_gridArray[rotatedTile.tileX+i][rotatedTile.tileY];
                 for (int k=0; k<3; k++) {
                     if (!firstDot) {
                         if (k!=0) {
@@ -162,7 +162,7 @@ static const int GRID_SIZE=3;
                                 match++;
                                 if (match>=5) {
                                     currentTile.remove=true;
-                                    Tile* tileBefore=self.gridArray[currentTile.tileX-1][currentTile.tileY];
+                                    Tile* tileBefore=_gridArray[currentTile.tileX-1][currentTile.tileY];
                                     tileBefore.remove=true;
                                     if (match==5) {
                                         score+=5;
@@ -177,7 +177,7 @@ static const int GRID_SIZE=3;
                             }
                         }
                         else if (k==0){
-                            Tile* tileBefore=self.gridArray[currentTile.tileX-1][currentTile.tileY];
+                            Tile* tileBefore=_gridArray[currentTile.tileX-1][currentTile.tileY];
                             if (currentTile.dotColorArray[k][j]==tileBefore.dotColorArray[2][j]) {
                                 match++;
                                 if (match>=5) {
@@ -213,8 +213,9 @@ static const int GRID_SIZE=3;
     BOOL removed=NO;
     for (int i=0; i<3; i++) {
         for (int j=0; j<3; j++) {
-            Tile* tile=self.gridArray[i][j];
+            Tile* tile=_gridArray[i][j];
             if (tile.remove==true) {
+                NSLog(@"%i, %i", tile.tileX, tile.tileY );
                 removed=YES;
                 tile.remove=false;
                 [self removeChild:tile];
@@ -225,7 +226,7 @@ static const int GRID_SIZE=3;
                 [newTile setScaleY:((_columnHeight)/tile.contentSize.height)];
                 
                 newTile.position = tile.position;
-                self.gridArray[i][j]=newTile;
+                _gridArray[i][j]=newTile;
                 newTile.tileX=tile.tileX;
                 newTile.tileY=tile.tileY;
                 newTile.remove=false;
@@ -258,7 +259,7 @@ static const int GRID_SIZE=3;
         firstDot=true;
         for (int i=-2; i<3; i++) {
             if (tile.tileY+i>=0 && tile.tileY+i<=2) {
-                Tile* currentTile=self.gridArray[tile.tileX][tile.tileY+i];
+                Tile* currentTile=_gridArray[tile.tileX][tile.tileY+i];
                 for (int k=0; k<3; k++) {
                     if (!firstDot){
                         if (k!=0) {
@@ -274,7 +275,7 @@ static const int GRID_SIZE=3;
                             }
                         }
                         else if (k==0){
-                            Tile* tileBefore=self.gridArray[currentTile.tileX][currentTile.tileY-1];
+                            Tile* tileBefore=_gridArray[currentTile.tileX][currentTile.tileY-1];
                             if (currentTile.dotColorArray[j][k]==tileBefore.dotColorArray[j][2]) {
                                 match++;
                                 if (match>=5) {
@@ -304,7 +305,7 @@ static const int GRID_SIZE=3;
         firstDot=true;
         for (int i=-2; i<3; i++) {
             if (tile.tileX+i>=0 && tile.tileX+i<=2) {
-                Tile* currentTile=self.gridArray[tile.tileX+i][tile.tileY];
+                Tile* currentTile=_gridArray[tile.tileX+i][tile.tileY];
                 for (int k=0; k<3; k++) {
                     if (!firstDot) {
                         if (k!=0) {
@@ -320,7 +321,7 @@ static const int GRID_SIZE=3;
                             }
                         }
                         else if (k==0){
-                            Tile* tileBefore=self.gridArray[currentTile.tileX-1][currentTile.tileY];
+                            Tile* tileBefore=_gridArray[currentTile.tileX-1][currentTile.tileY];
                             if (currentTile.dotColorArray[k][j]==tileBefore.dotColorArray[2][j]) {
                                 match++;
                                 if (match>=5) {
@@ -348,7 +349,7 @@ static const int GRID_SIZE=3;
     _tileMatchArray=[NSMutableArray array];
      for (int x=0; x<GRID_SIZE; x++) {
         for (int y=0; y<GRID_SIZE; y++){
-            Tile* tile=self.gridArray[x][y];
+            Tile* tile=_gridArray[x][y];
             tile.match=NO;
             for (int z=1; z<4; z++) {
                 tile.dotColorArrayCopy=[tile rotateColorMatrix:tile.dotColorArrayCopy];
@@ -359,7 +360,7 @@ static const int GRID_SIZE=3;
                     firstDot=true;
                     for (int i=-2; i<GRID_SIZE; i++){
                         if (tile.tileY+i>=0 && tile.tileY+i<=2) {
-                            Tile* currentTile=self.gridArray[tile.tileX][tile.tileY+i];
+                            Tile* currentTile=_gridArray[tile.tileX][tile.tileY+i];
                             NSMutableArray *currentTileArray=currentTile.dotColorArray;
                             if (currentTile==tile) {
                                 currentTileArray=currentTile.dotColorArrayCopy;
@@ -379,7 +380,7 @@ static const int GRID_SIZE=3;
                                         }
                                     }
                                     else if (k==0){
-                                        Tile* tileBefore=self.gridArray[currentTile.tileX][currentTile.tileY-1];
+                                        Tile* tileBefore=_gridArray[currentTile.tileX][currentTile.tileY-1];
                                         NSMutableArray *tileBeforeArray=tileBefore.dotColorArray;
                                         if (tileBefore==tile) {
                                             tileBeforeArray=tileBefore.dotColorArrayCopy;
@@ -409,7 +410,7 @@ static const int GRID_SIZE=3;
                     firstDot=true;
                     for (int i=-2; i<GRID_SIZE; i++) {
                         if (tile.tileX+i>=0 && tile.tileX+i<=2) {
-                            Tile* currentTile=self.gridArray[tile.tileX+i][tile.tileY];
+                            Tile* currentTile=_gridArray[tile.tileX+i][tile.tileY];
                             NSMutableArray *currentTileArray=currentTile.dotColorArray;
                             if (currentTile==tile) {
                                 currentTileArray=currentTile.dotColorArrayCopy;
@@ -429,7 +430,7 @@ static const int GRID_SIZE=3;
                                         }
                                     }
                                     else if (k==0){
-                                        Tile* tileBefore=self.gridArray[currentTile.tileX-1][currentTile.tileY];
+                                        Tile* tileBefore=_gridArray[currentTile.tileX-1][currentTile.tileY];
                                         NSMutableArray *tileBeforeArray=tileBefore.dotColorArray;
                                         if (tileBefore==tile) {
                                             tileBeforeArray=tileBefore.dotColorArrayCopy;
@@ -466,7 +467,7 @@ static const int GRID_SIZE=3;
     if (possibleMatch==NO) {
         for (int x=0; x<GRID_SIZE; x++) {
             for (int y=0; y<GRID_SIZE; y++) {
-                Tile* tile=self.gridArray[x][y];
+                Tile* tile=_gridArray[x][y];
                 [self removeChild:tile];
                 
                 Tile* newTile= (Tile*)[CCBReader load:@"Tile"];
@@ -475,7 +476,7 @@ static const int GRID_SIZE=3;
                 [newTile setScaleY:((_columnHeight)/tile.contentSize.height)];
                 
                 newTile.position = tile.position;
-                self.gridArray[x][y]=newTile;
+                _gridArray[x][y]=newTile;
                 newTile.tileX=tile.tileX;
                 newTile.tileY=tile.tileY;
                 newTile.remove=false;
@@ -485,9 +486,30 @@ static const int GRID_SIZE=3;
     else if (possibleMatch==YES){
         possibleMatch=NO;
     }
-    [indicateTimer invalidate];
-    indicatedTile=[_tileMatchArray objectAtIndex:(arc4random()% [_tileMatchArray count])];
-    indicateTimer=[NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(indicateMove) userInfo:nil repeats:YES];
+    if ([_tileMatchArray count]==0) {
+        for (int x=0; x<GRID_SIZE; x++) {
+            for (int y=0; y<GRID_SIZE; y++) {
+                Tile* tile=_gridArray[x][y];
+                [self removeChild:tile];
+                
+                Tile* newTile= (Tile*)[CCBReader load:@"Tile"];
+                
+                [newTile setScaleX:((_columnWidth)/tile.contentSize.width)];
+                [newTile setScaleY:((_columnHeight)/tile.contentSize.height)];
+                
+                newTile.position = tile.position;
+                _gridArray[x][y]=newTile;
+                newTile.tileX=tile.tileX;
+                newTile.tileY=tile.tileY;
+                newTile.remove=false;
+            }
+        }
+    }
+    else if ([_tileMatchArray count]>0){
+        [indicateTimer invalidate];
+        indicatedTile=[_tileMatchArray objectAtIndex:(arc4random()% [_tileMatchArray count])];
+        indicateTimer=[NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(indicateMove) userInfo:nil repeats:YES];
+    }
 }
 
 #pragma mark - Indicate Move

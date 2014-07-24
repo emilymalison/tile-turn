@@ -19,7 +19,7 @@
 -(void)checkVerticallyTile:(Tile*)tile;
 -(void)checkForMoves;
 
-@property(nonatomic, strong)NSMutableArray *gridArray;
+//@property(nonatomic, strong)NSMutableArray *gridArray;
 
 
 @property(nonatomic, assign)int totalScore;
