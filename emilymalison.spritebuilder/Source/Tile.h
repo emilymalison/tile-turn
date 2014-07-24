@@ -22,5 +22,6 @@
 @property(nonatomic, assign)int rotationMeasure;
 @property(nonatomic, assign)BOOL match;
 @property(nonatomic, assign)BOOL checking;
+@property(nonatomic, assign)BOOL rotatedTile;
 
 @end
