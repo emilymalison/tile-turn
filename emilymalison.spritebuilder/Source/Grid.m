@@ -204,7 +204,7 @@ static const int GRID_SIZE=3;
         }
     }
     _totalScore=score;
-    CCTimer* myTimer=[NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(removeTiles) userInfo:nil repeats:NO];
+    CCTimer* myTimer=[NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(removeTiles) userInfo:nil repeats:NO];
 }
 
 #pragma mark - Remove Tiles
@@ -468,9 +468,19 @@ static const int GRID_SIZE=3;
             for (int y=0; y<GRID_SIZE; y++) {
                 Tile* tile=self.gridArray[x][y];
                 [self removeChild:tile];
+                
+                Tile* newTile= (Tile*)[CCBReader load:@"Tile"];
+                
+                [newTile setScaleX:((_columnWidth)/tile.contentSize.width)];
+                [newTile setScaleY:((_columnHeight)/tile.contentSize.height)];
+                
+                newTile.position = tile.position;
+                self.gridArray[x][y]=newTile;
+                newTile.tileX=tile.tileX;
+                newTile.tileY=tile.tileY;
+                newTile.remove=false;
             }
         }
-        [self setUpGrid];
     }
     else if (possibleMatch==YES){
         possibleMatch=NO;
