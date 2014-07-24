@@ -69,7 +69,6 @@ static const int GRID_SIZE=3;
             [tile setScaleY:((_columnHeight)/tile.contentSize.height)];
             
             [self addChild:tile];
-            //tile.contentSize = CGSizeMake(_columnWidth, _columnHeight);
 			tile.position = ccp(x, y);
             _gridArray[i][j]=tile;
             tile.tileX=i;
@@ -130,6 +129,10 @@ static const int GRID_SIZE=3;
                                     tileBefore.remove=true;
                                     if (match==5) {
                                         score+=5;
+                                        if (currentTile.tileY-2>=0) {
+                                            Tile* tileBeforeTileBefore=_gridArray[currentTile.tileX][currentTile.tileY-2];
+                                            tileBeforeTileBefore.remove=true;
+                                        }
                                     }
                                     else if (match>5){
                                         score+=1;
@@ -185,6 +188,10 @@ static const int GRID_SIZE=3;
                                     tileBefore.remove=true;
                                     if (match==5) {
                                         score+=5;
+                                        if (currentTile.tileX-2>=0) {
+                                            Tile* tileBeforeTileBefore=_gridArray[currentTile.tileX-2][currentTile.tileY];
+                                            tileBeforeTileBefore.remove=true;
+                                        }
                                     }
                                     else if (match>5){
                                         score+=1;
@@ -204,7 +211,7 @@ static const int GRID_SIZE=3;
         }
     }
     _totalScore=score;
-    CCTimer* myTimer=[NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(removeTiles) userInfo:nil repeats:NO];
+    CCTimer* myTimer=[NSTimer scheduledTimerWithTimeInterval:.7 target:self selector:@selector(removeTiles) userInfo:nil repeats:NO];
 }
 
 #pragma mark - Remove Tiles
@@ -218,7 +225,11 @@ static const int GRID_SIZE=3;
                 NSLog(@"%i, %i", tile.tileX, tile.tileY );
                 removed=YES;
                 tile.remove=false;
-                [self removeChild:tile];
+                
+                // WARNING: MIGHT LEAD TO UNEXPECTED BEHAVIOR
+                if ([self.children containsObject:tile]) {
+                    [self removeChild:tile];
+                }
                 
                 Tile* newTile= (Tile*)[CCBReader load:@"Tile"];
                  
@@ -230,12 +241,15 @@ static const int GRID_SIZE=3;
                 newTile.tileX=tile.tileX;
                 newTile.tileY=tile.tileY;
                 newTile.remove=false;
+                newTile.rotationMeasure=0;
+                newTile.match=NO;
+                newTile.checking=NO;
                 
-                [self addChild: newTile];
+               [self addChild: newTile];
                 if (tile.checking==NO) {
                     [self checkTile:newTile];
-
                 }
+                
                 else if (tile.checking==YES){
                     tile.checking=NO;
                     [self checkVerticallyTile:newTile];
@@ -468,8 +482,9 @@ static const int GRID_SIZE=3;
         for (int x=0; x<GRID_SIZE; x++) {
             for (int y=0; y<GRID_SIZE; y++) {
                 Tile* tile=_gridArray[x][y];
-                [self removeChild:tile];
                 
+                [self removeChild:tile];
+
                 Tile* newTile= (Tile*)[CCBReader load:@"Tile"];
                 
                 [newTile setScaleX:((_columnWidth)/tile.contentSize.width)];
@@ -480,35 +495,20 @@ static const int GRID_SIZE=3;
                 newTile.tileX=tile.tileX;
                 newTile.tileY=tile.tileY;
                 newTile.remove=false;
+                newTile.match=NO;
+                newTile.checking=NO;
+                
+                [self addChild:newTile];
+                [self checkTile:newTile];
             }
         }
+        [self checkForMoves];
     }
     else if (possibleMatch==YES){
         possibleMatch=NO;
-    }
-    if ([_tileMatchArray count]==0) {
-        for (int x=0; x<GRID_SIZE; x++) {
-            for (int y=0; y<GRID_SIZE; y++) {
-                Tile* tile=_gridArray[x][y];
-                [self removeChild:tile];
-                
-                Tile* newTile= (Tile*)[CCBReader load:@"Tile"];
-                
-                [newTile setScaleX:((_columnWidth)/tile.contentSize.width)];
-                [newTile setScaleY:((_columnHeight)/tile.contentSize.height)];
-                
-                newTile.position = tile.position;
-                _gridArray[x][y]=newTile;
-                newTile.tileX=tile.tileX;
-                newTile.tileY=tile.tileY;
-                newTile.remove=false;
-            }
-        }
-    }
-    else if ([_tileMatchArray count]>0){
         [indicateTimer invalidate];
         indicatedTile=[_tileMatchArray objectAtIndex:(arc4random()% [_tileMatchArray count])];
-        indicateTimer=[NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(indicateMove) userInfo:nil repeats:YES];
+        indicateTimer=[NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(indicateMove) userInfo:nil repeats:YES];
     }
 }
 

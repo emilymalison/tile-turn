@@ -20,11 +20,11 @@ static const int TILE_SIZE=3;
     Dot *dot;
     BOOL canTouch;
     CCSprite *_tile;
+    CCPhysicsNode *_physicsNode;
 }
 
 - (void)onEnter
 {
-    
     [super onEnter];
     
     [self setUpTile];
@@ -36,7 +36,6 @@ static const int TILE_SIZE=3;
     self.rotationMeasure=0;
     self.match=NO;
     self.checking=NO;
-    self.rotatedTile=NO;
 }
 
 #pragma mark - Filling Tile with Dots
@@ -114,9 +113,6 @@ static const int TILE_SIZE=3;
 #pragma mark - Rotating Tile When Tapped
 
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
-    if (self.rotatedTile==NO) {
-        self.rotatedTile=YES;
-    }
     if (canTouch) {
         canTouch = NO;
         CCActionRotateBy *rotateTile= [CCActionRotateBy actionWithDuration:.4 angle:90];
