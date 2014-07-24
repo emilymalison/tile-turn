@@ -231,7 +231,15 @@ static const int GRID_SIZE=3;
                 newTile.remove=false;
                 
                 [self addChild: newTile];
-                [self checkTile:newTile];
+                if (tile.checking==NO) {
+                    [self checkTile:newTile];
+
+                }
+                else if (tile.checking==YES){
+                    tile.checking=NO;
+                    [self checkVerticallyTile:newTile];
+                    [self checkHorizontallyTile:newTile];
+                }
             }
         }
     }
@@ -464,22 +472,10 @@ static const int GRID_SIZE=3;
     NSLog(@"%i, %i", indicatedTile.tileX, indicatedTile.tileY);
     [indicatedTile.animationManager runAnimationsForSequenceNamed:(@"Animation")];
     CCTimer* myTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(resetAnimation) userInfo:nil repeats:NO];
-    /*for (int x=0; x<3; x++) {
-        for (int y=0; y<3; y++) {
-            Dot* dot=indicatedTile.tileArray[x][y];
-            [dot.animationManager runAnimationsForSequenceNamed:(@"Animation")];
-         }
-         }*/
 }
 
 -(void)resetAnimation{
     [indicatedTile.animationManager runAnimationsForSequenceNamed:(@"Default Timeline")];
-    /*for (int x=0; x<3; x++) {
-        for (int y=0; y<3; y++) {
-            Dot* dot=indicatedTile.tileArray[x][y];
-            [dot.animationManager runAnimationsForSequenceNamed:(@"Default Timeline")];
-        }
-    }*/
 }
 
 @end

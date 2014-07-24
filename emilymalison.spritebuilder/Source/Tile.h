@@ -21,5 +21,6 @@
 @property(nonatomic, assign)BOOL remove;
 @property(nonatomic, assign)int rotationMeasure;
 @property(nonatomic, assign)BOOL match;
+@property(nonatomic, assign)BOOL checking;
 
 @end

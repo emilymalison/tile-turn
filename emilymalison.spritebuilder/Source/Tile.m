@@ -35,6 +35,7 @@ static const int TILE_SIZE=3;
     self.remove=NO;
     self.rotationMeasure=0;
     self.match=NO;
+    self.checking=NO;
 }
 
 #pragma mark - Filling Tile with Dots
@@ -138,7 +139,9 @@ static const int TILE_SIZE=3;
     self.rotation -= 90;
     self.rotationMeasure+=1;
     if (self.rotationMeasure==3) {
+        NSLog(@"rotation=3");
         self.remove=YES;
+        self.checking=YES;
         [(Grid*)self.parent removeTiles];
     }
     self.dotColorArray=[self rotateColorMatrix:self.dotColorArray];
