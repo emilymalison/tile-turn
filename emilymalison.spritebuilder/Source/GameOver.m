@@ -10,4 +10,16 @@
 
 @implementation GameOver
 
+-(void) startGame{
+    CCScene *gameplayScene=[CCBReader loadAsScene:@"Gameplay"];
+    [[CCDirector sharedDirector] replaceScene:gameplayScene];
+}
+
+-(void)loadMenu{
+    CCScene *mainScene=[CCBReader loadAsScene:@"MainScene"];
+    [[CCDirector sharedDirector] replaceScene:mainScene];
+}
+
+
+
 @end

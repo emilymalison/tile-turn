@@ -10,4 +10,7 @@
 
 @interface MainScene : CCNode
 
+-(void)startGame;
+
+
 @end

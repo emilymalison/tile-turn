@@ -58,6 +58,7 @@
 }
 
 
+
 /*- (BOOL) ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair tile:(CCNode *)nodeA wildcard:(CCNode *)nodeB {
     if (nodeB.physicsBody.affectedByGravity == NO && nodeA.physicsBody.affectedByGravity) {
         nodeA.physicsBody.affectedByGravity = NO;
