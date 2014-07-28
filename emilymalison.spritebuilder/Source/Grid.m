@@ -27,7 +27,7 @@ static const int GRID_SIZE=3;
     BOOL possibleMatch;
     NSMutableArray *_tileMatchArray;
     BOOL moveIndicated;
-    CCTimer* indicateTimer;
+    NSTimer* indicateTimer;
     NSMutableArray *_newTileArray;
 }
 
@@ -216,7 +216,7 @@ static const int GRID_SIZE=3;
     _totalScore=score;
     if (score>scoreCheck) {
         //[self removeTiles];
-        CCTimer* myTimer=[NSTimer scheduledTimerWithTimeInterval:.7 target:self selector:@selector(removeTiles) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:.7 target:self selector:@selector(removeTiles) userInfo:nil repeats:NO];
     }
 }
 
@@ -228,15 +228,28 @@ static const int GRID_SIZE=3;
         for (int j=0; j<3; j++) {
             Tile* tile=_gridArray[i][j];
             if (tile.remove==true) {
-                NSLog(@"%i, %i", tile.tileX, tile.tileY );
                 removed=YES;
                 tile.remove=false;
+                
+                /*for (int x=0; x<GRID_SIZE; x++) {
+                    Tile* eachTile =_gridArray[x][tile.tileY];
+                    NSLog(@"%i,", tile.tileY);
+                    eachTile.physicsBody.collisionMask=nil;
+                    eachTile.physicsBody.affectedByGravity=YES;
+                }*/
                 
                 // WARNING: MIGHT LEAD TO UNEXPECTED BEHAVIOR
                 if ([self.children containsObject:tile]) {
                     [self removeChild:tile];
                     [_gridArray removeObject:tile];
                 }
+                
+                /*if (tile.tileX!=2) {
+                    Tile* tileAbove=_gridArray[tile.tileX+1][tile.tileY];
+                    //tileAbove.position=tile.position;
+                    [self schedule:@selector(updateTilePosition) interval:.02];
+                }*/
+                
                 Tile* newTile=_gridArray[tile.tileX][tile.tileY];
                 newTile= (Tile*)[CCBReader load:@"Tile"];
                  
@@ -274,13 +287,10 @@ static const int GRID_SIZE=3;
         }
         [_newTileArray removeAllObjects];
     }
-    NSLog(@"%@", _newTileArray);
     if (removed==YES) {
         [self checkForMoves];
     }
-    NSLog(@"break");
 }
-
 
 #pragma mark - Checking Original Grid For Matches
 
@@ -539,7 +549,7 @@ static const int GRID_SIZE=3;
 
 -(void)indicateMove{
     [indicatedTile.animationManager runAnimationsForSequenceNamed:(@"Animation")];
-    CCTimer* myTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(resetAnimation) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(resetAnimation) userInfo:nil repeats:NO];
 }
 
 -(void)resetAnimation{

@@ -8,6 +8,7 @@
 
 #import "Gameplay.h"
 #import "Grid.h"
+#import "GameOver.h"
 
 @implementation Gameplay{
     Grid *_grid;
@@ -16,12 +17,18 @@
     NSTimer *myTimer;
     CCLabelTTF *_score;
     int gameplayScore;
+    CCPhysicsNode *_physicsNode;
+    GameOver *_gameOver;
 }
 
 #pragma mark - Timer
 
 -(void)onEnter{
     [super onEnter];
+    
+    _gameOver.visible=NO;
+    
+    _physicsNode.collisionDelegate = self;
     
     myTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(second) userInfo:nil repeats:YES];
     timeRemaining=60;
@@ -38,18 +45,25 @@
         myTimer=nil;
         [self timerExpired];
     }
-    
 }
 
 -(void)timerExpired{
-    
+    _gameOver.visible=YES;
 }
 
-#pragma mark - Score
+ #pragma mark - Score
 
 -(void)updateScore{
     _score.string=[NSString stringWithFormat:@"%i", _grid.totalScore];
 }
 
+
+/*- (BOOL) ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair tile:(CCNode *)nodeA wildcard:(CCNode *)nodeB {
+    if (nodeB.physicsBody.affectedByGravity == NO && nodeA.physicsBody.affectedByGravity) {
+        nodeA.physicsBody.affectedByGravity = NO;
+        nodeA.physicsBody.velocity = ccp(0,0);
+    }
+    return YES;
+}*/
 
 @end

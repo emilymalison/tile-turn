@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4F0A4F26196D7BC8002F1D4D /* Tile.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0A4F25196D7BC8002F1D4D /* Tile.m */; };
+		4F5614691986899C00760A40 /* GameOver.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5614681986899C00760A40 /* GameOver.m */; };
 		4FA77402196C766D00B78702 /* Gameplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FA77401196C766D00B78702 /* Gameplay.m */; };
 		4FA7740A196C793800B78702 /* Grid.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FA77409196C793800B78702 /* Grid.m */; };
 		4FEFDBF2196EDC210087095F /* Dot.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFDBF1196EDC210087095F /* Dot.m */; };
@@ -62,6 +63,8 @@
 /* Begin PBXFileReference section */
 		4F0A4F24196D7BC8002F1D4D /* Tile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tile.h; path = Source/Tile.h; sourceTree = "<group>"; };
 		4F0A4F25196D7BC8002F1D4D /* Tile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Tile.m; path = Source/Tile.m; sourceTree = "<group>"; };
+		4F5614671986899C00760A40 /* GameOver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameOver.h; path = Source/GameOver.h; sourceTree = "<group>"; };
+		4F5614681986899C00760A40 /* GameOver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameOver.m; path = Source/GameOver.m; sourceTree = "<group>"; };
 		4FA77400196C766D00B78702 /* Gameplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Gameplay.h; path = Source/Gameplay.h; sourceTree = "<group>"; };
 		4FA77401196C766D00B78702 /* Gameplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Gameplay.m; path = Source/Gameplay.m; sourceTree = "<group>"; };
 		4FA77408196C793800B78702 /* Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Grid.h; path = Source/Grid.h; sourceTree = "<group>"; };
@@ -141,6 +144,8 @@
 				B737893E1807617C0076A88C /* AppDelegate.m */,
 				4FEFDBF0196EDC210087095F /* Dot.h */,
 				4FEFDBF1196EDC210087095F /* Dot.m */,
+				4F5614671986899C00760A40 /* GameOver.h */,
+				4F5614681986899C00760A40 /* GameOver.m */,
 				4FA77400196C766D00B78702 /* Gameplay.h */,
 				4FA77401196C766D00B78702 /* Gameplay.m */,
 				4FA77408196C793800B78702 /* Grid.h */,
@@ -363,6 +368,7 @@
 				4FA7740A196C793800B78702 /* Grid.m in Sources */,
 				4F0A4F26196D7BC8002F1D4D /* Tile.m in Sources */,
 				B737893F1807617C0076A88C /* AppDelegate.m in Sources */,
+				4F5614691986899C00760A40 /* GameOver.m in Sources */,
 				4FA77402196C766D00B78702 /* Gameplay.m in Sources */,
 				B7378994180767190076A88C /* MainScene.m in Sources */,
 				4FEFDBF2196EDC210087095F /* Dot.m in Sources */,

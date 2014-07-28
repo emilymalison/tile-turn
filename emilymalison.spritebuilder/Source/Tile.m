@@ -20,7 +20,6 @@ static const int TILE_SIZE=3;
     Dot *dot;
     BOOL canTouch;
     CCSprite *_tile;
-    CCPhysicsNode *_physicsNode;
 }
 
 - (void)onEnter
@@ -36,6 +35,7 @@ static const int TILE_SIZE=3;
     self.rotationMeasure=0;
     self.match=NO;
     self.checking=NO;
+    self.physicsBody.collisionMask=@[];
 }
 
 #pragma mark - Filling Tile with Dots
@@ -114,10 +114,12 @@ static const int TILE_SIZE=3;
 
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
     if (canTouch) {
+        self.physicsBody.collisionMask = @[];
         canTouch = NO;
         CCActionRotateBy *rotateTile= [CCActionRotateBy actionWithDuration:.4 angle:90];
         CCActionCallBlock *resetTouch = [CCActionCallBlock actionWithBlock:^{
             canTouch= YES;
+            //self.physicsBody.collisionMask = nil;
         }];
         [self runAction:[CCActionSequence actionOne:rotateTile two:resetTouch]];
     
