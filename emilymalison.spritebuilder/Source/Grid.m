@@ -29,6 +29,9 @@ static const int GRID_SIZE=3;
     BOOL moveIndicated;
     NSTimer* indicateTimer;
     NSMutableArray *_newTileArray;
+    Tile *fallingTile;
+    CCTimer *fallingTimer;
+    int newYPosition;
 }
 
 - (void)onEnter
@@ -215,8 +218,8 @@ static const int GRID_SIZE=3;
     }
     _totalScore=score;
     if (score>scoreCheck) {
-        //[self removeTiles];
-        [NSTimer scheduledTimerWithTimeInterval:.7 target:self selector:@selector(removeTiles) userInfo:nil repeats:NO];
+        [self removeTiles];
+        //[NSTimer scheduledTimerWithTimeInterval:.7 target:self selector:@selector(removeTiles) userInfo:nil repeats:NO];
     }
 }
 
@@ -244,11 +247,15 @@ static const int GRID_SIZE=3;
                     [_gridArray removeObject:tile];
                 }
                 
-                /*if (tile.tileX!=2) {
+                if (tile.tileX!=2) {
                     Tile* tileAbove=_gridArray[tile.tileX+1][tile.tileY];
-                    //tileAbove.position=tile.position;
-                    [self schedule:@selector(updateTilePosition) interval:.02];
-                }*/
+                    _gridArray[tile.tileX][tile.tileY]=tileAbove;
+                    tileAbove.tileX=tile.tileX;
+                    tileAbove.tileY=tile.tileY;
+                    newYPosition=tile.position.y;
+                    fallingTile=tileAbove;
+                    fallingTimer=[self schedule:@selector(updateTilePosition) interval:.02];
+                }
                 
                 Tile* newTile=_gridArray[tile.tileX][tile.tileY];
                 newTile= (Tile*)[CCBReader load:@"Tile"];
@@ -265,7 +272,7 @@ static const int GRID_SIZE=3;
                 newTile.match=NO;
                 newTile.checking=NO;
                 
-                [self addChild:newTile];
+                //[self addChild:newTile];
                 
                 if (tile.checking==NO) {
                     [_newTileArray addObject:newTile];
@@ -274,8 +281,8 @@ static const int GRID_SIZE=3;
                 else if (tile.checking==YES){
                     newTile.checking=NO;
                     newTile.remove=NO;
-                    [self checkVerticallyTile:newTile];
-                    [self checkHorizontallyTile:newTile];
+                    //[self checkVerticallyTile:newTile];
+                    //[self checkHorizontallyTile:newTile];
                 }
             }
         }
@@ -283,12 +290,19 @@ static const int GRID_SIZE=3;
     if ([_newTileArray count]>0) {
         for (int i=0; i<[_newTileArray count]; i++) {
             Tile* tile=_newTileArray[i];
-            [self checkTile:tile];
+            //[self checkTile:tile];
         }
         [_newTileArray removeAllObjects];
     }
     if (removed==YES) {
-        [self checkForMoves];
+        //[self checkForMoves];
+    }
+}
+
+-(void)updateTilePosition{
+    fallingTile.position=ccp(fallingTile.position.x, fallingTile.position.y-2);
+    if (fallingTile.position.y==newYPosition) {
+        [fallingTimer invalidate];
     }
 }
 
