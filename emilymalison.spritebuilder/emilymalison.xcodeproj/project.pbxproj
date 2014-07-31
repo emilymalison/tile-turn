@@ -10,6 +10,7 @@
 		4F0A4F26196D7BC8002F1D4D /* Tile.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0A4F25196D7BC8002F1D4D /* Tile.m */; };
 		4F5614691986899C00760A40 /* GameOver.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5614681986899C00760A40 /* GameOver.m */; };
 		4F5CB57619899A3F003767B9 /* Tutorial.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5CB57519899A3F003767B9 /* Tutorial.m */; };
+		4F5CB57A198ADC59003767B9 /* TutorialTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5CB579198ADC59003767B9 /* TutorialTile.m */; };
 		4FA77402196C766D00B78702 /* Gameplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FA77401196C766D00B78702 /* Gameplay.m */; };
 		4FA7740A196C793800B78702 /* Grid.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FA77409196C793800B78702 /* Grid.m */; };
 		4FEFDBF2196EDC210087095F /* Dot.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFDBF1196EDC210087095F /* Dot.m */; };
@@ -68,6 +69,8 @@
 		4F5614681986899C00760A40 /* GameOver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameOver.m; path = Source/GameOver.m; sourceTree = "<group>"; };
 		4F5CB57419899A3F003767B9 /* Tutorial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tutorial.h; path = Source/Tutorial.h; sourceTree = "<group>"; };
 		4F5CB57519899A3F003767B9 /* Tutorial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Tutorial.m; path = Source/Tutorial.m; sourceTree = "<group>"; };
+		4F5CB578198ADC59003767B9 /* TutorialTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TutorialTile.h; path = Source/TutorialTile.h; sourceTree = "<group>"; };
+		4F5CB579198ADC59003767B9 /* TutorialTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TutorialTile.m; path = Source/TutorialTile.m; sourceTree = "<group>"; };
 		4FA77400196C766D00B78702 /* Gameplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Gameplay.h; path = Source/Gameplay.h; sourceTree = "<group>"; };
 		4FA77401196C766D00B78702 /* Gameplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Gameplay.m; path = Source/Gameplay.m; sourceTree = "<group>"; };
 		4FA77408196C793800B78702 /* Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Grid.h; path = Source/Grid.h; sourceTree = "<group>"; };
@@ -159,6 +162,8 @@
 				4F0A4F25196D7BC8002F1D4D /* Tile.m */,
 				4F5CB57419899A3F003767B9 /* Tutorial.h */,
 				4F5CB57519899A3F003767B9 /* Tutorial.m */,
+				4F5CB578198ADC59003767B9 /* TutorialTile.h */,
+				4F5CB579198ADC59003767B9 /* TutorialTile.m */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -379,6 +384,7 @@
 				4FEFDBF2196EDC210087095F /* Dot.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
 				4F5CB57619899A3F003767B9 /* Tutorial.m in Sources */,
+				4F5CB57A198ADC59003767B9 /* TutorialTile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

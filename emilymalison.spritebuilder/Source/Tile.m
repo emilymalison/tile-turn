@@ -20,13 +20,14 @@ static const int TILE_SIZE=3;
     Dot *dot;
     BOOL canTouch;
     CCSprite *_tile;
+    Tile *tutorialTile;
 }
 
 - (void)onEnter
 {
     [super onEnter];
-    
     [self setUpTile];
+
     
     self.userInteractionEnabled = YES;
     canTouch = YES;
