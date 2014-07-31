@@ -7,7 +7,19 @@
 //
 
 #import "Tutorial.h"
+#import "TutorialTile.h"
 
-@implementation Tutorial
+@implementation Tutorial{
+    TutorialTile *tileLeft;
+    TutorialTile *tileRight;
+}
+-(void)onEnter{
+    [super onEnter];
+    tileLeft.number=1;
+    tileRight.number=2;
+    [tileLeft setUpTutorialTile];
+    [tileRight setUpTutorialTile];
+}
+
 
 @end

@@ -10,4 +10,7 @@
 
 @interface TutorialTile : CCSprite
 
+@property(nonatomic, assign)int number;
+
+-(void)setUpTutorialTile;
 @end

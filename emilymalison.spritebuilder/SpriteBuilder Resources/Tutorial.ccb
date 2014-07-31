@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>7</integer>
+	<integer>11</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -49,7 +49,7 @@
 				<key>customClass</key>
 				<string></string>
 				<key>displayName</key>
-				<string>CCNodeColor</string>
+				<string>background</string>
 				<key>memberVarAssignmentName</key>
 				<string></string>
 				<key>memberVarAssignmentType</key>
@@ -148,7 +148,7 @@
 				<key>customClass</key>
 				<string></string>
 				<key>displayName</key>
-				<string>CCLabelTTF</string>
+				<string>directions</string>
 				<key>memberVarAssignmentName</key>
 				<string></string>
 				<key>memberVarAssignmentType</key>
@@ -209,8 +209,8 @@
 						<key>value</key>
 						<array>
 							<string>Welcome to Tile Turn!
-Tap the tile on the left
-to rotate it!</string>
+Tap the tile on the 
+right to rotate it!</string>
 							<false/>
 						</array>
 					</dict>
@@ -370,9 +370,9 @@ to rotate it!</string>
 				<key>customClass</key>
 				<string></string>
 				<key>displayName</key>
-				<string>CCBFile</string>
+				<string>tutorialTile</string>
 				<key>memberVarAssignmentName</key>
-				<string></string>
+				<string>tileLeft</string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>properties</key>
@@ -432,9 +432,9 @@ to rotate it!</string>
 				<key>customClass</key>
 				<string></string>
 				<key>displayName</key>
-				<string>CCBFile</string>
+				<string>tutorialTile</string>
 				<key>memberVarAssignmentName</key>
-				<string></string>
+				<string>tileRight</string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>properties</key>
@@ -454,8 +454,8 @@ to rotate it!</string>
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>212</real>
-							<real>207</real>
+							<real>211</real>
+							<real>208</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -483,6 +483,8 @@ to rotate it!</string>
 						<string>tutorialTile.ccb</string>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
