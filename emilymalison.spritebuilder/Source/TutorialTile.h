@@ -11,6 +11,7 @@
 @interface TutorialTile : CCSprite
 
 @property(nonatomic, assign)int number;
+@property(nonatomic, assign)int rotationMeasure;
 
 -(void)setUpTutorialTile;
 @end

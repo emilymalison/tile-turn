@@ -16,8 +16,6 @@
     CGFloat _tileColumnWidth;
     CGFloat _dotMarginHorizontal;
     CGFloat _dotMarginVertical;
-    //TutorialTile *tileLeft;
-    //TutorialTile *tileRight;
     Dot *dot;
 }
 
@@ -27,6 +25,7 @@
     
     self.userInteractionEnabled=YES;
     canTouch=YES;
+    self.rotation=0;
 }
 
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
@@ -35,9 +34,10 @@
         CCActionRotateBy *rotateTile= [CCActionRotateBy actionWithDuration:.4 angle:90];
         CCActionCallBlock *resetTouch = [CCActionCallBlock actionWithBlock:^{
             canTouch= YES;
+            self.rotationMeasure+=1;
+            [(Tutorial*)self.parent check];
         }];
         [self runAction:[CCActionSequence actionOne:rotateTile two:resetTouch]];
-        
     }
 }
 
@@ -94,7 +94,7 @@
             y+=_tileColumnHeight;
         }
     }
-    if (self.number==2) {
+    else if (self.number==2) {
         for (int i=0; i<3; i++) {
             x=_dotMarginHorizontal;
             for (int j=0; j<3; j++) {
@@ -132,6 +132,91 @@
                 dot.position = ccp(x, y);
                 
                 
+                x+=_tileColumnWidth;
+            }
+            y+=_tileColumnHeight;
+        }
+    }
+    else if (self.number==3){
+        for (int i=0; i<3; i++) {
+            x=_dotMarginHorizontal;
+            for (int j=0; j<3; j++) {
+                if (i==0 && j==0) {
+                    dot=(Dot*)[CCBReader load:@"WhiteDot"];
+                }
+                else if (i==0 && j==1){
+                    dot=(Dot*)[CCBReader load:@"GreenDot"];
+                }
+                else if (i==0 && j==2){
+                    dot=(Dot*)[CCBReader load:@"BlueDot"];
+                }
+                else if (i==1 && j==0){
+                    dot=(Dot*)[CCBReader load:@"BlueDot"];
+                }
+                else if (i==1 && j==1){
+                    dot=(Dot*)[CCBReader load:@"BlueDot"];
+                }
+                else if (i==1 && j==2){
+                    dot=(Dot*)[CCBReader load:@"GreenDot"];
+                }
+                else if (i==2 && j==0){
+                    dot=(Dot*)[CCBReader load:@"WhiteDot"];
+                }
+                else if (i==2 && j==1){
+                    dot=(Dot*)[CCBReader load:@"WhiteDot"];
+                }
+                else if (i==2 && j==2){
+                    dot=(Dot*)[CCBReader load:@"WhiteDot"];
+                }
+                [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2];
+                [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2];
+                [self addChild:dot];
+                dot.contentSize = CGSizeMake(_tileColumnWidth, _tileColumnHeight);
+                dot.position = ccp(x, y);
+                
+                
+                x+=_tileColumnWidth;
+            }
+            y+=_tileColumnHeight;
+        }
+    }
+    else if (self.number==4){
+        for (int i=0; i<3; i++) {
+            x=_dotMarginHorizontal;
+            for (int j=0; j<3; j++) {
+                if (i==0 && j==0) {
+                    dot=(Dot*)[CCBReader load:@"BlueDot"];
+                }
+                else if (i==0 && j==1){
+                    dot=(Dot*)[CCBReader load:@"BlueDot"];
+                }
+                else if (i==0 && j==2){
+                    dot=(Dot*)[CCBReader load:@"WhiteDot"];
+                }
+                else if (i==1 && j==0){
+                    dot=(Dot*)[CCBReader load:@"GreenDot"];
+                }
+                else if (i==1 && j==1){
+                        dot=(Dot*)[CCBReader load:@"WhiteDot"];
+                }
+                else if (i==1 && j==2){
+                    dot=(Dot*)[CCBReader load:@"WhiteDot"];
+                }
+                else if (i==2 && j==0){
+                    dot=(Dot*)[CCBReader load:@"GreenDot"];
+                }
+                else if (i==2 && j==1){
+                    dot=(Dot*)[CCBReader load:@"BlueDot"];
+                }
+                else if (i==2 && j==2){
+                    dot=(Dot*)[CCBReader load:@"WhiteDot"];
+                }
+                [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2];
+                [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2];
+                [self addChild:dot];
+                dot.contentSize = CGSizeMake(_tileColumnWidth, _tileColumnHeight);
+                dot.position = ccp(x, y);
+
                 x+=_tileColumnWidth;
             }
             y+=_tileColumnHeight;

@@ -10,4 +10,8 @@
 
 @interface Tutorial : CCNode
 
+
+-(void)check;
+
+
 @end
