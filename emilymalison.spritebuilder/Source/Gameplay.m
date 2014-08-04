@@ -21,6 +21,9 @@
     GameOver *_gameOver;
     CCNodeColor *shufflingScreen;
     CCLabelTTF *shufflingText;
+    CCNodeColor *pauseScreen;
+    CCLabelTTF *pauseText;
+    CCButton *continuePlayButton;
 }
 
 #pragma mark - Timer
@@ -70,6 +73,23 @@
 -(void)shufflingDone{
     shufflingScreen.visible=NO;
     shufflingText.visible=NO;
+    [_grid enableUserInteraction];
+}
+
+#pragma mark - Pause Screen
+-(void)pause{
+    pauseScreen.visible=YES;
+    pauseText.visible=YES;
+    continuePlayButton.visible=YES;
+    [myTimer invalidate];
+    [_grid disableUserInteraction];
+}
+
+-(void)continuePlay{
+    pauseScreen.visible=NO;
+    pauseText.visible=NO;
+    continuePlayButton.visible=NO;
+    myTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(second) userInfo:nil repeats:YES];
     [_grid enableUserInteraction];
 }
 @end
