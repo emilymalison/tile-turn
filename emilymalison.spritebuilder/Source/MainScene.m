@@ -14,13 +14,17 @@
 #pragma mark - Loading Gameplay Scene
 
 -(void) startGame{
-    /*if (timesPlayed==1){
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"hasPlayedTutorial"]==nil) {
         CCScene *tutorial=[CCBReader loadAsScene:@"Tutorial"];
         [[CCDirector sharedDirector] replaceScene:tutorial];
-    }*/
-    
-    CCScene *gameplayScene=[CCBReader loadAsScene:@"Gameplay"];
-    [[CCDirector sharedDirector] replaceScene:gameplayScene];
+        [defaults setObject:[NSNumber numberWithBool:YES] forKey:@"hasPlayedTutorial"];
+        [defaults synchronize];
+    }
+    else{
+        CCScene *gameplayScene=[CCBReader loadAsScene:@"Gameplay"];
+        [[CCDirector sharedDirector] replaceScene:gameplayScene];
+    }
 }
 
 
