@@ -542,7 +542,8 @@ static const int GRID_SIZE=3;
     }
     if (possibleMatch==NO) {
         NSLog(@"no possible matches");
-        [(Gameplay*)self.parent noPossibleMatches];
+        CCNode *_node=self.parent;
+        [(Gameplay*)_node.parent noPossibleMatches];
         for (int x=0; x<GRID_SIZE; x++) {
             for (int y=0; y<GRID_SIZE; y++) {
                 Tile* tile=_gridArray[x][y];
@@ -583,7 +584,8 @@ static const int GRID_SIZE=3;
 -(void)resetShuffling{
     shuffling=NO;
     [self checkForMoves];
-    [(Gameplay*)self.parent shufflingDone];
+    CCNode *_node=self.parent;
+    [(Gameplay*)_node.parent shufflingDone];
 }
 
 #pragma mark - Indicate Move
