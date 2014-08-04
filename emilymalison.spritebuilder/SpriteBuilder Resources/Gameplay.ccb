@@ -618,7 +618,7 @@
 									<real>70</real>
 									<integer>2</integer>
 									<integer>2</integer>
-									<integer>1</integer>
+									<integer>0</integer>
 								</array>
 							</dict>
 							<dict>
@@ -939,7 +939,7 @@
 							<real>40</real>
 							<integer>2</integer>
 							<integer>2</integer>
-							<integer>1</integer>
+							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
@@ -1130,6 +1130,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -1167,7 +1169,7 @@
 							<real>40</real>
 							<integer>1</integer>
 							<integer>2</integer>
-							<integer>1</integer>
+							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
@@ -1395,7 +1397,7 @@
 							<real>70</real>
 							<integer>1</integer>
 							<integer>2</integer>
-							<integer>1</integer>
+							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
@@ -2091,8 +2093,6 @@ Shuffling…</string>
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>

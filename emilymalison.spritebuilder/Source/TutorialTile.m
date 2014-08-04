@@ -17,6 +17,7 @@
     CGFloat _dotMarginHorizontal;
     CGFloat _dotMarginVertical;
     Dot *dot;
+    Tutorial *_tutorial;
 }
 
 
@@ -35,7 +36,8 @@
         CCActionCallBlock *resetTouch = [CCActionCallBlock actionWithBlock:^{
             canTouch= YES;
             self.rotationMeasure+=1;
-            [(Tutorial*)self.parent check];
+            CCNode *_node=self.parent;
+            [(Tutorial*)_node.parent check];
         }];
         [self runAction:[CCActionSequence actionOne:rotateTile two:resetTouch]];
     }
