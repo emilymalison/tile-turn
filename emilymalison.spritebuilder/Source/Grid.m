@@ -29,6 +29,9 @@ static const int GRID_SIZE=3;
     BOOL moveIndicated;
     NSTimer* indicateTimer;
     NSMutableArray *_newTileArray;
+    Gameplay *_gameplayScene;
+    BOOL shuffling;
+    NSTimer *shufflingTimer;
 }
 
 - (void)onEnter
@@ -40,12 +43,22 @@ static const int GRID_SIZE=3;
     
     moveIndicated=NO;
     _newTileArray=[NSMutableArray array];
+    
+    shuffling=NO;
 }
 
 
 #pragma mark - Filling Grid with Tiles
 
 -(void)setUpGrid{
+    if (shuffling==YES) {
+        for (int x=0; x<GRID_SIZE; x++) {
+            for (int y=0; y<GRID_SIZE; y++) {
+                Tile *tile=_gridArray[x][y];
+                [self removeChild:tile];
+            }
+        }
+    }
     
     _gridArray=[NSMutableArray array];
     
@@ -80,13 +93,23 @@ static const int GRID_SIZE=3;
 		}
 		y += _columnHeight;
     }
-    [self checkHorizontallyTile:_gridArray[0][0]];
-    [self checkHorizontallyTile:_gridArray[1][0]];
-    [self checkHorizontallyTile:_gridArray[2][0]];
-    [self checkVerticallyTile:_gridArray[0][0]];
-    [self checkVerticallyTile:_gridArray[0][1]];
-    [self checkVerticallyTile:_gridArray[0][2]];
-    [self checkForMoves];
+    if (shuffling==NO) {
+        [self checkHorizontallyTile:_gridArray[0][0]];
+        [self checkHorizontallyTile:_gridArray[1][0]];
+        [self checkHorizontallyTile:_gridArray[2][0]];
+        [self checkVerticallyTile:_gridArray[0][0]];
+        [self checkVerticallyTile:_gridArray[0][1]];
+        [self checkVerticallyTile:_gridArray[0][2]];
+        [self checkForMoves];
+    }
+    if (shuffling==YES) {
+        for (int x=0; x<GRID_SIZE; x++) {
+            for (int y=0; y<GRID_SIZE; y++){
+                Tile* tile=_gridArray[x][y];
+                [self checkTile:tile];
+            }
+        }
+    }
 }
 
 #pragma mark - Checking for Matches
@@ -536,6 +559,16 @@ static const int GRID_SIZE=3;
     
     if (possibleMatch==NO) {
         NSLog(@"no possible matches");
+        [(Gameplay*)self.parent noPossibleMatches];
+        shuffling=YES;
+        for (int x=0; x<GRID_SIZE; x++) {
+            for (int y=0; y<GRID_SIZE; y++){
+                Tile* tile=_gridArray[x][y];
+                tile.userInteractionEnabled=NO;
+            }
+        }
+        NSTimer *setUpTimer=[NSTimer scheduledTimerWithTimeInterval:.3 target:self selector:@selector(setUpGrid) userInfo:(nil) repeats:NO];
+        shufflingTimer=[NSTimer scheduledTimerWithTimeInterval:1.3 target:self selector:@selector(resetShuffling) userInfo:nil repeats:NO];
     }
     else if (possibleMatch==YES){
         possibleMatch=NO;
@@ -543,6 +576,12 @@ static const int GRID_SIZE=3;
         indicatedTile=[_tileMatchArray objectAtIndex:(arc4random()% [_tileMatchArray count])];
         indicateTimer=[NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(indicateMove) userInfo:nil repeats:YES];
     }
+}
+
+-(void)resetShuffling{
+    shuffling=NO;
+    [self checkForMoves];
+    [(Gameplay*)self.parent shufflingDone];
 }
 
 #pragma mark - Indicate Move

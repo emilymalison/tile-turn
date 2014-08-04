@@ -8,10 +8,11 @@
 
 #import "CCNode.h"
 
-@interface Gameplay : CCNode <CCPhysicsCollisionDelegate>
+@interface Gameplay : CCNode //<CCPhysicsCollisionDelegate>
 
 
 -(void)timerExpired;
-//-(void)updateScore:(int)score;
+-(void)noPossibleMatches;
+-(void)shufflingDone;
 
 @end

@@ -19,13 +19,14 @@
     int gameplayScore;
     CCPhysicsNode *_physicsNode;
     GameOver *_gameOver;
+    CCNodeColor *shufflingScreen;
+    CCLabelTTF *shufflingText;
 }
 
 #pragma mark - Timer
 
 -(void)onEnter{
-    [super onEnter];
-    
+    [super onEnter];    
     _gameOver.visible=NO;
     
     _physicsNode.collisionDelegate = self;
@@ -49,12 +50,27 @@
 
 -(void)timerExpired{
     _gameOver.visible=YES;
+    _gameOver.userInteractionEnabled=YES;
+    self.userInteractionEnabled=NO;
 }
 
  #pragma mark - Score
 
 -(void)updateScore{
     _score.string=[NSString stringWithFormat:@"%i", _grid.totalScore];
+}
+
+#pragma mark - Shuffling Screen
+-(void)noPossibleMatches{
+    shufflingScreen.visible=YES;
+    shufflingText.visible=YES;
+    self.userInteractionEnabled=NO;
+}
+
+-(void)shufflingDone{
+    shufflingScreen.visible=NO;
+    shufflingText.visible=NO;
+    self.userInteractionEnabled=YES;
 }
 
 
