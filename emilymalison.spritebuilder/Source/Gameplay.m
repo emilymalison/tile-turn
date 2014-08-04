@@ -59,12 +59,13 @@
 
 
 
-/*- (BOOL) ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair tile:(CCNode *)nodeA wildcard:(CCNode *)nodeB {
+- (BOOL) ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair tile:(CCNode *)nodeA wildcard:(CCNode *)nodeB {
     if (nodeB.physicsBody.affectedByGravity == NO && nodeA.physicsBody.affectedByGravity) {
         nodeA.physicsBody.affectedByGravity = NO;
         nodeA.physicsBody.velocity = ccp(0,0);
     }
     return YES;
-}*/
+    //[_grid checkTile:nodeA];
+}
 
 @end
