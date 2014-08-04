@@ -51,6 +51,7 @@ static const int GRID_SIZE=3;
             if (_gridArray[x][y]!=nil) {
                 Tile* tile=_gridArray[x][y];
                 tile.tileX=round((tile.position.y/tile.contentSize.height)/2);
+                tile.tileY=round((tile.position.x/tile.contentSize.width)/2);
                 _gridArray[tile.tileX][tile.tileY]=tile;
             }
         }
@@ -246,7 +247,7 @@ static const int GRID_SIZE=3;
                 removed=YES;
                 tile.remove=false;
                 
-                for (int x=0; x<GRID_SIZE; x++) {
+                for (int x=0; x<3; x++) {
                     Tile* eachTile =_gridArray[x][tile.tileY];
                     eachTile.physicsBody.collisionMask=nil;
                     eachTile.physicsBody.affectedByGravity=YES;
@@ -298,12 +299,6 @@ static const int GRID_SIZE=3;
     if (removed==YES) {
         //[self checkForMoves];
     }
-}
-
-- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair tile:(CCNode *)tile wildcard:(CCNode *)object {
-    tile.physicsBody.collisionMask=@[];
-    tile.physicsBody.affectedByGravity=NO;
-    return YES;
 }
 
 #pragma mark - Checking Original Grid For Matches

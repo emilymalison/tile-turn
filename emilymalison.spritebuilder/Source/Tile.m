@@ -131,12 +131,6 @@ static const int TILE_SIZE=3;
     }
 }
 
-- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair tile:(CCNode *)tile wildcard:(CCNode *)object {
-    self.physicsBody.collisionMask=@[];
-    self.physicsBody.affectedByGravity=NO;
-    return YES;
-}
-
 -(NSMutableArray*)rotateColorMatrix:(NSMutableArray*)matrix{
     return [NSMutableArray arrayWithObjects:[NSMutableArray arrayWithObjects:matrix[0][2], matrix[1][2], matrix[2][2], nil], [NSMutableArray arrayWithObjects:matrix[0][1], matrix[1][1], matrix[2][1], nil], [NSMutableArray arrayWithObjects:matrix[0][0], matrix[1][0], matrix[2][0], nil], nil];
 }
@@ -159,6 +153,14 @@ static const int TILE_SIZE=3;
     [(Grid*)self.parent checkVerticallyTile:self];
     [(Grid*)self.parent checkHorizontallyTile:self];
     
+}
+
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair tile:(CCNode *)nodeA wildcard:(CCNode *)nodeB {
+    if (nodeB.physicsBody.affectedByGravity == NO && nodeA.physicsBody.affectedByGravity) {
+        nodeA.physicsBody.affectedByGravity = NO;
+        nodeA.physicsBody.velocity = ccp(0,0);
+    }
+    return YES;
 }
 
 
