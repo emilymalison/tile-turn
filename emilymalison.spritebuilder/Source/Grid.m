@@ -45,6 +45,18 @@ static const int GRID_SIZE=3;
     _newTileArray=[NSMutableArray array];
 }
 
+-(void)update:(CCTime)delta{
+    for (int x=0; x<GRID_SIZE; x++) {
+        for (int y=0; y<GRID_SIZE; y++) {
+            if (_gridArray[x][y]!=nil) {
+                Tile* tile=_gridArray[x][y];
+                tile.tileX=round((tile.position.y/tile.contentSize.height)/2);
+                _gridArray[tile.tileX][tile.tileY]=tile;
+            }
+        }
+    }
+}
+
 
 #pragma mark - Filling Grid with Tiles
 
@@ -218,8 +230,8 @@ static const int GRID_SIZE=3;
     }
     _totalScore=score;
     if (score>scoreCheck) {
-        [self removeTiles];
-        //[NSTimer scheduledTimerWithTimeInterval:.7 target:self selector:@selector(removeTiles) userInfo:nil repeats:NO];
+        //[self removeTiles];
+        [NSTimer scheduledTimerWithTimeInterval:.7 target:self selector:@selector(removeTiles) userInfo:nil repeats:NO];
     }
 }
 
@@ -234,12 +246,11 @@ static const int GRID_SIZE=3;
                 removed=YES;
                 tile.remove=false;
                 
-                /*for (int x=0; x<GRID_SIZE; x++) {
+                for (int x=0; x<GRID_SIZE; x++) {
                     Tile* eachTile =_gridArray[x][tile.tileY];
-                    NSLog(@"%i,", tile.tileY);
                     eachTile.physicsBody.collisionMask=nil;
                     eachTile.physicsBody.affectedByGravity=YES;
-                }*/
+                }
                 
                 // WARNING: MIGHT LEAD TO UNEXPECTED BEHAVIOR
                 if ([self.children containsObject:tile]) {
@@ -247,17 +258,7 @@ static const int GRID_SIZE=3;
                     [_gridArray removeObject:tile];
                 }
                 
-                if (tile.tileX!=2) {
-                    Tile* tileAbove=_gridArray[tile.tileX+1][tile.tileY];
-                    _gridArray[tile.tileX][tile.tileY]=tileAbove;
-                    tileAbove.tileX=tile.tileX;
-                    tileAbove.tileY=tile.tileY;
-                    newYPosition=tile.position.y;
-                    fallingTile=tileAbove;
-                    fallingTimer=[self schedule:@selector(updateTilePosition) interval:.02];
-                }
-                
-                Tile* newTile=_gridArray[tile.tileX][tile.tileY];
+                /*Tile* newTile=_gridArray[tile.tileX][tile.tileY];
                 newTile= (Tile*)[CCBReader load:@"Tile"];
                  
                 [newTile setScaleX:((_columnWidth)/tile.contentSize.width)];
@@ -283,7 +284,7 @@ static const int GRID_SIZE=3;
                     newTile.remove=NO;
                     //[self checkVerticallyTile:newTile];
                     //[self checkHorizontallyTile:newTile];
-                }
+                }*/
             }
         }
     }
@@ -299,11 +300,10 @@ static const int GRID_SIZE=3;
     }
 }
 
--(void)updateTilePosition{
-    fallingTile.position=ccp(fallingTile.position.x, fallingTile.position.y-2);
-    if (fallingTile.position.y==newYPosition) {
-        [fallingTimer invalidate];
-    }
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair tile:(CCNode *)tile wildcard:(CCNode *)object {
+    tile.physicsBody.collisionMask=@[];
+    tile.physicsBody.affectedByGravity=NO;
+    return YES;
 }
 
 #pragma mark - Checking Original Grid For Matches
@@ -521,7 +521,7 @@ static const int GRID_SIZE=3;
             }
         }
     }
-    /*if (possibleMatch==NO) {
+    if (possibleMatch==NO) {
         for (int x=0; x<GRID_SIZE; x++) {
             for (int y=0; y<GRID_SIZE; y++) {
                 Tile* tile=_gridArray[x][y];
@@ -546,7 +546,7 @@ static const int GRID_SIZE=3;
             }
         }
         [self checkForMoves];
-    }*/
+    }
     
     if (possibleMatch==NO) {
         NSLog(@"no possible matches");
