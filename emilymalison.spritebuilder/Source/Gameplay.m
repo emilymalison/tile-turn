@@ -51,7 +51,7 @@
 -(void)timerExpired{
     _gameOver.visible=YES;
     _gameOver.userInteractionEnabled=YES;
-    self.userInteractionEnabled=NO;
+    [_grid disableUserInteraction];
 }
 
  #pragma mark - Score
@@ -64,23 +64,12 @@
 -(void)noPossibleMatches{
     shufflingScreen.visible=YES;
     shufflingText.visible=YES;
-    self.userInteractionEnabled=NO;
+    [_grid disableUserInteraction];
 }
 
 -(void)shufflingDone{
     shufflingScreen.visible=NO;
     shufflingText.visible=NO;
-    self.userInteractionEnabled=YES;
+    [_grid enableUserInteraction];
 }
-
-
-
-/*- (BOOL) ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair tile:(CCNode *)nodeA wildcard:(CCNode *)nodeB {
-    if (nodeB.physicsBody.affectedByGravity == NO && nodeA.physicsBody.affectedByGravity) {
-        nodeA.physicsBody.affectedByGravity = NO;
-        nodeA.physicsBody.velocity = ccp(0,0);
-    }
-    return YES;
-}*/
-
 @end

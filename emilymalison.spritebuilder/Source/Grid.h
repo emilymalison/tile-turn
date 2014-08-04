@@ -18,6 +18,8 @@
 -(void)checkHorizontallyTile:(Tile*)tile;
 -(void)checkVerticallyTile:(Tile*)tile;
 -(void)checkForMoves;
+-(void)disableUserInteraction;
+-(void)enableUserInteraction;
 
 //@property(nonatomic, strong)NSMutableArray *gridArray;
 

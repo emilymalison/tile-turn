@@ -47,6 +47,24 @@ static const int GRID_SIZE=3;
     shuffling=NO;
 }
 
+-(void)disableUserInteraction{
+    for (int x=0; x<GRID_SIZE; x++) {
+        for (int y=0; y<GRID_SIZE; y++) {
+            Tile *tile=_gridArray[x][y];
+            tile.userInteractionEnabled=NO;
+        }
+    }
+    [indicateTimer invalidate];
+}
+
+-(void)enableUserInteraction{
+    for (int x=0; x<GRID_SIZE; x++) {
+        for (int y=0; y<GRID_SIZE; y++) {
+            Tile *tile=_gridArray[x][y];
+            tile.userInteractionEnabled=YES;
+        }
+    }
+}
 
 #pragma mark - Filling Grid with Tiles
 
@@ -101,14 +119,6 @@ static const int GRID_SIZE=3;
         [self checkVerticallyTile:_gridArray[0][1]];
         [self checkVerticallyTile:_gridArray[0][2]];
         [self checkForMoves];
-    }
-    if (shuffling==YES) {
-        for (int x=0; x<GRID_SIZE; x++) {
-            for (int y=0; y<GRID_SIZE; y++){
-                Tile* tile=_gridArray[x][y];
-                [self checkTile:tile];
-            }
-        }
     }
 }
 
@@ -530,7 +540,9 @@ static const int GRID_SIZE=3;
             }
         }
     }
-    /*if (possibleMatch==NO) {
+    if (possibleMatch==NO) {
+        NSLog(@"no possible matches");
+        [(Gameplay*)self.parent noPossibleMatches];
         for (int x=0; x<GRID_SIZE; x++) {
             for (int y=0; y<GRID_SIZE; y++) {
                 Tile* tile=_gridArray[x][y];
@@ -552,24 +564,14 @@ static const int GRID_SIZE=3;
                 
                 [self addChild:newTile];
                 [self checkTile:newTile];
+                newTile.userInteractionEnabled=NO;
             }
         }
         [self checkForMoves];
-    }*/
-    
-    if (possibleMatch==NO) {
-        NSLog(@"no possible matches");
-        [(Gameplay*)self.parent noPossibleMatches];
-        shuffling=YES;
-        for (int x=0; x<GRID_SIZE; x++) {
-            for (int y=0; y<GRID_SIZE; y++){
-                Tile* tile=_gridArray[x][y];
-                tile.userInteractionEnabled=NO;
-            }
-        }
-        NSTimer *setUpTimer=[NSTimer scheduledTimerWithTimeInterval:.3 target:self selector:@selector(setUpGrid) userInfo:(nil) repeats:NO];
+        [self disableUserInteraction];
         shufflingTimer=[NSTimer scheduledTimerWithTimeInterval:1.3 target:self selector:@selector(resetShuffling) userInfo:nil repeats:NO];
     }
+    
     else if (possibleMatch==YES){
         possibleMatch=NO;
         [indicateTimer invalidate];
