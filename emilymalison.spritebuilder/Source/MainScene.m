@@ -9,12 +9,16 @@
 #import "MainScene.h"
 
 @implementation MainScene{
-
 }
 
 #pragma mark - Loading Gameplay Scene
 
 -(void) startGame{
+    /*if (timesPlayed==1){
+        CCScene *tutorial=[CCBReader loadAsScene:@"Tutorial"];
+        [[CCDirector sharedDirector] replaceScene:tutorial];
+    }*/
+    
     CCScene *gameplayScene=[CCBReader loadAsScene:@"Gameplay"];
     [[CCDirector sharedDirector] replaceScene:gameplayScene];
 }
