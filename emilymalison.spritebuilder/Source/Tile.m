@@ -114,12 +114,12 @@ static const int TILE_SIZE=3;
 
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
     if (canTouch) {
-        self.physicsBody.collisionMask = @[];
+        self.physicsBody.collisionMask=@[];
         canTouch = NO;
         CCActionRotateBy *rotateTile= [CCActionRotateBy actionWithDuration:.4 angle:90];
         CCActionCallBlock *resetTouch = [CCActionCallBlock actionWithBlock:^{
             canTouch= YES;
-            //self.physicsBody.collisionMask = nil;
+            self.physicsBody.collisionMask = nil;
         }];
         [self runAction:[CCActionSequence actionOne:rotateTile two:resetTouch]];
     

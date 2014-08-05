@@ -29,6 +29,7 @@
     _gameOver.visible=NO;
     
     _physicsNode.collisionDelegate = self;
+    _physicsNode.debugDraw=true;
     
     myTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(second) userInfo:nil repeats:YES];
     timeRemaining=60;

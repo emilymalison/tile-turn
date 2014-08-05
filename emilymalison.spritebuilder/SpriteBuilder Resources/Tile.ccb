@@ -307,46 +307,46 @@
 			<key>dynamic</key>
 			<true/>
 			<key>elasticity</key>
-			<real>0.30000001192092896</real>
+			<real>0.0</real>
 			<key>friction</key>
 			<real>0.30000001192092896</real>
 			<key>points</key>
 			<array>
 				<array>
-					<real>0.0</real>
-					<real>0.0</real>
+					<real>0.33279591798782349</real>
+					<real>0.062457486987113953</real>
 				</array>
 				<array>
-					<real>0.0</real>
-					<real>51</real>
+					<real>0.13550853729248047</real>
+					<real>50.921894073486328</real>
 				</array>
 				<array>
-					<real>50</real>
-					<real>51</real>
+					<real>50.845668792724609</real>
+					<real>51.026279449462891</real>
 				</array>
 				<array>
-					<real>50</real>
-					<real>0.0</real>
+					<real>50.880115509033203</real>
+					<real>0.15536001324653625</real>
 				</array>
 			</array>
 			<key>polygons</key>
 			<array>
 				<array>
 					<array>
-						<real>50</real>
-						<real>0.0</real>
+						<real>50.880115509033203</real>
+						<real>0.15536001324653625</real>
 					</array>
 					<array>
-						<real>50</real>
-						<real>51</real>
+						<real>50.845668792724609</real>
+						<real>51.026279449462891</real>
 					</array>
 					<array>
-						<real>0.0</real>
-						<real>51</real>
+						<real>0.13550853729248047</real>
+						<real>50.921894073486328</real>
 					</array>
 					<array>
-						<real>0.0</real>
-						<real>0.0</real>
+						<real>0.33279591798782349</real>
+						<real>0.062457486987113953</real>
 					</array>
 				</array>
 			</array>
