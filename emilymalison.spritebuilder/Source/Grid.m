@@ -231,12 +231,11 @@ static const int GRID_SIZE=3;
     }
     _totalScore=score;
     if (score>scoreCheck) {
-        //[self removeTiles];
         [NSTimer scheduledTimerWithTimeInterval:.7 target:self selector:@selector(removeTiles) userInfo:nil repeats:NO];
     }
 }
 
-#pragma mark - Remove Tiles
+#pragma mark - Removing Tiles and Adding New Tiles
 
 -(void)removeTiles{
     BOOL removed=NO;
@@ -257,6 +256,34 @@ static const int GRID_SIZE=3;
                 if ([self.children containsObject:tile]) {
                     [self removeChild:tile];
                     [_gridArray removeObject:tile];
+                }
+                
+                Tile* newTile=(Tile*)[CCBReader load: @"Tile"];
+                newTile.physicsBody.collisionMask=nil;
+                newTile.physicsBody.affectedByGravity=YES;
+                newTile.physicsBody.collisionType=@"newTile";
+                [newTile setScaleX:((_columnWidth)/newTile.contentSize.width)];
+                [newTile setScaleY:((_columnHeight)/newTile.contentSize.height)];
+                newTile.position=ccp(tile.positionInPoints.x, 350);
+                newTile.remove=false;
+                newTile.rotationMeasure=0;
+                newTile.match=NO;
+                newTile.checking=NO;
+                [_gridArray addObject:newTile];
+                for (int x=0; x<3; x++) {
+                    Tile* eachTile =_gridArray[x][tile.tileY];
+                    eachTile.physicsBody.collisionMask=nil;
+                }
+                [self addChild:newTile];
+                
+                if (tile.checking==NO) {
+                    [_newTileArray addObject:newTile];
+                }
+                else if (tile.checking==YES){
+                    newTile.checking=NO;
+                    newTile.remove=NO;
+                    [self checkHorizontallyTile:newTile];
+                    [self checkVerticallyTile:newTile];
                 }
                 
                 /*Tile* newTile=_gridArray[tile.tileX][tile.tileY];

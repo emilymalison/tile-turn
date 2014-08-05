@@ -123,7 +123,6 @@ static const int TILE_SIZE=3;
         }];
         [self runAction:[CCActionSequence actionOne:rotateTile two:resetTouch]];
     
-        //TODO: Fix Array Rotation
         self.dotColorArray=[self rotateColorMatrix:self.dotColorArray];
         self.dotColorArrayCopy=self.dotColorArray;
         
