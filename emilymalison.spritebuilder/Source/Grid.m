@@ -278,6 +278,7 @@ static const int GRID_SIZE=3;
                 newTile.userInteractionEnabled=NO;
                 
                 [self addChild:newTile];
+                newTile.visible=NO;
                 
                 for (int x=0; x<[_newTileArray count]; x++) {
                     Tile* otherNewTile=_newTileArray[x];
