@@ -242,7 +242,7 @@ static const int GRID_SIZE=3;
     for (int i=0; i<3; i++) {
         for (int j=0; j<3; j++) {
             Tile* tile=_gridArray[i][j];
-            if (tile.remove==true) {
+            if (tile.remove==true && tile.checking==NO) {
                 removed=YES;
                 tile.remove=false;
                 
@@ -269,6 +269,7 @@ static const int GRID_SIZE=3;
                 newTile.rotationMeasure=0;
                 newTile.match=NO;
                 newTile.checking=NO;
+                newTile.userInteractionEnabled=NO;
                 [_gridArray addObject:newTile];
                 for (int x=0; x<3; x++) {
                     Tile* eachTile =_gridArray[x][tile.tileY];
@@ -276,15 +277,7 @@ static const int GRID_SIZE=3;
                 }
                 [self addChild:newTile];
                 
-                if (tile.checking==NO) {
-                    [_newTileArray addObject:newTile];
-                }
-                else if (tile.checking==YES){
-                    newTile.checking=NO;
-                    newTile.remove=NO;
-                    [self checkHorizontallyTile:newTile];
-                    [self checkVerticallyTile:newTile];
-                }
+                [_newTileArray addObject:newTile];
                 
                 /*Tile* newTile=_gridArray[tile.tileX][tile.tileY];
                 newTile= (Tile*)[CCBReader load:@"Tile"];
@@ -313,6 +306,26 @@ static const int GRID_SIZE=3;
                     //[self checkVerticallyTile:newTile];
                     //[self checkHorizontallyTile:newTile];
                 }*/
+            }
+            else if (tile.remove==YES && tile.checking==YES){
+                Tile* newTile=_gridArray[tile.tileX][tile.tileY];
+                newTile= (Tile*)[CCBReader load:@"Tile"];
+                
+                [newTile setScaleX:((_columnWidth)/tile.contentSize.width)];
+                [newTile setScaleY:((_columnHeight)/tile.contentSize.height)];
+                
+                newTile.position = tile.position;
+                _gridArray[i][j]=newTile;
+                newTile.tileX=tile.tileX;
+                newTile.tileY=tile.tileY;
+                newTile.remove=false;
+                newTile.rotationMeasure=0;
+                newTile.match=NO;
+                newTile.checking=NO;
+                
+                [self addChild:newTile];
+                [self checkVerticallyTile:newTile];
+                [self checkHorizontallyTile:newTile];
             }
         }
     }
