@@ -259,9 +259,6 @@ static const int GRID_SIZE=3;
                 }
                 
                 Tile* newTile=(Tile*)[CCBReader load: @"Tile"];
-                newTile.physicsBody.collisionMask=nil;
-                newTile.physicsBody.affectedByGravity=YES;
-                newTile.physicsBody.collisionType=@"newTile";
                 [newTile setScaleX:((_columnWidth)/newTile.contentSize.width)];
                 [newTile setScaleY:((_columnHeight)/newTile.contentSize.height)];
                 newTile.position=ccp(tile.positionInPoints.x, 350);
@@ -271,41 +268,26 @@ static const int GRID_SIZE=3;
                 newTile.checking=NO;
                 newTile.userInteractionEnabled=NO;
                 [_gridArray addObject:newTile];
+                
                 for (int x=0; x<3; x++) {
                     Tile* eachTile =_gridArray[x][tile.tileY];
                     eachTile.physicsBody.collisionMask=nil;
                 }
+                
                 [self addChild:newTile];
                 
-                [_newTileArray addObject:newTile];
-                
-                /*Tile* newTile=_gridArray[tile.tileX][tile.tileY];
-                newTile= (Tile*)[CCBReader load:@"Tile"];
-                 
-                [newTile setScaleX:((_columnWidth)/tile.contentSize.width)];
-                [newTile setScaleY:((_columnHeight)/tile.contentSize.height)];
-                
-                newTile.position = tile.position;
-                _gridArray[i][j]=newTile;
-                newTile.tileX=tile.tileX;
-                newTile.tileY=tile.tileY;
-                newTile.remove=false;
-                newTile.rotationMeasure=0;
-                newTile.match=NO;
-                newTile.checking=NO;
-                
-                //[self addChild:newTile];
-                
-                if (tile.checking==NO) {
-                    [_newTileArray addObject:newTile];
+                for (int x=0; x<[_newTileArray count]; x++) {
+                    Tile* otherNewTile=_newTileArray[x];
+                    if (CGRectContainsRect(otherNewTile.boundingBox, newTile.boundingBox)) {
+                        newTile.position=ccp(newTile.position.x, newTile.position.y+newTile.contentSize.height);
+                    }
                 }
                 
-                else if (tile.checking==YES){
-                    newTile.checking=NO;
-                    newTile.remove=NO;
-                    //[self checkVerticallyTile:newTile];
-                    //[self checkHorizontallyTile:newTile];
-                }*/
+                newTile.physicsBody.collisionMask=nil;
+                newTile.physicsBody.affectedByGravity=YES;
+                newTile.physicsBody.collisionType=@"newTile";
+                
+                [_newTileArray addObject:newTile];
             }
             else if (tile.remove==YES && tile.checking==YES){
                 Tile* newTile=_gridArray[tile.tileX][tile.tileY];

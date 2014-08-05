@@ -72,6 +72,7 @@
     if (nodeB.physicsBody.affectedByGravity == NO && nodeA.physicsBody.affectedByGravity) {
         nodeA.physicsBody.affectedByGravity = NO;
         nodeA.physicsBody.velocity = ccp(0,0);
+        nodeA.physicsBody.collisionType=@"tile";
     }
     return YES;
     //[_grid checkTile:nodeA];
