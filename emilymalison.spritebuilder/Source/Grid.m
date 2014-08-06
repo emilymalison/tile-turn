@@ -32,6 +32,7 @@ static const int GRID_SIZE=3;
     Tile *fallingTile;
     CCTimer *fallingTimer;
     int newYPosition;
+    NSMutableArray *_tilesToFallArray;
     //NSNull *noTile;
 }
 
@@ -44,6 +45,7 @@ static const int GRID_SIZE=3;
     
     moveIndicated=NO;
     _newTileArray=[NSMutableArray array];
+    _tilesToFallArray=[NSMutableArray array];
     
     //noTile=[NSNull null];
 }
@@ -249,7 +251,7 @@ static const int GRID_SIZE=3;
 
 -(void)removeTiles{
     BOOL removed=NO;
-    BOOL firstNewTile=YES;
+    //BOOL firstNewTile=YES;
     for (int i=0; i<3; i++) {
         for (int j=0; j<3; j++) {
             Tile* tile=_gridArray[i][j];
@@ -273,33 +275,58 @@ static const int GRID_SIZE=3;
                 Tile* newTile=(Tile*)[CCBReader load: @"Tile"];
                 [newTile setScaleX:((_columnWidth)/newTile.contentSize.width)];
                 [newTile setScaleY:((_columnHeight)/newTile.contentSize.height)];
-                newTile.position=ccp(tile.positionInPoints.x, 350);
+                newTile.position=ccp(tile.positionInPoints.x, 348);
                 newTile.remove=false;
                 newTile.rotationMeasure=0;
                 newTile.match=NO;
                 newTile.checking=NO;
                 newTile.userInteractionEnabled=NO;
+                newTile.visible=NO;
                 
                 [self addChild:newTile];
                 
-                for (int x=0; x<[_newTileArray count]; x++) {
+                /*for (int x=0; x<[_newTileArray count]; x++) {
                     Tile* otherNewTile=_newTileArray[x];
                     if (CGRectContainsRect(otherNewTile.boundingBox, newTile.boundingBox)) {
                         newTile.position=ccp(newTile.position.x, newTile.position.y+newTile.contentSize.height);
                     }
-                }
+                }*/
                 
-                /*for (Tile* otherTile in self.children){
+                for (Tile* otherTile in self.children){
                     if ([_gridArray[0] containsObject:otherTile]) {
-                        
+                        if (CGRectContainsRect(newTile.boundingBox, otherTile.boundingBox)) {
+                            [_tilesToFallArray addObject:newTile];
+                            [NSTimer timerWithTimeInterval:.7 target:self selector:@selector(newTileFall) userInfo:nil repeats:NO];
+                        }
+                        else{
+                            newTile.physicsBody.affectedByGravity=YES;
+                            newTile.physicsBody.collisionMask=nil;
+                            newTile.visible=YES;
+                        }
                     }
                     else if ([_gridArray[1] containsObject:otherTile]){
-                        
+                        if (CGRectContainsRect(newTile.boundingBox, otherTile.boundingBox)) {
+                            [_tilesToFallArray addObject:newTile];
+                            [NSTimer timerWithTimeInterval:.7 target:self selector:@selector(newTileFall) userInfo:nil repeats:NO];
+                        }
+                        else{
+                            newTile.physicsBody.affectedByGravity=YES;
+                            newTile.physicsBody.collisionMask=nil;
+                            newTile.visible=YES;
+                        }
                     }
                     else if ([_gridArray[2] containsObject:otherTile]){
-                        
+                        if (CGRectContainsRect(newTile.boundingBox, otherTile.boundingBox)) {
+                            [_tilesToFallArray addObject:newTile];
+                            [NSTimer timerWithTimeInterval:.7 target:self selector:@selector(newTileFall) userInfo:nil repeats:NO];
+                        }
+                        else{
+                            newTile.physicsBody.affectedByGravity=YES;
+                            newTile.physicsBody.collisionMask=nil;
+                            newTile.visible=YES;
+                        }
                     }
-                }*/
+                }
                     
                 newTile.physicsBody.collisionMask=nil;
                 newTile.physicsBody.affectedByGravity=YES;
@@ -332,13 +359,17 @@ static const int GRID_SIZE=3;
     }
     if ([_newTileArray count]>0) {
         for (int i=0; i<[_newTileArray count]; i++) {
-            Tile* tile=_newTileArray[i];
+            //Tile* tile=_newTileArray[i];
             //[self checkTile:tile];
         }
     }
     if (removed==YES) {
         //[self checkForMoves];
     }
+}
+
+-(void)newTileFall{
+    
 }
 
 #pragma mark - Checking Original Grid For Matches
