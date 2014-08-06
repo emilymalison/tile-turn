@@ -249,6 +249,7 @@ static const int GRID_SIZE=3;
 
 -(void)removeTiles{
     BOOL removed=NO;
+    BOOL firstNewTile=YES;
     for (int i=0; i<3; i++) {
         for (int j=0; j<3; j++) {
             Tile* tile=_gridArray[i][j];
@@ -259,7 +260,9 @@ static const int GRID_SIZE=3;
                 for (int x=0; x<3; x++) {
                     Tile* eachTile =_gridArray[x][tile.tileY];
                     eachTile.physicsBody.collisionMask=nil;
-                    eachTile.physicsBody.affectedByGravity=YES;
+                    if (eachTile.tileX>tile.tileX) {
+                        eachTile.physicsBody.affectedByGravity=YES;
+                    }
                 }
                 
                 // WARNING: MIGHT LEAD TO UNEXPECTED BEHAVIOR
@@ -278,7 +281,6 @@ static const int GRID_SIZE=3;
                 newTile.userInteractionEnabled=NO;
                 
                 [self addChild:newTile];
-                newTile.visible=NO;
                 
                 for (int x=0; x<[_newTileArray count]; x++) {
                     Tile* otherNewTile=_newTileArray[x];
@@ -286,10 +288,25 @@ static const int GRID_SIZE=3;
                         newTile.position=ccp(newTile.position.x, newTile.position.y+newTile.contentSize.height);
                     }
                 }
+                
+                /*for (Tile* otherTile in self.children){
+                    if ([_gridArray[0] containsObject:otherTile]) {
+                        
+                    }
+                    else if ([_gridArray[1] containsObject:otherTile]){
+                        
+                    }
+                    else if ([_gridArray[2] containsObject:otherTile]){
+                        
+                    }
+                }*/
+                    
                 newTile.physicsBody.collisionMask=nil;
                 newTile.physicsBody.affectedByGravity=YES;
                 
                 [_newTileArray addObject:newTile];
+                //[NSTimer]
+
             }
             else if (tile.remove==YES && tile.checking==YES){
                 Tile* newTile=_gridArray[tile.tileX][tile.tileY];
@@ -318,7 +335,6 @@ static const int GRID_SIZE=3;
             Tile* tile=_newTileArray[i];
             //[self checkTile:tile];
         }
-        [_newTileArray removeAllObjects];
     }
     if (removed==YES) {
         //[self checkForMoves];
