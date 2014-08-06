@@ -31,11 +31,6 @@ static const int GRID_SIZE=3;
     NSMutableArray *_newTileArray0;
     NSMutableArray *_newTileArray1;
     NSMutableArray *_newTileArray2;
-    Tile *fallingTile;
-    CCTimer *fallingTimer;
-    int newYPosition;
-    NSMutableArray *_tilesToFallArray;
-    //NSNull *noTile;
 }
 
 - (void)onEnter
@@ -49,22 +44,10 @@ static const int GRID_SIZE=3;
     _newTileArray0=[NSMutableArray array];
     _newTileArray1=[NSMutableArray array];
     _newTileArray2=[NSMutableArray array];
-    _tilesToFallArray=[NSMutableArray array];
     
-    //noTile=[NSNull null];
 }
 
 -(void)update:(CCTime)delta{
-    /*for (int x=0; x<GRID_SIZE; x++) {
-        for (int y=0; y<GRID_SIZE; y++) {
-            if (_gridArray[x][y]!=noTile) {
-                Tile* tile=_gridArray[x][y];
-                tile.tileX=round((tile.position.y/tile.contentSize.height)/2);
-                tile.tileY=round((tile.position.x/tile.contentSize.width)/2);
-                _gridArray[tile.tileX][tile.tileY]=tile;
-            }
-        }
-    }*/
     for (Tile* tile in self.children) {
         tile.tileX=round((tile.position.y/tile.contentSize.height)/2);
         tile.tileY=round((tile.position.x/tile.contentSize.width)/2);
@@ -263,6 +246,9 @@ static const int GRID_SIZE=3;
             Tile* tile=_gridArray[i][j];
             if (tile.remove==true && tile.checking==NO) {
                 removed=YES;
+                /*for (Tile* someTile in self.children) {
+                    someTile.userInteractionEnabled=NO;
+                }*/
                 tile.remove=false;
                 
                 for (int x=0; x<3; x++) {
@@ -291,7 +277,7 @@ static const int GRID_SIZE=3;
                 newTile.visible=NO;
                 
                 [self addChild:newTile];
-                
+                                
                 if (newTile.tileY==0) {
                     if ([_newTileArray0 count]==1) {
                         [NSTimer scheduledTimerWithTimeInterval:1.3 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
@@ -302,6 +288,7 @@ static const int GRID_SIZE=3;
                         [NSTimer scheduledTimerWithTimeInterval:2.6 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
                         newTile.visible=NO;
                         newTile.physicsBody.collisionMask=@[];
+
                     }
                     else if ([_newTileArray0 count]==0) {
                         newTile.physicsBody.collisionMask=nil;
@@ -349,41 +336,6 @@ static const int GRID_SIZE=3;
                     }
                     [_newTileArray2 addObject:newTile];
                 }
-                /*for (Tile* otherTile in self.children){
-                    if ([_gridArray[0] containsObject:otherTile]) {
-                        if (CGRectContainsRect(newTile.boundingBox, otherTile.boundingBox)) {
-                            [_tilesToFallArray addObject:newTile];
-                            [NSTimer timerWithTimeInterval:.7 target:self selector:@selector(newTileFall) userInfo:nil repeats:NO];
-                        }
-                        else{
-                            newTile.physicsBody.affectedByGravity=YES;
-                            newTile.physicsBody.collisionMask=nil;
-                            newTile.visible=YES;
-                        }
-                    }
-                    else if ([_gridArray[1] containsObject:otherTile]){
-                        if (CGRectContainsRect(newTile.boundingBox, otherTile.boundingBox)) {
-                            [_tilesToFallArray addObject:newTile];
-                            [NSTimer timerWithTimeInterval:.7 target:self selector:@selector(newTileFall) userInfo:nil repeats:NO];
-                        }
-                        else{
-                            newTile.physicsBody.affectedByGravity=YES;
-                            newTile.physicsBody.collisionMask=nil;
-                            newTile.visible=YES;
-                        }
-                    }
-                    else if ([_gridArray[2] containsObject:otherTile]){
-                        if (CGRectContainsRect(newTile.boundingBox, otherTile.boundingBox)) {
-                            [_tilesToFallArray addObject:newTile];
-                            [NSTimer timerWithTimeInterval:.7 target:self selector:@selector(newTileFall) userInfo:nil repeats:NO];
-                        }
-                        else{
-                            newTile.physicsBody.affectedByGravity=YES;
-                            newTile.physicsBody.collisionMask=nil;
-                            newTile.visible=YES;
-                        }
-                    }
-                }*/
             }
             else if (tile.remove==YES && tile.checking==YES){
                 [self removeChild:tile];
@@ -408,26 +360,8 @@ static const int GRID_SIZE=3;
             }
         }
     }
-    if ([_newTileArray0 count]>0) {
-        for (int i=0; i<[_newTileArray0 count]; i++) {
-            //Tile* tile=_newTileArray0[i];
-            //[self checkTile:tile];
-        }
-    }
-    if ([_newTileArray1 count]>0) {
-        for (int i=0; i<[_newTileArray1 count]; i++) {
-            //Tile* tile=_newTileArray1[i];
-            //[self checkTile:tile];
-        }
-    }
-    if ([_newTileArray2 count]>0) {
-        for (int i=0; i<[_newTileArray2 count]; i++) {
-            //Tile* tile=_newTileArray2[i];
-            //[self checkTile:tile];
-        }
-    }
     if (removed==YES) {
-        //[self checkForMoves];
+        [self checkForMoves];
     }
 }
 

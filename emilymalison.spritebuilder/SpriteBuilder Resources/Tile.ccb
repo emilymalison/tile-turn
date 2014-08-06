@@ -303,7 +303,7 @@
 			<key>cornerRadius</key>
 			<real>0.0</real>
 			<key>density</key>
-			<real>50</real>
+			<real>5</real>
 			<key>dynamic</key>
 			<true/>
 			<key>elasticity</key>
@@ -313,40 +313,40 @@
 			<key>points</key>
 			<array>
 				<array>
-					<real>1.5116771459579468</real>
-					<real>0.019706727936863899</real>
+					<real>0.63570970296859741</real>
+					<real>-0.67541587352752686</real>
 				</array>
 				<array>
-					<real>1.5323989391326904</real>
-					<real>50.968990325927734</real>
+					<real>0.16287560760974884</real>
+					<real>50.967105865478516</real>
 				</array>
 				<array>
-					<real>50.270099639892578</real>
-					<real>51.308074951171875</real>
+					<real>50.450946807861328</real>
+					<real>51.017971038818359</real>
 				</array>
 				<array>
-					<real>50.143886566162109</real>
-					<real>-0.12346215546131134</real>
+					<real>50.886104583740234</real>
+					<real>-0.066948123276233673</real>
 				</array>
 			</array>
 			<key>polygons</key>
 			<array>
 				<array>
 					<array>
-						<real>50.143886566162109</real>
-						<real>-0.12346215546131134</real>
+						<real>50.886104583740234</real>
+						<real>-0.066948123276233673</real>
 					</array>
 					<array>
-						<real>50.270099639892578</real>
-						<real>51.308074951171875</real>
+						<real>50.450946807861328</real>
+						<real>51.017971038818359</real>
 					</array>
 					<array>
-						<real>1.5323989391326904</real>
-						<real>50.968990325927734</real>
+						<real>0.16287560760974884</real>
+						<real>50.967105865478516</real>
 					</array>
 					<array>
-						<real>1.5116771459579468</real>
-						<real>0.019706727936863899</real>
+						<real>0.63570970296859741</real>
+						<real>-0.67541587352752686</real>
 					</array>
 				</array>
 			</array>

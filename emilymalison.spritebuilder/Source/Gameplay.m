@@ -19,6 +19,7 @@
     int gameplayScore;
     CCPhysicsNode *_physicsNode;
     GameOver *_gameOver;
+    int tilesDoneFalling;
 }
 
 #pragma mark - Timer
@@ -35,6 +36,8 @@
     timeRemaining=60;
     
     [self schedule:@selector(updateScore) interval:0.5f];
+    
+    tilesDoneFalling=0;
 }
 
 
@@ -66,17 +69,23 @@
         nodeA.physicsBody.velocity = ccp(0,0);
     }
     return YES;
-    //[_grid checkTile:nodeA];
+    /*for (Tile* tile in _grid.children) {
+        if (tile.physicsBody.affectedByGravity==NO) {
+            tilesDoneFalling+=1;
+        }
+    }
+    if (tilesDoneFalling==9) {
+        NSLog(@"tiles done falling");
+        [_grid checkForMoves];
+        for (Tile* tile in _grid.children) {
+            tile.userInteractionEnabled=YES;
+            [_grid checkTile:tile];
+        }
+    }
+    else{
+        tilesDoneFalling=0;
+    }*/
 }
 
-- (BOOL) ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair newTile:(CCNode *)nodeA wildcard:(CCNode *)nodeB {
-    if (nodeB.physicsBody.affectedByGravity == NO && nodeA.physicsBody.affectedByGravity) {
-        nodeA.physicsBody.affectedByGravity = NO;
-        nodeA.physicsBody.velocity = ccp(0,0);
-        nodeA.physicsBody.collisionType=@"tile";
-    }
-    return YES;
-    //[_grid checkTile:nodeA];
-}
 
 @end
