@@ -264,24 +264,11 @@ static const int GRID_SIZE=3;
                 removed=YES;
                 tile.remove=false;
                 
-                /*for (int x=0; x<GRID_SIZE; x++) {
-                    Tile* eachTile =_gridArray[x][tile.tileY];
-                    NSLog(@"%i,", tile.tileY);
-                    eachTile.physicsBody.collisionMask=nil;
-                    eachTile.physicsBody.affectedByGravity=YES;
-                }*/
-                
                 // WARNING: MIGHT LEAD TO UNEXPECTED BEHAVIOR
                 if ([self.children containsObject:tile]) {
                     [self removeChild:tile];
                     [_gridArray removeObject:tile];
                 }
-                
-                /*if (tile.tileX!=2) {
-                    Tile* tileAbove=_gridArray[tile.tileX+1][tile.tileY];
-                    //tileAbove.position=tile.position;
-                    [self schedule:@selector(updateTilePosition) interval:.02];
-                }*/
                 
                 Tile* newTile=_gridArray[tile.tileX][tile.tileY];
                 newTile= (Tile*)[CCBReader load:@"Tile"];
