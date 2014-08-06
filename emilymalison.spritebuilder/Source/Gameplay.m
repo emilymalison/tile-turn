@@ -24,6 +24,7 @@
     CCNodeColor *pauseScreen;
     CCLabelTTF *pauseText;
     CCButton *continuePlayButton;
+    CCButton *menuButton;
 }
 
 #pragma mark - Timer
@@ -81,6 +82,7 @@
     pauseScreen.visible=YES;
     pauseText.visible=YES;
     continuePlayButton.visible=YES;
+    menuButton.visible=YES;
     [myTimer invalidate];
     [_grid disableUserInteraction];
 }
@@ -88,8 +90,15 @@
 -(void)continuePlay{
     pauseScreen.visible=NO;
     pauseText.visible=NO;
+    menuButton.visible=NO;
     continuePlayButton.visible=NO;
     myTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(second) userInfo:nil repeats:YES];
     [_grid enableUserInteraction];
 }
+
+-(void)loadMenu{
+    CCScene *mainScene=[CCBReader loadAsScene:@"MainScene"];
+    [[CCDirector sharedDirector] replaceScene:mainScene];
+}
+
 @end
