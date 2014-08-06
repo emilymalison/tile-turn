@@ -22,6 +22,7 @@
     CCLabelTTF *secondText;
     CCLabelTTF *greatText;
     NSTimer *checkTimer;
+    NSTimer *continueTimer;
     int numberScene;
 }
 
@@ -58,7 +59,12 @@
 
 -(void)resetAnimation{
     [greatJob.animationManager runAnimationsForSequenceNamed:(@"Default Timeline")];
+    continueTimer=[NSTimer scheduledTimerWithTimeInterval:.5 target:self selector:@selector(continueButtonVisible) userInfo:nil repeats:NO];
+}
+
+-(void)continueButtonVisible{
     continueButton.visible=YES;
+    [continueTimer invalidate];
 }
 
 -(void)nextScreen{
@@ -84,7 +90,7 @@
 
 -(void)resetSecondAnimation{
     [greatJob.animationManager runAnimationsForSequenceNamed:(@"Default Timeline")];
-    continueButton.visible=YES;
+    continueTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(continueButtonVisible) userInfo:nil repeats:NO];
 }
 
 -(void) startGame{

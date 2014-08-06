@@ -54,6 +54,7 @@
     float y=_dotMarginVertical;
     
     if (self.number==1) {
+        self.userInteractionEnabled=NO;
         for (int i=0; i<3; i++) {
             x=_dotMarginHorizontal;
             for (int j=0; j<3; j++) {
@@ -140,6 +141,7 @@
         }
     }
     else if (self.number==3){
+        self.userInteractionEnabled=NO;
         for (int i=0; i<3; i++) {
             x=_dotMarginHorizontal;
             for (int j=0; j<3; j++) {
