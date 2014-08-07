@@ -267,13 +267,15 @@
 						<string>Color3</string>
 						<key>value</key>
 						<array>
+							<real>0.47749239206314087</real>
 							<real>1</real>
-							<real>1</real>
-							<real>1</real>
+							<real>0.29772830009460449</real>
 							<real>1</real>
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 				<key>seqExpanded</key>
 				<true/>
 			</dict>
@@ -307,7 +309,7 @@
 			<key>dynamic</key>
 			<true/>
 			<key>elasticity</key>
-			<real>0.30000001192092896</real>
+			<real>0.0</real>
 			<key>friction</key>
 			<real>0.30000001192092896</real>
 			<key>points</key>
@@ -321,11 +323,11 @@
 					<real>51</real>
 				</array>
 				<array>
-					<real>50</real>
+					<real>51</real>
 					<real>51</real>
 				</array>
 				<array>
-					<real>50</real>
+					<real>51</real>
 					<real>0.0</real>
 				</array>
 			</array>
@@ -333,11 +335,11 @@
 			<array>
 				<array>
 					<array>
-						<real>50</real>
+						<real>51</real>
 						<real>0.0</real>
 					</array>
 					<array>
-						<real>50</real>
+						<real>51</real>
 						<real>51</real>
 					</array>
 					<array>
@@ -413,8 +415,6 @@
 				</array>
 			</dict>
 		</array>
-		<key>selected</key>
-		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>
@@ -474,7 +474,7 @@
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>
-			<real>128</real>
+			<real>32</real>
 			<key>sequenceId</key>
 			<integer>0</integer>
 			<key>soundChannel</key>

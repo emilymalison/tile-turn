@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>23</integer>
+	<integer>24</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -597,9 +597,9 @@
 						<key>physicsBody</key>
 						<dict>
 							<key>affectedByGravity</key>
-							<true/>
+							<false/>
 							<key>allowsRotation</key>
-							<true/>
+							<false/>
 							<key>bodyShape</key>
 							<integer>0</integer>
 							<key>collisionCategories</key>
@@ -677,7 +677,7 @@
 								<key>value</key>
 								<array>
 									<real>0.5</real>
-									<real>-5</real>
+									<real>-4.5</real>
 									<integer>0</integer>
 									<integer>2</integer>
 									<integer>0</integer>
@@ -819,7 +819,7 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>-6</real>
+									<real>-7</real>
 									<real>0.5</real>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -962,7 +962,7 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>-5</real>
+									<real>-8</real>
 									<real>0.5</real>
 									<integer>3</integer>
 									<integer>0</integer>
@@ -2008,76 +2008,6 @@
 							<integer>0</integer>
 							<integer>0</integer>
 						</array>
-					</dict>
-				</array>
-			</dict>
-			<dict>
-				<key>UUID</key>
-				<integer>15</integer>
-				<key>baseClass</key>
-				<string>CCBFile</string>
-				<key>children</key>
-				<array/>
-				<key>customClass</key>
-				<string></string>
-				<key>displayName</key>
-				<string>GameOver</string>
-				<key>memberVarAssignmentName</key>
-				<string>_gameOver</string>
-				<key>memberVarAssignmentType</key>
-				<integer>1</integer>
-				<key>properties</key>
-				<array>
-					<dict>
-						<key>name</key>
-						<string>visible</string>
-						<key>type</key>
-						<string>Check</string>
-						<key>value</key>
-						<false/>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>name</string>
-						<key>type</key>
-						<string>StringSimple</string>
-						<key>value</key>
-						<string></string>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>position</string>
-						<key>type</key>
-						<string>Position</string>
-						<key>value</key>
-						<array>
-							<real>0.5</real>
-							<real>0.5</real>
-							<integer>0</integer>
-							<integer>2</integer>
-							<integer>2</integer>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>scale</string>
-						<key>type</key>
-						<string>ScaleLock</string>
-						<key>value</key>
-						<array>
-							<real>1</real>
-							<real>1</real>
-							<false/>
-							<integer>0</integer>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>ccbFile</string>
-						<key>type</key>
-						<string>CCBFile</string>
-						<key>value</key>
-						<string>GameOver.ccb</string>
 					</dict>
 				</array>
 			</dict>
@@ -3408,8 +3338,6 @@ press play.</string>
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
