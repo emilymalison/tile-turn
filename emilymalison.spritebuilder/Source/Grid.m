@@ -309,12 +309,12 @@ static const int GRID_SIZE=3;
                                 
                 if (newTile.tileY==0) {
                     if ([_newTileArray0 count]==1) {
-                        [NSTimer scheduledTimerWithTimeInterval:1.6 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
+                        [NSTimer scheduledTimerWithTimeInterval:.9 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
                         newTile.visible=NO;
                         newTile.physicsBody.collisionMask=@[];
                     }
                     else if ([_newTileArray0 count]==2){
-                        [NSTimer scheduledTimerWithTimeInterval:2.9 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
+                        [NSTimer scheduledTimerWithTimeInterval:1.6 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
                         newTile.visible=NO;
                         newTile.physicsBody.collisionMask=@[];
 
@@ -324,19 +324,19 @@ static const int GRID_SIZE=3;
                             newTile.physicsBody.collisionMask=nil;
                             newTile.physicsBody.affectedByGravity=YES;
                             newTile.visible=YES;
-                        } delay:.3];
+                        } delay:.2];
                     }
                     [_newTileArray0 addObject:newTile];
                 }
                 if (newTile.tileY==1) {
                     if ([_newTileArray1 count]==1) {
-                        [NSTimer scheduledTimerWithTimeInterval:1.6 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
+                        [NSTimer scheduledTimerWithTimeInterval:.9 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
                         newTile.visible=NO;
                         newTile.physicsBody.collisionMask=@[];
                         newTile.physicsBody.affectedByGravity=NO;
                     }
                     else if ([_newTileArray1 count]==2){
-                        [NSTimer scheduledTimerWithTimeInterval:2.9 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
+                        [NSTimer scheduledTimerWithTimeInterval:1.6 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
                         newTile.visible=NO;
                         newTile.physicsBody.collisionMask=@[];
                     }
@@ -346,19 +346,19 @@ static const int GRID_SIZE=3;
                             newTile.physicsBody.collisionMask=nil;
                             newTile.physicsBody.affectedByGravity=YES;
                             newTile.visible=YES;
-                        } delay:.3];
+                        } delay:.2];
                     }
                     [_newTileArray1 addObject:newTile];
                 }
                 if (newTile.tileY==2) {
                     if ([_newTileArray2 count]==1) {
-                        [NSTimer scheduledTimerWithTimeInterval:1.6 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
+                        [NSTimer scheduledTimerWithTimeInterval:.9 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
                         newTile.visible=NO;
                         newTile.physicsBody.collisionMask=@[];
                         newTile.physicsBody.affectedByGravity=NO;
                     }
                     else if ([_newTileArray2 count]==2){
-                        [NSTimer scheduledTimerWithTimeInterval:2.9 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
+                        [NSTimer scheduledTimerWithTimeInterval:1.6 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
                         newTile.visible=NO;
                         newTile.physicsBody.collisionMask=@[];
                     }
@@ -367,7 +367,7 @@ static const int GRID_SIZE=3;
                             newTile.physicsBody.collisionMask=nil;
                             newTile.physicsBody.affectedByGravity=YES;
                             newTile.visible=YES;
-                        } delay:.3];
+                        } delay:.2];
                     }
                     [_newTileArray2 addObject:newTile];
                 }
