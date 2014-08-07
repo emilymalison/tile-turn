@@ -65,6 +65,7 @@ static const int GRID_SIZE=3;
             [self checkForMoves];
             for (Tile* checkTile in self.children) {
                 [self checkTile:checkTile];
+                checkTile.userInteractionEnabled=YES;
             }
         }
     }
@@ -259,9 +260,9 @@ static const int GRID_SIZE=3;
             Tile* tile=_gridArray[i][j];
             if (tile.remove==true && tile.checking==NO) {
                 removed=YES;
-                /*for (Tile* someTile in self.children) {
+                for (Tile* someTile in self.children) {
                     someTile.userInteractionEnabled=NO;
-                }*/
+                }
                 tile.remove=false;
                 
                 for (int x=0; x<3; x++) {
@@ -286,10 +287,11 @@ static const int GRID_SIZE=3;
                 newTile.rotationMeasure=0;
                 newTile.match=NO;
                 newTile.checking=NO;
-                newTile.userInteractionEnabled=NO;
                 newTile.visible=NO;
                 
                 [self addChild:newTile];
+                
+                newTile.userInteractionEnabled=NO;
                                 
                 if (newTile.tileY==0) {
                     if ([_newTileArray0 count]==1) {
