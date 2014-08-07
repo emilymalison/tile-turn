@@ -31,6 +31,8 @@ static const int GRID_SIZE=3;
     NSMutableArray *_newTileArray0;
     NSMutableArray *_newTileArray1;
     NSMutableArray *_newTileArray2;
+    int tilesNotMoving;
+    BOOL falling;
 }
 
 - (void)onEnter
@@ -44,15 +46,26 @@ static const int GRID_SIZE=3;
     _newTileArray0=[NSMutableArray array];
     _newTileArray1=[NSMutableArray array];
     _newTileArray2=[NSMutableArray array];
-    
+    falling=NO;
 }
 
 -(void)update:(CCTime)delta{
+    tilesNotMoving=0;
     for (Tile* tile in self.children) {
         tile.tileX=round((tile.position.y/tile.contentSize.height)/2);
         tile.tileY=round((tile.position.x/tile.contentSize.width)/2);
         if (tile.tileX<=2) {
             _gridArray[tile.tileX][tile.tileY]=tile;
+        }
+        if (tile.physicsBody.affectedByGravity==NO) {
+            tilesNotMoving+=1;
+        }
+        if (tilesNotMoving==9 && falling==YES) {
+            falling=NO;
+            [self checkForMoves];
+            for (Tile* checkTile in self.children) {
+                [self checkTile:checkTile];
+            }
         }
     }
 }
@@ -91,7 +104,7 @@ static const int GRID_SIZE=3;
             tile.tileX=i;
             tile.tileY=j;
             
-			x+= _columnWidth;
+			x+= _columnWidth+1;
 		}
 		y += _columnHeight;
     }
@@ -361,7 +374,7 @@ static const int GRID_SIZE=3;
         }
     }
     if (removed==YES) {
-        [self checkForMoves];
+        falling=YES;
     }
 }
 

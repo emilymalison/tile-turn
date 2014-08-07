@@ -597,9 +597,9 @@
 						<key>physicsBody</key>
 						<dict>
 							<key>affectedByGravity</key>
-							<true/>
+							<false/>
 							<key>allowsRotation</key>
-							<true/>
+							<false/>
 							<key>bodyShape</key>
 							<integer>0</integer>
 							<key>collisionCategories</key>
@@ -677,7 +677,7 @@
 								<key>value</key>
 								<array>
 									<real>0.5</real>
-									<real>-5</real>
+									<real>-4.5</real>
 									<integer>0</integer>
 									<integer>2</integer>
 									<integer>0</integer>
@@ -721,6 +721,8 @@
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
@@ -962,7 +964,7 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>-7</real>
+									<real>-8</real>
 									<real>0.5</real>
 									<integer>3</integer>
 									<integer>0</integer>
@@ -1007,8 +1009,6 @@
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
