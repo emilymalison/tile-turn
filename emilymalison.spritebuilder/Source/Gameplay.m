@@ -19,7 +19,6 @@
     int gameplayScore;
     CCPhysicsNode *_physicsNode;
     GameOver *_gameOver;
-    int tilesDoneFalling;
 }
 
 #pragma mark - Timer
@@ -30,14 +29,12 @@
     _gameOver.visible=NO;
     
     _physicsNode.collisionDelegate = self;
-    _physicsNode.debugDraw=true;
     
     myTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(second) userInfo:nil repeats:YES];
     timeRemaining=60;
     
     [self schedule:@selector(updateScore) interval:0.5f];
     
-    tilesDoneFalling=0;
 }
 
 
