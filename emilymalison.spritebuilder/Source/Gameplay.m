@@ -45,7 +45,7 @@
 -(void)second{
     timeRemaining-=1;
     _timer.string= [NSString stringWithFormat:@"%d", timeRemaining];
-    if (timeRemaining==0) {
+    if (timeRemaining==45) {
         [myTimer invalidate];
         myTimer=nil;
         [self timerExpired];
@@ -53,9 +53,11 @@
 }
 
 -(void)timerExpired{
-    _gameOver.visible=YES;
-    _gameOver.userInteractionEnabled=YES;
-    [_grid disableUserInteraction];
+    GameOver *gameover = (GameOver*)[CCBReader load:@"GameOver"];
+    gameover.finalScore = _grid.totalScore;
+    CCScene *gameoverScene = [CCScene node];
+    [gameoverScene addChild:gameover];
+    [[CCDirector sharedDirector] replaceScene:gameoverScene];
 }
 
  #pragma mark - Score

@@ -10,4 +10,5 @@
 
 @interface GameOver : CCNode
 
+@property (nonatomic, assign)int finalScore;
 @end

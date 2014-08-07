@@ -7,8 +7,17 @@
 //
 
 #import "GameOver.h"
+#import "Grid.h"
 
-@implementation GameOver
+@implementation GameOver{
+    Grid *_grid;
+    CCLabelTTF *finalScore;
+}
+
+-(void)onEnter{
+    [super onEnter];
+    finalScore.string=[NSString stringWithFormat:@"%i", self.finalScore];
+}
 
 -(void) startGame{
     CCScene *gameplayScene=[CCBReader loadAsScene:@"Gameplay"];
@@ -19,6 +28,8 @@
     CCScene *mainScene=[CCBReader loadAsScene:@"MainScene"];
     [[CCDirector sharedDirector] replaceScene:mainScene];
 }
+
+
 
 
 

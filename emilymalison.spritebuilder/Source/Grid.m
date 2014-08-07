@@ -143,7 +143,6 @@ static const int GRID_SIZE=3;
 		}
 		y += _columnHeight;
     }
-    if (shuffling==NO) {
         [self checkHorizontallyTile:_gridArray[0][0]];
         [self checkHorizontallyTile:_gridArray[1][0]];
         [self checkHorizontallyTile:_gridArray[2][0]];
@@ -151,7 +150,6 @@ static const int GRID_SIZE=3;
         [self checkVerticallyTile:_gridArray[0][1]];
         [self checkVerticallyTile:_gridArray[0][2]];
         [self checkForMoves];
-    }
 }
 
 #pragma mark - Checking for Matches
@@ -333,7 +331,7 @@ static const int GRID_SIZE=3;
                 newTile.tileY=tile.tileY;
                 [newTile setScaleX:((_columnWidth)/newTile.contentSize.width)];
                 [newTile setScaleY:((_columnHeight)/newTile.contentSize.height)];
-                newTile.position=ccp(tile.positionInPoints.x, self.contentSize.height+newTile.contentSize.height+1);
+                newTile.position=ccp(tile.positionInPoints.x, self.contentSize.height+newTile.contentSize.height+5);
                 newTile.remove=false;
                 newTile.rotationMeasure=0;
                 newTile.match=NO;
@@ -671,32 +669,8 @@ static const int GRID_SIZE=3;
         NSLog(@"no possible matches");
         CCNode *_node=self.parent;
         [(Gameplay*)_node.parent noPossibleMatches];
-        for (int x=0; x<GRID_SIZE; x++) {
-            for (int y=0; y<GRID_SIZE; y++) {
-                Tile* tile=_gridArray[x][y];
-                
-                [self removeChild:tile];
-
-                Tile* newTile= (Tile*)[CCBReader load:@"Tile"];
-                
-                [newTile setScaleX:((_columnWidth)/tile.contentSize.width)];
-                [newTile setScaleY:((_columnHeight)/tile.contentSize.height)];
-                
-                newTile.position = tile.position;
-                _gridArray[x][y]=newTile;
-                newTile.tileX=tile.tileX;
-                newTile.tileY=tile.tileY;
-                newTile.remove=false;
-                newTile.match=NO;
-                newTile.checking=NO;
-                
-                [self addChild:newTile];
-                [self checkTile:newTile];
-                newTile.userInteractionEnabled=NO;
-            }
-        }
-        [self checkForMoves];
-        [self disableUserInteraction];
+        shuffling=YES;
+        [self setUpGrid];
         shufflingTimer=[NSTimer scheduledTimerWithTimeInterval:1.3 target:self selector:@selector(resetShuffling) userInfo:nil repeats:NO];
     }
     
@@ -706,11 +680,11 @@ static const int GRID_SIZE=3;
         indicatedTile=[_tileMatchArray objectAtIndex:(arc4random()% [_tileMatchArray count])];
         indicateTimer=[NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(indicateMove) userInfo:nil repeats:YES];
     }
+    
 }
 
 -(void)resetShuffling{
     shuffling=NO;
-    [self checkForMoves];
     CCNode *_node=self.parent;
     [(Gameplay*)_node.parent shufflingDone];
 }

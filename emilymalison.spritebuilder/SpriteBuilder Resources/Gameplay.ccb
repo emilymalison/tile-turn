@@ -1086,7 +1086,7 @@
 						<key>value</key>
 						<array>
 							<real>0.0</real>
-							<real>-300</real>
+							<real>-400</real>
 						</array>
 					</dict>
 					<dict>
@@ -1098,8 +1098,6 @@
 						<real>0.5</real>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -2107,7 +2105,7 @@
 							<real>0.90196079015731812</real>
 							<real>0.90196079015731812</real>
 							<real>0.90196079015731812</real>
-							<real>0.60000002384185791</real>
+							<real>0.89999997615814209</real>
 						</array>
 					</dict>
 					<dict>
@@ -2116,7 +2114,7 @@
 						<key>type</key>
 						<string>Float</string>
 						<key>value</key>
-						<real>0.60000002384185791</real>
+						<real>0.89999997615814209</real>
 					</dict>
 				</array>
 			</dict>
@@ -2440,9 +2438,9 @@ Shuffling…</string>
 						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<real>0.20999999344348907</real>
-							<real>0.64999997615814209</real>
-							<real>0.87000000476837158</real>
+							<real>0.27617830038070679</real>
+							<real>0.59010845422744751</real>
+							<real>1</real>
 							<real>0.94999998807907104</real>
 						</array>
 					</dict>
@@ -2455,6 +2453,8 @@ Shuffling…</string>
 						<real>0.94999998807907104</real>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
