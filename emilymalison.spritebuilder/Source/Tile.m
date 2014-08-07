@@ -115,22 +115,22 @@ static const int TILE_SIZE=3;
 
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
     if (canTouch) {
-        self.physicsBody.collisionMask = @[];
+        self.physicsBody.collisionMask=@[];
         canTouch = NO;
         CCActionRotateBy *rotateTile= [CCActionRotateBy actionWithDuration:.4 angle:90];
         CCActionCallBlock *resetTouch = [CCActionCallBlock actionWithBlock:^{
             canTouch= YES;
-            //self.physicsBody.collisionMask = nil;
+            self.physicsBody.collisionMask = nil;
         }];
         [self runAction:[CCActionSequence actionOne:rotateTile two:resetTouch]];
-    
-        //TODO: Fix Array Rotation
+        
         self.dotColorArray=[self rotateColorMatrix:self.dotColorArray];
         self.dotColorArrayCopy=self.dotColorArray;
         
         [(Grid*)self.parent checkTile:self];
     }
 }
+
 
 -(NSMutableArray*)rotateColorMatrix:(NSMutableArray*)matrix{
     return [NSMutableArray arrayWithObjects:[NSMutableArray arrayWithObjects:matrix[0][2], matrix[1][2], matrix[2][2], nil], [NSMutableArray arrayWithObjects:matrix[0][1], matrix[1][1], matrix[2][1], nil], [NSMutableArray arrayWithObjects:matrix[0][0], matrix[1][0], matrix[2][0], nil], nil];

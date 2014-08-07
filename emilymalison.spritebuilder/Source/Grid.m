@@ -32,6 +32,11 @@ static const int GRID_SIZE=3;
     Gameplay *_gameplayScene;
     BOOL shuffling;
     NSTimer *shufflingTimer;
+    NSMutableArray *_newTileArray0;
+    NSMutableArray *_newTileArray1;
+    NSMutableArray *_newTileArray2;
+    int tilesNotMoving;
+    BOOL falling;
 }
 
 - (void)onEnter
@@ -45,7 +50,34 @@ static const int GRID_SIZE=3;
     _newTileArray=[NSMutableArray array];
     
     shuffling=NO;
+    _newTileArray0=[NSMutableArray array];
+    _newTileArray1=[NSMutableArray array];
+    _newTileArray2=[NSMutableArray array];
+    falling=NO;
 }
+
+-(void)update:(CCTime)delta{
+    tilesNotMoving=0;
+    for (Tile* tile in self.children) {
+        tile.tileX=round((tile.position.y/tile.contentSize.height)/2);
+        tile.tileY=round((tile.position.x/tile.contentSize.width)/2);
+        if (tile.tileX<=2) {
+            _gridArray[tile.tileX][tile.tileY]=tile;
+        }
+        if (tile.physicsBody.affectedByGravity==NO && falling==YES) {
+            tilesNotMoving+=1;
+        }
+        if (tilesNotMoving==9 && falling==YES) {
+            falling=NO;
+            [self checkForMoves];
+            for (Tile* checkTile in self.children) {
+                [self checkTile:checkTile];
+                checkTile.userInteractionEnabled=YES;
+            }
+        }
+    }
+}
+
 
 -(void)disableUserInteraction{
     for (int x=0; x<GRID_SIZE; x++) {
@@ -107,7 +139,7 @@ static const int GRID_SIZE=3;
             tile.tileX=i;
             tile.tileY=j;
             
-			x+= _columnWidth;
+			x+= _columnWidth + 1;
 		}
 		y += _columnHeight;
     }
@@ -256,28 +288,138 @@ static const int GRID_SIZE=3;
 #pragma mark - Remove Tiles
 
 -(void)removeTiles{
+    _newTileArray0=[NSMutableArray array];
+    _newTileArray1=[NSMutableArray array];
+    _newTileArray2=[NSMutableArray array];
     BOOL removed=NO;
     for (int i=0; i<3; i++) {
         for (int j=0; j<3; j++) {
             Tile* tile=_gridArray[i][j];
-            if (tile.remove==true) {
+            if (tile.remove==true && tile.checking==NO) {
                 removed=YES;
+                for (Tile* someTile in self.children) {
+                    someTile.userInteractionEnabled=NO;
+                }
                 tile.remove=false;
+                
+                for (int x=0; x<3; x++) {
+                    Tile* eachTile =_gridArray[x][tile.tileY];
+                    eachTile.physicsBody.collisionMask=nil;
+                    if (tile.tileX+1<=2) {
+                        if (eachTile.tileX==tile.tileX+1) {
+                            [self scheduleBlock:^(CCTimer *timer) {
+                                eachTile.physicsBody.affectedByGravity=YES;
+                            } delay:.1];
+                        }
+                        if (tile.tileX+2<=2) {
+                            if (eachTile.tileX==tile.tileX+2) {
+                                [self scheduleBlock:^(CCTimer *timer) {
+                                    eachTile.physicsBody.affectedByGravity=YES;
+                                } delay:.2];
+                            }
+                        }
+                    }
+                }
                 
                 // WARNING: MIGHT LEAD TO UNEXPECTED BEHAVIOR
                 if ([self.children containsObject:tile]) {
                     [self removeChild:tile];
-                    [_gridArray removeObject:tile];
+                    [self scheduleBlock:^(CCTimer *timer) {
+                        falling=YES;
+                    } delay:.5];
                 }
                 
+                Tile* newTile=(Tile*)[CCBReader load: @"Tile"];
+                newTile.tileY=tile.tileY;
+                [newTile setScaleX:((_columnWidth)/newTile.contentSize.width)];
+                [newTile setScaleY:((_columnHeight)/newTile.contentSize.height)];
+                newTile.position=ccp(tile.positionInPoints.x, self.contentSize.height+newTile.contentSize.height+1);
+                newTile.remove=false;
+                newTile.rotationMeasure=0;
+                newTile.match=NO;
+                newTile.checking=NO;
+                newTile.visible=NO;
+                
+                [self addChild:newTile];
+                
+                newTile.userInteractionEnabled=NO;
+                
+                if (newTile.tileY==0) {
+                    if ([_newTileArray0 count]==1) {
+                        [NSTimer scheduledTimerWithTimeInterval:.9 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
+                        newTile.visible=NO;
+                        newTile.physicsBody.collisionMask=@[];
+                    }
+                    else if ([_newTileArray0 count]==2){
+                        [NSTimer scheduledTimerWithTimeInterval:1.6 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
+                        newTile.visible=NO;
+                        newTile.physicsBody.collisionMask=@[];
+                        
+                    }
+                    else if ([_newTileArray0 count]==0) {
+                        [self scheduleBlock:^(CCTimer *timer) {
+                            newTile.physicsBody.collisionMask=nil;
+                            newTile.physicsBody.affectedByGravity=YES;
+                            newTile.visible=YES;
+                        } delay:.2];
+                    }
+                    [_newTileArray0 addObject:newTile];
+                }
+                if (newTile.tileY==1) {
+                    if ([_newTileArray1 count]==1) {
+                        [NSTimer scheduledTimerWithTimeInterval:.9 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
+                        newTile.visible=NO;
+                        newTile.physicsBody.collisionMask=@[];
+                        newTile.physicsBody.affectedByGravity=NO;
+                    }
+                    else if ([_newTileArray1 count]==2){
+                        [NSTimer scheduledTimerWithTimeInterval:1.6 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
+                        newTile.visible=NO;
+                        newTile.physicsBody.collisionMask=@[];
+                    }
+                    
+                    else if ([_newTileArray1 count]==0) {
+                        [self scheduleBlock:^(CCTimer *timer) {
+                            newTile.physicsBody.collisionMask=nil;
+                            newTile.physicsBody.affectedByGravity=YES;
+                            newTile.visible=YES;
+                        } delay:.2];
+                    }
+                    [_newTileArray1 addObject:newTile];
+                }
+                if (newTile.tileY==2) {
+                    if ([_newTileArray2 count]==1) {
+                        [NSTimer scheduledTimerWithTimeInterval:.9 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
+                        newTile.visible=NO;
+                        newTile.physicsBody.collisionMask=@[];
+                        newTile.physicsBody.affectedByGravity=NO;
+                    }
+                    else if ([_newTileArray2 count]==2){
+                        [NSTimer scheduledTimerWithTimeInterval:1.6 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
+                        newTile.visible=NO;
+                        newTile.physicsBody.collisionMask=@[];
+                    }
+                    else if ([_newTileArray2 count]==0) {
+                        [self scheduleBlock:^(CCTimer *timer) {
+                            newTile.physicsBody.collisionMask=nil;
+                            newTile.physicsBody.affectedByGravity=YES;
+                            newTile.visible=YES;
+                        } delay:.2];
+                    }
+                    [_newTileArray2 addObject:newTile];
+                }
+            }
+            else if (tile.remove==YES && tile.checking==YES){
+                removed=NO;
+                [self removeChild:tile];
                 Tile* newTile=_gridArray[tile.tileX][tile.tileY];
                 newTile= (Tile*)[CCBReader load:@"Tile"];
-                 
+                
                 [newTile setScaleX:((_columnWidth)/tile.contentSize.width)];
                 [newTile setScaleY:((_columnHeight)/tile.contentSize.height)];
                 
                 newTile.position = tile.position;
-                _gridArray[i][j]=newTile;
+                _gridArray[tile.tileX][tile.tileY]=newTile;
                 newTile.tileX=tile.tileX;
                 newTile.tileY=tile.tileY;
                 newTile.remove=false;
@@ -286,31 +428,29 @@ static const int GRID_SIZE=3;
                 newTile.checking=NO;
                 
                 [self addChild:newTile];
-                
-                if (tile.checking==NO) {
-                    [_newTileArray addObject:newTile];
-                }
-                
-                else if (tile.checking==YES){
-                    newTile.checking=NO;
-                    newTile.remove=NO;
-                    [self checkVerticallyTile:newTile];
-                    [self checkHorizontallyTile:newTile];
-                }
+                [self checkVerticallyTile:newTile];
+                [self checkHorizontallyTile:newTile];
             }
         }
     }
-    if ([_newTileArray count]>0) {
-        for (int i=0; i<[_newTileArray count]; i++) {
-            Tile* tile=_newTileArray[i];
-            [self checkTile:tile];
-        }
-        [_newTileArray removeAllObjects];
+}
+
+-(void)dropNewTile:(NSTimer*)theTimer{
+    Tile *newTile = [theTimer userInfo];
+    newTile.physicsBody.affectedByGravity=YES;
+    newTile.physicsBody.collisionMask=nil;
+    newTile.visible=YES;
+    if (newTile.tileY==0) {
+        [_newTileArray0 removeObject:newTile];
     }
-    if (removed==YES) {
-        [self checkForMoves];
+    else if (newTile.tileY==1) {
+        [_newTileArray1 removeObject:newTile];
+    }
+    else if (newTile.tileY==2) {
+        [_newTileArray2 removeObject:newTile];
     }
 }
+
 
 #pragma mark - Checking Original Grid For Matches
 

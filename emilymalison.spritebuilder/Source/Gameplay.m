@@ -64,6 +64,16 @@
     _score.string=[NSString stringWithFormat:@"%i", _grid.totalScore];
 }
 
+#pragma mark - Collisions
+
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair tile:(CCNode *)nodeA wildcard:(CCNode *)nodeB {
+    if (nodeB.physicsBody.affectedByGravity == NO && nodeA.physicsBody.affectedByGravity) {
+        nodeA.physicsBody.affectedByGravity = NO;
+        nodeA.physicsBody.velocity = ccp(0,0);
+    }
+    return YES;
+}
+
 #pragma mark - Shuffling Screen
 -(void)noPossibleMatches{
     shufflingScreen.visible=YES;
