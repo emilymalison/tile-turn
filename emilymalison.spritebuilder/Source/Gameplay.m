@@ -69,22 +69,6 @@
         nodeA.physicsBody.velocity = ccp(0,0);
     }
     return YES;
-    /*for (Tile* tile in _grid.children) {
-        if (tile.physicsBody.affectedByGravity==NO) {
-            tilesDoneFalling+=1;
-        }
-    }
-    if (tilesDoneFalling==9) {
-        NSLog(@"tiles done falling");
-        [_grid checkForMoves];
-        for (Tile* tile in _grid.children) {
-            tile.userInteractionEnabled=YES;
-            [_grid checkTile:tile];
-        }
-    }
-    else{
-        tilesDoneFalling=0;
-    }*/
 }
 
 
