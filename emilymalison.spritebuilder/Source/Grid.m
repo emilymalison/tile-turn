@@ -37,6 +37,7 @@ static const int GRID_SIZE=3;
     NSMutableArray *_newTileArray2;
     int tilesNotMoving;
     BOOL falling;
+    NSTimer *secondIndicateTimer;
 }
 
 - (void)onEnter
@@ -280,6 +281,9 @@ static const int GRID_SIZE=3;
     if (score>scoreCheck) {
         //[self removeTiles];
         [NSTimer scheduledTimerWithTimeInterval:.7 target:self selector:@selector(removeTiles) userInfo:nil repeats:NO];
+    }
+    else{
+        [self checkForMoves];
     }
 }
 
@@ -678,7 +682,7 @@ static const int GRID_SIZE=3;
         possibleMatch=NO;
         [indicateTimer invalidate];
         indicatedTile=[_tileMatchArray objectAtIndex:(arc4random()% [_tileMatchArray count])];
-        indicateTimer=[NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(indicateMove) userInfo:nil repeats:YES];
+        indicateTimer=[NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(indicateMove) userInfo:nil repeats:NO];
     }
     
 }
@@ -694,6 +698,7 @@ static const int GRID_SIZE=3;
 -(void)indicateMove{
     [indicatedTile.animationManager runAnimationsForSequenceNamed:(@"Animation")];
     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(resetAnimation) userInfo:nil repeats:NO];
+    indicateTimer=[NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(indicateMove) userInfo:nil repeats:NO];
 }
 
 -(void)resetAnimation{
