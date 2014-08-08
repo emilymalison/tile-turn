@@ -39,6 +39,8 @@ static const int GRID_SIZE=3;
     BOOL falling;
     NSTimer *secondIndicateTimer;
     BOOL newGrid;
+    Tile* placeHolderTile;
+
 }
 
 - (void)onEnter
@@ -71,13 +73,20 @@ static const int GRID_SIZE=3;
         if (tile.physicsBody.affectedByGravity==NO && falling==YES) {
             tilesNotMoving+=1;
         }
-        if (tilesNotMoving==9 && falling==YES) {
-            falling=NO;
-            for (Tile* checkTile in self.children) {
-                [self checkTile:checkTile];
-                checkTile.userInteractionEnabled=YES;
-            }
-            [self checkForMoves];
+    }
+    if (tilesNotMoving==9 && falling==YES) {
+        falling=NO;
+        [self tilesDoneFalling];
+        [self checkForMoves];
+    }
+}
+
+-(void)tilesDoneFalling{
+    for (int x=0; x<GRID_SIZE; x++) {
+        for (int y=0; y<GRID_SIZE; y++) {
+            Tile *tile=_gridArray[x][y];
+            [self checkTile:tile];
+            tile.userInteractionEnabled=YES;
         }
     }
 }
@@ -686,6 +695,7 @@ static const int GRID_SIZE=3;
         }
         else if (newGrid==YES){
             NSLog(@"no possible matches on new grid");
+            shuffling=YES;
             [self setUpGrid];
         }
     }
