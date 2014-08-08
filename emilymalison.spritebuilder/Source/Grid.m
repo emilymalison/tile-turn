@@ -38,13 +38,16 @@ static const int GRID_SIZE=3;
     int tilesNotMoving;
     BOOL falling;
     NSTimer *secondIndicateTimer;
+    BOOL newGrid;
 }
 
 - (void)onEnter
 {
+    
     [super onEnter];
     possibleMatch=NO;
     
+    newGrid=YES;
     [self setUpGrid];
     
     moveIndicated=NO;
@@ -70,11 +73,11 @@ static const int GRID_SIZE=3;
         }
         if (tilesNotMoving==9 && falling==YES) {
             falling=NO;
-            [self checkForMoves];
             for (Tile* checkTile in self.children) {
                 [self checkTile:checkTile];
                 checkTile.userInteractionEnabled=YES;
             }
+            [self checkForMoves];
         }
     }
 }
@@ -109,6 +112,9 @@ static const int GRID_SIZE=3;
                 [self removeChild:tile];
             }
         }
+    }
+    if (newGrid==YES) {
+        self.visible=NO;
     }
     
     _gridArray=[NSMutableArray array];
@@ -671,11 +677,17 @@ static const int GRID_SIZE=3;
     }
     if (possibleMatch==NO) {
         NSLog(@"no possible matches");
-        CCNode *_node=self.parent;
-        [(Gameplay*)_node.parent noPossibleMatches];
-        shuffling=YES;
-        [self setUpGrid];
-        shufflingTimer=[NSTimer scheduledTimerWithTimeInterval:1.3 target:self selector:@selector(resetShuffling) userInfo:nil repeats:NO];
+        if (newGrid==NO) {
+            CCNode *_node=self.parent;
+            [(Gameplay*)_node.parent noPossibleMatches];
+            shuffling=YES;
+            [self setUpGrid];
+            shufflingTimer=[NSTimer scheduledTimerWithTimeInterval:1.3 target:self selector:@selector(resetShuffling) userInfo:nil repeats:NO];
+        }
+        else if (newGrid==YES){
+            NSLog(@"no possible matches on new grid");
+            [self setUpGrid];
+        }
     }
     
     else if (possibleMatch==YES){
@@ -683,8 +695,11 @@ static const int GRID_SIZE=3;
         [indicateTimer invalidate];
         indicatedTile=[_tileMatchArray objectAtIndex:(arc4random()% [_tileMatchArray count])];
         indicateTimer=[NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(indicateMove) userInfo:nil repeats:NO];
+        if (newGrid==YES) {
+            newGrid=NO;
+            self.visible=YES;
+        }
     }
-    
 }
 
 -(void)resetShuffling{
