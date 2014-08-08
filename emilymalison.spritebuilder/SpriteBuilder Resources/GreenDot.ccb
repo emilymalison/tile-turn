@@ -103,7 +103,7 @@
 				<key>value</key>
 				<array>
 					<string></string>
-					<string>chipGreen_border@4x.png</string>
+					<string>chipWhite_border@4x.png</string>
 				</array>
 			</dict>
 			<dict>
@@ -113,8 +113,8 @@
 				<string>Color3</string>
 				<key>value</key>
 				<array>
-					<real>1</real>
-					<real>1</real>
+					<real>0.64263433218002319</real>
+					<real>0.69214648008346558</real>
 					<real>1</real>
 					<real>1</real>
 				</array>

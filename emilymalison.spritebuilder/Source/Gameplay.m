@@ -26,6 +26,9 @@
     CCButton *continuePlayButton;
     CCButton *retryButton;
     CCButton *menuButton;
+    CCNode *retry;
+    CCNode *play;
+    CCNode *home;
 }
 
 #pragma mark - Timer
@@ -47,7 +50,7 @@
 -(void)second{
     timeRemaining-=1;
     _timer.string= [NSString stringWithFormat:@"%d", timeRemaining];
-    if (timeRemaining==0) {
+    if (timeRemaining==55) {
         [myTimer invalidate];
         myTimer=nil;
         [self timerExpired];
@@ -99,6 +102,9 @@
     continuePlayButton.visible=YES;
     retryButton.visible=YES;
     menuButton.visible=YES;
+    retry.visible=YES;
+    play.visible=YES;
+    home.visible=YES;
     [myTimer invalidate];
     [_grid disableUserInteraction];
 }
@@ -108,6 +114,9 @@
     pauseText.visible=NO;
     menuButton.visible=NO;
     retryButton.visible=NO;
+    retry.visible=NO;
+    play.visible=NO;
+    home.visible=NO;
     continuePlayButton.visible=NO;
     myTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(second) userInfo:nil repeats:YES];
     [_grid enableUserInteraction];
