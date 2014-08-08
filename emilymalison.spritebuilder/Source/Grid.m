@@ -73,6 +73,11 @@ static const int GRID_SIZE=3;
         if (tile.physicsBody.affectedByGravity==NO && falling==YES) {
             tilesNotMoving+=1;
         }
+        CCNode *_node=self.parent;
+        Gameplay *gameplay=(Gameplay*)_node.parent;
+        if (gameplay.shuffling==YES) {
+            tile.userInteractionEnabled=NO;
+        }
     }
     if (tilesNotMoving==9 && falling==YES) {
         falling=NO;
@@ -117,8 +122,8 @@ static const int GRID_SIZE=3;
     if (shuffling==YES) {
         for (int x=0; x<GRID_SIZE; x++) {
             for (int y=0; y<GRID_SIZE; y++) {
-                Tile *tile=_gridArray[x][y];
-                [self removeChild:tile];
+                Tile *toBeRemoved=_gridArray[x][y];
+                [self removeChild:toBeRemoved];
             }
         }
     }
@@ -154,6 +159,9 @@ static const int GRID_SIZE=3;
             _gridArray[i][j]=tile;
             tile.tileX=i;
             tile.tileY=j;
+            if (shuffling==YES) {
+                tile.userInteractionEnabled=NO;
+            }
             
 			x+= _columnWidth + 1;
 		}

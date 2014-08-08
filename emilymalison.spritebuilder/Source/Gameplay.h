@@ -15,4 +15,6 @@
 -(void)noPossibleMatches;
 -(void)shufflingDone;
 
+@property (nonatomic, assign) BOOL shuffling;
+
 @end

@@ -39,6 +39,7 @@
     timeRemaining=60;
     
     [self schedule:@selector(updateScore) interval:0.5f];
+    self.shuffling=NO;
 }
 
 
@@ -78,15 +79,17 @@
 
 #pragma mark - Shuffling Screen
 -(void)noPossibleMatches{
+    self.shuffling=YES;
     shufflingScreen.visible=YES;
     shufflingText.visible=YES;
-    [_grid disableUserInteraction];
+    //[_grid disableUserInteraction];
 }
 
 -(void)shufflingDone{
     shufflingScreen.visible=NO;
     shufflingText.visible=NO;
     [_grid enableUserInteraction];
+    self.shuffling=NO;
 }
 
 #pragma mark - Pause Screen
