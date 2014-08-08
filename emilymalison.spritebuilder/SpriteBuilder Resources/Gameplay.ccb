@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>24</integer>
+	<integer>25</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -50,9 +50,9 @@
 		<array>
 			<dict>
 				<key>UUID</key>
-				<integer>1</integer>
+				<integer>24</integer>
 				<key>baseClass</key>
-				<string>CCNodeColor</string>
+				<string>CCNodeGradient</string>
 				<key>children</key>
 				<array/>
 				<key>customClass</key>
@@ -60,7 +60,7 @@
 				<key>displayName</key>
 				<string>background</string>
 				<key>memberVarAssignmentName</key>
-				<string>_background</string>
+				<string></string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>properties</key>
@@ -126,24 +126,40 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>color</string>
+						<string>startColor</string>
 						<key>type</key>
 						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<real>0.90196079015731812</real>
-							<real>0.90196079015731812</real>
-							<real>0.90196079015731812</real>
+							<real>0.0</real>
+							<real>0.50196081399917603</real>
+							<real>1</real>
 							<real>1</real>
 						</array>
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>opacity</string>
+						<string>endColor</string>
 						<key>type</key>
-						<string>Float</string>
+						<string>Color3</string>
 						<key>value</key>
-						<real>1</real>
+						<array>
+							<real>0.62915337085723877</real>
+							<real>0.77627497911453247</real>
+							<real>1</real>
+							<real>1</real>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>vector</string>
+						<key>type</key>
+						<string>Point</string>
+						<key>value</key>
+						<array>
+							<real>0.0</real>
+							<real>-1</real>
+						</array>
 					</dict>
 				</array>
 			</dict>
@@ -228,8 +244,8 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>40</real>
-							<real>40</real>
+							<real>32</real>
+							<real>32</real>
 							<integer>0</integer>
 							<integer>0</integer>
 						</array>
@@ -285,7 +301,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonHighlighted.png</string>
+							<string>pause.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -309,7 +325,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonNormal.png</string>
+							<string>pause.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -328,7 +344,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonNormal.png</string>
+							<string>pause.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -472,6 +488,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -566,7 +584,7 @@
 									<real>0.90196079015731812</real>
 									<real>0.90196079015731812</real>
 									<real>0.90196079015731812</real>
-									<real>1</real>
+									<real>0.0</real>
 								</array>
 							</dict>
 							<dict>
@@ -575,7 +593,7 @@
 								<key>type</key>
 								<string>Float</string>
 								<key>value</key>
-								<real>1</real>
+								<real>0.0</real>
 							</dict>
 						</array>
 					</dict>
@@ -1215,9 +1233,9 @@
 						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
-							<real>0.0</real>
-							<real>0.0</real>
+							<real>1</real>
+							<real>1</real>
+							<real>1</real>
 							<real>0.75</real>
 						</array>
 					</dict>
@@ -1443,9 +1461,9 @@
 						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
-							<real>0.0</real>
-							<real>0.0</real>
+							<real>1</real>
+							<real>1</real>
+							<real>1</real>
 							<real>0.75</real>
 						</array>
 					</dict>
@@ -1671,9 +1689,9 @@
 						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
-							<real>0.0</real>
-							<real>0.0</real>
+							<real>1</real>
+							<real>1</real>
+							<real>1</real>
 							<real>0.74000000953674316</real>
 						</array>
 					</dict>
@@ -1899,9 +1917,9 @@
 						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
-							<real>0.0</real>
-							<real>0.0</real>
+							<real>1</real>
+							<real>1</real>
+							<real>1</real>
 							<real>0.75</real>
 						</array>
 					</dict>
@@ -2453,8 +2471,6 @@ Shuffling…</string>
 						<real>0.94999998807907104</real>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>

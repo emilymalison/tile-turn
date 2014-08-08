@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>31</integer>
+	<integer>33</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -41,9 +41,9 @@
 		<array>
 			<dict>
 				<key>UUID</key>
-				<integer>1</integer>
+				<integer>31</integer>
 				<key>baseClass</key>
-				<string>CCNodeColor</string>
+				<string>CCNodeGradient</string>
 				<key>children</key>
 				<array/>
 				<key>customClass</key>
@@ -117,24 +117,40 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>color</string>
+						<string>startColor</string>
 						<key>type</key>
 						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<real>0.90196079015731812</real>
-							<real>0.90196079015731812</real>
-							<real>0.90196079015731812</real>
+							<real>0.0</real>
+							<real>0.50196081399917603</real>
+							<real>1</real>
 							<real>1</real>
 						</array>
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>opacity</string>
+						<string>endColor</string>
 						<key>type</key>
-						<string>Float</string>
+						<string>Color3</string>
 						<key>value</key>
-						<real>1</real>
+						<array>
+							<real>0.62915337085723877</real>
+							<real>0.77627497911453247</real>
+							<real>1</real>
+							<real>1</real>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>vector</string>
+						<key>type</key>
+						<string>Point</string>
+						<key>value</key>
+						<array>
+							<real>0.0</real>
+							<real>-1</real>
+						</array>
 					</dict>
 				</array>
 			</dict>
@@ -240,19 +256,6 @@ right to rotate it!</string>
 						<string>Check</string>
 						<key>value</key>
 						<false/>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>color</string>
-						<key>type</key>
-						<string>Color3</string>
-						<key>value</key>
-						<array>
-							<real>0.0</real>
-							<real>0.0</real>
-							<real>0.0</real>
-							<real>1</real>
-						</array>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -731,19 +734,6 @@ right to rotate it!</string>
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>color</string>
-						<key>type</key>
-						<string>Color3</string>
-						<key>value</key>
-						<array>
-							<real>0.0</real>
-							<real>0.0</real>
-							<real>0.0</real>
-							<real>1</real>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
 						<string>dimensions</string>
 						<key>type</key>
 						<string>Size</string>
@@ -852,9 +842,9 @@ right to rotate it!</string>
 			</dict>
 			<dict>
 				<key>UUID</key>
-				<integer>12</integer>
+				<integer>32</integer>
 				<key>baseClass</key>
-				<string>CCNodeColor</string>
+				<string>CCNodeGradient</string>
 				<key>children</key>
 				<array/>
 				<key>customClass</key>
@@ -936,24 +926,40 @@ right to rotate it!</string>
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>color</string>
+						<string>startColor</string>
 						<key>type</key>
 						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<real>0.90196079015731812</real>
-							<real>0.90196079015731812</real>
-							<real>0.90196079015731812</real>
+							<real>0.0</real>
+							<real>0.50196081399917603</real>
+							<real>1</real>
 							<real>1</real>
 						</array>
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>opacity</string>
+						<string>endColor</string>
 						<key>type</key>
-						<string>Float</string>
+						<string>Color3</string>
 						<key>value</key>
-						<real>1</real>
+						<array>
+							<real>0.62915337085723877</real>
+							<real>0.77627497911453247</real>
+							<real>1</real>
+							<real>1</real>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>vector</string>
+						<key>type</key>
+						<string>Point</string>
+						<key>value</key>
+						<array>
+							<real>0.0</real>
+							<real>-1</real>
+						</array>
 					</dict>
 				</array>
 			</dict>
@@ -1068,19 +1074,6 @@ Ready to play?</string>
 						<string>Check</string>
 						<key>value</key>
 						<false/>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>color</string>
-						<key>type</key>
-						<string>Color3</string>
-						<key>value</key>
-						<array>
-							<real>0.0</real>
-							<real>0.0</real>
-							<real>0.0</real>
-							<real>1</real>
-						</array>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -1520,19 +1513,6 @@ times...</string>
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>color</string>
-						<key>type</key>
-						<string>Color3</string>
-						<key>value</key>
-						<array>
-							<real>0.0</real>
-							<real>0.0</real>
-							<real>0.0</real>
-							<real>1</real>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
 						<string>dimensions</string>
 						<key>type</key>
 						<string>Size</string>
@@ -1636,8 +1616,6 @@ times...</string>
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -1806,19 +1784,6 @@ make a match.</string>
 						<string>Check</string>
 						<key>value</key>
 						<false/>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>color</string>
-						<key>type</key>
-						<string>Color3</string>
-						<key>value</key>
-						<array>
-							<real>0.0</real>
-							<real>0.0</real>
-							<real>0.0</real>
-							<real>1</real>
-						</array>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -2595,6 +2560,8 @@ make a match.</string>
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
