@@ -24,6 +24,7 @@
     CCNodeColor *pauseScreen;
     CCLabelTTF *pauseText;
     CCButton *continuePlayButton;
+    CCButton *retryButton;
     CCButton *menuButton;
 }
 
@@ -82,7 +83,6 @@
     self.shuffling=YES;
     shufflingScreen.visible=YES;
     shufflingText.visible=YES;
-    //[_grid disableUserInteraction];
 }
 
 -(void)shufflingDone{
@@ -97,6 +97,7 @@
     pauseScreen.visible=YES;
     pauseText.visible=YES;
     continuePlayButton.visible=YES;
+    retryButton.visible=YES;
     menuButton.visible=YES;
     [myTimer invalidate];
     [_grid disableUserInteraction];
@@ -106,6 +107,7 @@
     pauseScreen.visible=NO;
     pauseText.visible=NO;
     menuButton.visible=NO;
+    retryButton.visible=NO;
     continuePlayButton.visible=NO;
     myTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(second) userInfo:nil repeats:YES];
     [_grid enableUserInteraction];
@@ -114,6 +116,11 @@
 -(void)loadMenu{
     CCScene *mainScene=[CCBReader loadAsScene:@"MainScene"];
     [[CCDirector sharedDirector] replaceScene:mainScene];
+}
+
+-(void)retry{
+    CCScene *gameplay=[CCBReader loadAsScene:@"Gameplay"];
+    [[CCDirector sharedDirector] replaceScene:gameplay];
 }
 
 @end

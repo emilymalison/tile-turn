@@ -39,7 +39,7 @@ static const int GRID_SIZE=3;
     BOOL falling;
     NSTimer *secondIndicateTimer;
     BOOL newGrid;
-    Tile* placeHolderTile;
+    BOOL afterFalling;
 
 }
 
@@ -60,6 +60,7 @@ static const int GRID_SIZE=3;
     _newTileArray1=[NSMutableArray array];
     _newTileArray2=[NSMutableArray array];
     falling=NO;
+    afterFalling=NO;
 }
 
 -(void)update:(CCTime)delta{
@@ -82,18 +83,18 @@ static const int GRID_SIZE=3;
     if (tilesNotMoving==9 && falling==YES) {
         falling=NO;
         [self tilesDoneFalling];
-        [self checkForMoves];
     }
 }
 
 -(void)tilesDoneFalling{
+    //afterFalling=YES;
     for (int x=0; x<GRID_SIZE; x++) {
         for (int y=0; y<GRID_SIZE; y++) {
             Tile *tile=_gridArray[x][y];
             [self checkTile:tile];
-            tile.userInteractionEnabled=YES;
         }
     }
+    [self checkForMoves];
 }
 
 
@@ -159,9 +160,6 @@ static const int GRID_SIZE=3;
             _gridArray[i][j]=tile;
             tile.tileX=i;
             tile.tileY=j;
-            if (shuffling==YES) {
-                tile.userInteractionEnabled=NO;
-            }
             
 			x+= _columnWidth + 1;
 		}
@@ -306,9 +304,8 @@ static const int GRID_SIZE=3;
         //[self removeTiles];
         [NSTimer scheduledTimerWithTimeInterval:.7 target:self selector:@selector(removeTiles) userInfo:nil repeats:NO];
     }
-    else{
+    else if (afterFalling==NO){
         [self enableUserInteraction];
-        [self checkForMoves];
     }
 }
 
@@ -696,6 +693,7 @@ static const int GRID_SIZE=3;
     }
     if (possibleMatch==NO) {
         NSLog(@"no possible matches");
+        shuffling=YES;
         if (newGrid==NO) {
             CCNode *_node=self.parent;
             [(Gameplay*)_node.parent noPossibleMatches];
@@ -705,7 +703,6 @@ static const int GRID_SIZE=3;
         }
         else if (newGrid==YES){
             NSLog(@"no possible matches on new grid");
-            shuffling=YES;
             [self setUpGrid];
         }
     }
