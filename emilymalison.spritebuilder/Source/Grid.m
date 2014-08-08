@@ -171,6 +171,7 @@ static const int GRID_SIZE=3;
 #pragma mark - Checking for Matches
 
 -(void)checkTile:(Tile *)rotatedTile{
+    [self disableUserInteraction];
     int match;
     BOOL firstDot;
     int scoreCheck=score;
@@ -298,6 +299,7 @@ static const int GRID_SIZE=3;
         [NSTimer scheduledTimerWithTimeInterval:.7 target:self selector:@selector(removeTiles) userInfo:nil repeats:NO];
     }
     else{
+        [self enableUserInteraction];
         [self checkForMoves];
     }
 }
