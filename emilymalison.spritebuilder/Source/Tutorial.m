@@ -24,6 +24,9 @@
     NSTimer *checkTimer;
     NSTimer *continueTimer;
     int numberScene;
+    CCNode *continueBackground;
+    CCNode *play;
+
 }
 
 -(void)onEnter{
@@ -64,12 +67,14 @@
 
 -(void)continueButtonVisible{
     continueButton.visible=YES;
+    continueBackground.visible=YES;
     [continueTimer invalidate];
 }
 
 -(void)nextScreen{
     if (numberScene==1) {
         continueButton.visible=NO;
+        continueBackground.visible=NO;
         newScreen.visible=YES;
         tutorialTile3.visible=YES;
         tutorialTile4.visible=YES;
@@ -78,12 +83,14 @@
     }
     else if (numberScene==2){
         continueButton.visible=NO;
+        continueBackground.visible=NO;
         tutorialTile3.visible=NO;
         tutorialTile4.visible=NO;
         secondText.visible=NO;
         greatText.visible=NO;
         newButton.visible=YES;
         newText.visible=YES;
+        play.visible=YES;
         numberScene+=1;
     }
 }
