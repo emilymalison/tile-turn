@@ -50,7 +50,11 @@
 -(void)second{
     timeRemaining-=1;
     _timer.string= [NSString stringWithFormat:@"%d", timeRemaining];
+    if (timeRemaining==10) {
+        [_timer.animationManager runAnimationsForSequenceNamed:@"Animation"];
+    }
     if (timeRemaining==0) {
+        [_timer.animationManager runAnimationsForSequenceNamed:@"Default Timeline"];
         [myTimer invalidate];
         myTimer=nil;
         [self timerExpired];
