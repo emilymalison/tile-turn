@@ -714,7 +714,7 @@ static const int GRID_SIZE=3;
             [(Gameplay*)_node.parent noPossibleMatches];
             shuffling=YES;
             [self setUpGrid];
-            shufflingTimer=[NSTimer scheduledTimerWithTimeInterval:1.3 target:self selector:@selector(resetShuffling) userInfo:nil repeats:NO];
+            shufflingTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(resetShuffling) userInfo:nil repeats:NO];
         }
         else if (newGrid==YES){
             NSLog(@"no possible matches on new grid");
