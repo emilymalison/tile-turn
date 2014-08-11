@@ -318,7 +318,13 @@ static const int GRID_SIZE=3;
     }
     _totalScore=score;
     if (score>scoreCheck) {
-        [NSTimer scheduledTimerWithTimeInterval:.7 target:self selector:@selector(removeTiles) userInfo:nil repeats:NO];
+       for (Tile* toBeRemoved in self.children){
+            if (toBeRemoved.remove==YES) {
+                [self scheduleBlock:^(CCTimer *timer) {
+                    [self matchAnimationOnTile:toBeRemoved];
+                } delay:.6];
+            }
+        }
     }
     else if (afterFalling==NO){
         [self enableUserInteraction];
@@ -473,6 +479,11 @@ static const int GRID_SIZE=3;
             }
         }
     }
+}
+
+-(void)matchAnimationOnTile:(Tile*)removedTile{
+      [removedTile.animationManager runAnimationsForSequenceNamed:(@"Match Timeline")];
+      [NSTimer scheduledTimerWithTimeInterval:.5 target:self selector:@selector(removeTiles) userInfo:nil repeats:NO];
 }
 
 -(void)dropNewTile:(NSTimer*)theTimer{
