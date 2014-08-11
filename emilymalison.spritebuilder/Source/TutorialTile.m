@@ -50,13 +50,13 @@
     _dotMarginHorizontal=_tileColumnWidth/3;
     _dotMarginVertical=_tileColumnHeight/3;
     
-    float x=_dotMarginHorizontal;
-    float y=_dotMarginVertical;
+    float x=_dotMarginHorizontal-1;
+    float y=_dotMarginVertical-1;
     
     if (self.number==1) {
         self.userInteractionEnabled=NO;
         for (int i=0; i<3; i++) {
-            x=_dotMarginHorizontal;
+            x=_dotMarginHorizontal-1;
             for (int j=0; j<3; j++) {
                 if (i==0 && j==0) {
                     dot=(Dot*)[CCBReader load:@"BlueDot"];
@@ -85,8 +85,8 @@
                 else if (i==2 && j==2){
                     dot=(Dot*)[CCBReader load:@"BlueDot"];
                 }
-                [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2];
-                [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2];
+                [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2.2];
+                [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2.2];
                 [self addChild:dot];
                 dot.contentSize = CGSizeMake(_tileColumnWidth, _tileColumnHeight);
                 dot.position = ccp(x, y);
@@ -99,7 +99,7 @@
     }
     else if (self.number==2) {
         for (int i=0; i<3; i++) {
-            x=_dotMarginHorizontal;
+            x=_dotMarginHorizontal-1;
             for (int j=0; j<3; j++) {
                 if (i==0 && j==0) {
                     dot=(Dot*)[CCBReader load:@"BlueDot"];
@@ -128,8 +128,8 @@
                 else if (i==2 && j==2){
                     dot=(Dot*)[CCBReader load:@"GreenDot"];
                 }
-                [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2];
-                [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2];
+                [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2.2];
+                [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2.2];
                 [self addChild:dot];
                 dot.contentSize = CGSizeMake(_tileColumnWidth, _tileColumnHeight);
                 dot.position = ccp(x, y);
@@ -143,7 +143,7 @@
     else if (self.number==3){
         self.userInteractionEnabled=NO;
         for (int i=0; i<3; i++) {
-            x=_dotMarginHorizontal;
+            x=_dotMarginHorizontal-1;
             for (int j=0; j<3; j++) {
                 if (i==0 && j==0) {
                     dot=(Dot*)[CCBReader load:@"WhiteDot"];
@@ -172,8 +172,8 @@
                 else if (i==2 && j==2){
                     dot=(Dot*)[CCBReader load:@"WhiteDot"];
                 }
-                [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2];
-                [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2];
+                [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2.2];
+                [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2.2];
                 [self addChild:dot];
                 dot.contentSize = CGSizeMake(_tileColumnWidth, _tileColumnHeight);
                 dot.position = ccp(x, y);
@@ -186,7 +186,7 @@
     }
     else if (self.number==4){
         for (int i=0; i<3; i++) {
-            x=_dotMarginHorizontal;
+            x=_dotMarginHorizontal-1;
             for (int j=0; j<3; j++) {
                 if (i==0 && j==0) {
                     dot=(Dot*)[CCBReader load:@"BlueDot"];
@@ -215,8 +215,8 @@
                 else if (i==2 && j==2){
                     dot=(Dot*)[CCBReader load:@"WhiteDot"];
                 }
-                [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2];
-                [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2];
+                [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2.2];
+                [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2.2];
                 [self addChild:dot];
                 dot.contentSize = CGSizeMake(_tileColumnWidth, _tileColumnHeight);
                 dot.position = ccp(x, y);

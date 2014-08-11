@@ -103,7 +103,7 @@
 				<key>value</key>
 				<array>
 					<string></string>
-					<string>chipWhite_border@4x.png</string>
+					<string>dot.png</string>
 				</array>
 			</dict>
 			<dict>
@@ -113,13 +113,15 @@
 				<string>Color3</string>
 				<key>value</key>
 				<array>
-					<real>1</real>
-					<real>1</real>
-					<real>1</real>
+					<real>0.8811916708946228</real>
+					<real>0.57381278276443481</real>
+					<real>0.81974679231643677</real>
 					<real>1</real>
 				</array>
 			</dict>
 		</array>
+		<key>selected</key>
+		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>

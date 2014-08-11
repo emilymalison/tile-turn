@@ -48,8 +48,8 @@ static const int TILE_SIZE=3;
     _dotMarginHorizontal=_tileColumnWidth/TILE_SIZE;
     _dotMarginVertical=_tileColumnHeight/TILE_SIZE;
     
-    float x=_dotMarginHorizontal;
-    float y=_dotMarginVertical;
+    float x=_dotMarginHorizontal-1;
+    float y=_dotMarginVertical-1;
     
     self.dotColorArray=[NSMutableArray array];
     self.tileArray=[NSMutableArray array];
@@ -60,15 +60,15 @@ static const int TILE_SIZE=3;
     for (int i=0; i<3; i++) {
         [self.dotColorArray addObject:[NSMutableArray array]];
         self.tileArray[i]=[NSMutableArray array];
-        x=_dotMarginHorizontal;
+        x=_dotMarginHorizontal-1;
         
         for (int j=0; j<3; j++) {
             int numberDot=arc4random()%3;
             if (numberDot==0) {
                 dot=(Dot*)[CCBReader load:@"BlueDot"];
                 dot.DotColor=blue;
-                [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2];
-                [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2];
+                [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2.2];
+                [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2.2];
                 [_tile addChild:dot];
                 dot.contentSize = CGSizeMake(_tileColumnWidth, _tileColumnHeight);
                 dot.position = ccp(x, y);
@@ -80,8 +80,8 @@ static const int TILE_SIZE=3;
             else if(numberDot==1){
                 dot=(Dot*)[CCBReader load: @"GreenDot"];
                 dot.DotColor=green;
-                [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2];
-                [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2];
+                [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2.2];
+                [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2.2];
                 [_tile addChild:dot];
                 dot.contentSize=CGSizeMake(_tileColumnWidth, _tileColumnHeight);
                 dot.position=ccp(x, y);
@@ -93,8 +93,8 @@ static const int TILE_SIZE=3;
             else if(numberDot==2){
                 dot=(Dot*)[CCBReader load: @"WhiteDot"];
                 dot.DotColor=white;
-                [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2];
-                [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2];
+                [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2.2];
+                [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2.2];
                 [_tile addChild:dot];
                 dot.contentSize=CGSizeMake(_tileColumnWidth, _tileColumnHeight);
                 dot.position=ccp(x, y);
