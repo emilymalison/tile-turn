@@ -259,13 +259,14 @@ static const int GRID_SIZE=3;
                                     tileBefore.remove=true;
                                     if (match==5) {
                                         score+=5;
+                                        Tile* tileBeforeBefore=_gridArray[currentTile.tileX][currentTile.tileY-2];
+                                        tileBeforeBefore.remove=TRUE;
                                         Dot* dot1=currentTile.tileArray[j][k];
                                         dot1.match=YES;
                                         if (k==0){
                                             Dot* dot2=tileBefore.tileArray[j][2];
                                             Dot* dot3=tileBefore.tileArray[j][1];
                                             Dot* dot4=tileBefore.tileArray[j][0];
-                                            Tile* tileBeforeBefore=_gridArray[currentTile.tileX][currentTile.tileY-2];
                                             Dot* dot5=tileBeforeBefore.tileArray[j][2];
                                             dot2.match=YES;
                                             dot3.match=YES;
@@ -334,7 +335,7 @@ static const int GRID_SIZE=3;
                                         }
                                     }
                                     else if (match>5){
-                                        Dot* dot6=currentTile.tileArray[j][k];
+                                        Dot* dot6=currentTile.tileArray[k][j];
                                         dot6.match=YES;
                                         score+=1;
                                     }
@@ -352,15 +353,16 @@ static const int GRID_SIZE=3;
                                     currentTile.remove=true;
                                     tileBefore.remove=true;
                                     if (match==5) {
+                                        Tile* tileBeforeBefore=_gridArray[currentTile.tileX-2][currentTile.tileY];
+                                        tileBeforeBefore.remove=TRUE;
                                         score+=5;
-                                        Dot* dot1=currentTile.tileArray[j][k];
+                                        Dot* dot1=currentTile.tileArray[k][j];
                                         dot1.match=YES;
                                         if (k==0){
-                                            Dot* dot2=tileBefore.tileArray[2][k];
-                                            Dot* dot3=tileBefore.tileArray[1][k];
-                                            Dot* dot4=tileBefore.tileArray[0][k];
-                                            Tile* tileBeforeBefore=_gridArray[currentTile.tileX-2][currentTile.tileY];
-                                            Dot* dot5=tileBeforeBefore.tileArray[2][k];
+                                            Dot* dot2=tileBefore.tileArray[2][j];
+                                            Dot* dot3=tileBefore.tileArray[1][j];
+                                            Dot* dot4=tileBefore.tileArray[0][j];
+                                            Dot* dot5=tileBeforeBefore.tileArray[2][j];
                                             dot2.match=YES;
                                             dot3.match=YES;
                                             dot4.match=YES;
@@ -368,7 +370,7 @@ static const int GRID_SIZE=3;
                                         }
                                     }
                                     else if (match>5){
-                                        Dot* dot6=currentTile.tileArray[j][k];
+                                        Dot* dot6=currentTile.tileArray[k][j];
                                         dot6.match=YES;
                                         score+=1;
                                     }
