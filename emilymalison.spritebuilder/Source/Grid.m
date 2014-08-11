@@ -84,7 +84,15 @@ static const int GRID_SIZE=3;
     if (tilesNotMoving==9 && falling==YES) {
         falling=NO;
         [self tilesDoneFalling];
-        if (self.timerExpired==YES) {
+        if (self.timerExpired==YES && shuffling==NO) {
+            CCNode *_node=self.parent;
+            [self scheduleBlock:^(CCTimer *timer) {
+                [(Gameplay*)_node.parent gameOver];
+            } delay:.3];
+        }
+    }
+    else if (falling==NO){
+        if (self.timerExpired==YES && shuffling==NO) {
             CCNode *_node=self.parent;
             [self scheduleBlock:^(CCTimer *timer) {
                 [(Gameplay*)_node.parent gameOver];

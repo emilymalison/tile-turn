@@ -59,6 +59,7 @@
 
 -(void)timerExpired{
     _grid.timerExpired=YES;
+    [_grid disableUserInteraction];
 }
 -(void)gameOver{
     GameOver *gameover = (GameOver*)[CCBReader load:@"GameOver"];
