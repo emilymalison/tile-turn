@@ -47,43 +47,43 @@
     _tileColumnHeight=self.contentSize.height/3;
     _tileColumnWidth=self.contentSize.width/3;
     
-    _dotMarginHorizontal=_tileColumnWidth/3;
-    _dotMarginVertical=_tileColumnHeight/3;
+    _dotMarginHorizontal=_tileColumnWidth/2;
+    _dotMarginVertical=_tileColumnHeight/2;
     
-    float x=_dotMarginHorizontal-1;
-    float y=_dotMarginVertical-1;
+    float x=_dotMarginHorizontal;
+    float y=_dotMarginVertical;
     
     if (self.number==1) {
         self.userInteractionEnabled=NO;
         for (int i=0; i<3; i++) {
-            x=_dotMarginHorizontal-1;
+            x=_dotMarginHorizontal;
             for (int j=0; j<3; j++) {
                 if (i==0 && j==0) {
-                    dot=(Dot*)[CCBReader load:@"BlueDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot1"];
                 }
                 else if (i==0 && j==1){
-                    dot=(Dot*)[CCBReader load:@"GreenDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot2"];
                 }
                 else if (i==0 && j==2){
-                    dot=(Dot*)[CCBReader load:@"WhiteDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot3"];
                 }
                 else if (i==1 && j==0){
-                    dot=(Dot*)[CCBReader load:@"WhiteDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot3"];
                 }
                 else if (i==1 && j==1){
-                    dot=(Dot*)[CCBReader load:@"WhiteDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot3"];
                 }
                 else if (i==1 && j==2){
-                    dot=(Dot*)[CCBReader load:@"GreenDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot2"];
                 }
                 else if (i==2 && j==0){
-                    dot=(Dot*)[CCBReader load:@"BlueDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot1"];
                 }
                 else if (i==2 && j==1){
-                    dot=(Dot*)[CCBReader load:@"BlueDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot1"];
                 }
                 else if (i==2 && j==2){
-                    dot=(Dot*)[CCBReader load:@"BlueDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot1"];
                 }
                 [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2.2];
                 [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2.2];
@@ -99,34 +99,34 @@
     }
     else if (self.number==2) {
         for (int i=0; i<3; i++) {
-            x=_dotMarginHorizontal-1;
+            x=_dotMarginHorizontal;
             for (int j=0; j<3; j++) {
                 if (i==0 && j==0) {
-                    dot=(Dot*)[CCBReader load:@"BlueDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot1"];
                 }
                 else if (i==0 && j==1){
-                    dot=(Dot*)[CCBReader load:@"WhiteDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot3"];
                 }
                 else if (i==0 && j==2){
-                    dot=(Dot*)[CCBReader load:@"WhiteDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot3"];
                 }
                 else if (i==1 && j==0){
-                    dot=(Dot*)[CCBReader load:@"BlueDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot1"];
                 }
                 else if (i==1 && j==1){
-                    dot=(Dot*)[CCBReader load:@"BlueDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot1"];
                 }
                 else if (i==1 && j==2){
-                    dot=(Dot*)[CCBReader load:@"GreenDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot1"];
                 }
                 else if (i==2 && j==0){
-                    dot=(Dot*)[CCBReader load:@"GreenDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot1"];
                 }
                 else if (i==2 && j==1){
-                    dot=(Dot*)[CCBReader load:@"WhiteDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot3"];
                 }
                 else if (i==2 && j==2){
-                    dot=(Dot*)[CCBReader load:@"GreenDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot2"];
                 }
                 [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2.2];
                 [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2.2];
@@ -143,34 +143,34 @@
     else if (self.number==3){
         self.userInteractionEnabled=NO;
         for (int i=0; i<3; i++) {
-            x=_dotMarginHorizontal-1;
+            x=_dotMarginHorizontal;
             for (int j=0; j<3; j++) {
                 if (i==0 && j==0) {
-                    dot=(Dot*)[CCBReader load:@"WhiteDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot3"];
                 }
                 else if (i==0 && j==1){
-                    dot=(Dot*)[CCBReader load:@"GreenDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot2"];
                 }
                 else if (i==0 && j==2){
-                    dot=(Dot*)[CCBReader load:@"BlueDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot1"];
                 }
                 else if (i==1 && j==0){
-                    dot=(Dot*)[CCBReader load:@"BlueDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot1"];
                 }
                 else if (i==1 && j==1){
-                    dot=(Dot*)[CCBReader load:@"BlueDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot1"];
                 }
                 else if (i==1 && j==2){
-                    dot=(Dot*)[CCBReader load:@"GreenDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot2"];
                 }
                 else if (i==2 && j==0){
-                    dot=(Dot*)[CCBReader load:@"WhiteDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot3"];
                 }
                 else if (i==2 && j==1){
-                    dot=(Dot*)[CCBReader load:@"WhiteDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot3"];
                 }
                 else if (i==2 && j==2){
-                    dot=(Dot*)[CCBReader load:@"WhiteDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot3"];
                 }
                 [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2.2];
                 [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2.2];
@@ -186,34 +186,34 @@
     }
     else if (self.number==4){
         for (int i=0; i<3; i++) {
-            x=_dotMarginHorizontal-1;
+            x=_dotMarginHorizontal;
             for (int j=0; j<3; j++) {
                 if (i==0 && j==0) {
-                    dot=(Dot*)[CCBReader load:@"BlueDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot1"];
                 }
                 else if (i==0 && j==1){
-                    dot=(Dot*)[CCBReader load:@"BlueDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot1"];
                 }
                 else if (i==0 && j==2){
-                    dot=(Dot*)[CCBReader load:@"WhiteDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot3"];
                 }
                 else if (i==1 && j==0){
-                    dot=(Dot*)[CCBReader load:@"GreenDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot2"];
                 }
                 else if (i==1 && j==1){
-                        dot=(Dot*)[CCBReader load:@"WhiteDot"];
+                        dot=(Dot*)[CCBReader load:@"Dot3"];
                 }
                 else if (i==1 && j==2){
-                    dot=(Dot*)[CCBReader load:@"WhiteDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot3"];
                 }
                 else if (i==2 && j==0){
-                    dot=(Dot*)[CCBReader load:@"GreenDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot2"];
                 }
                 else if (i==2 && j==1){
-                    dot=(Dot*)[CCBReader load:@"BlueDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot1"];
                 }
                 else if (i==2 && j==2){
-                    dot=(Dot*)[CCBReader load:@"WhiteDot"];
+                    dot=(Dot*)[CCBReader load:@"Dot3"];
                 }
                 [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2.2];
                 [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2.2];

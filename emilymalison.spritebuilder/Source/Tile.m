@@ -45,11 +45,11 @@ static const int TILE_SIZE=3;
     _tileColumnHeight=self.contentSize.height/3;
     _tileColumnWidth=self.contentSize.width/3;
     
-    _dotMarginHorizontal=_tileColumnWidth/TILE_SIZE;
-    _dotMarginVertical=_tileColumnHeight/TILE_SIZE;
+    _dotMarginHorizontal=_tileColumnWidth/2;
+    _dotMarginVertical=_tileColumnHeight/2;
     
-    float x=_dotMarginHorizontal-1;
-    float y=_dotMarginVertical-1;
+    float x=_dotMarginHorizontal;
+    float y=_dotMarginVertical;
     
     self.dotColorArray=[NSMutableArray array];
     self.tileArray=[NSMutableArray array];
@@ -60,12 +60,12 @@ static const int TILE_SIZE=3;
     for (int i=0; i<3; i++) {
         [self.dotColorArray addObject:[NSMutableArray array]];
         self.tileArray[i]=[NSMutableArray array];
-        x=_dotMarginHorizontal-1;
+        x=_dotMarginHorizontal;
         
         for (int j=0; j<3; j++) {
             int numberDot=arc4random()%3;
             if (numberDot==0) {
-                dot=(Dot*)[CCBReader load:@"BlueDot"];
+                dot=(Dot*)[CCBReader load:@"Dot1"];
                 dot.DotColor=blue;
                 [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2.2];
                 [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2.2];
@@ -75,10 +75,11 @@ static const int TILE_SIZE=3;
                 self.tileArray[i][j]=dot;
                 dot.dotX=i;
                 dot.dotY=j;
+                dot.match=NO;
                 [self.dotColorArray[i] addObject:[NSNumber numberWithInteger: dot.DotColor]];
             }
             else if(numberDot==1){
-                dot=(Dot*)[CCBReader load: @"GreenDot"];
+                dot=(Dot*)[CCBReader load: @"Dot2"];
                 dot.DotColor=green;
                 [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2.2];
                 [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2.2];
@@ -89,9 +90,10 @@ static const int TILE_SIZE=3;
                 self.tileArray[i][j]=dot;
                 dot.dotX=i;
                 dot.dotY=j;
+                dot.match=NO;
             }
             else if(numberDot==2){
-                dot=(Dot*)[CCBReader load: @"WhiteDot"];
+                dot=(Dot*)[CCBReader load: @"Dot3"];
                 dot.DotColor=white;
                 [dot setScaleX:(((_tileColumnWidth)/dot.contentSize.width))/2.2];
                 [dot setScaleY:(((_tileColumnHeight)/dot.contentSize.height))/2.2];
@@ -102,6 +104,7 @@ static const int TILE_SIZE=3;
                 self.tileArray[i][j]=dot;
                 dot.dotX=i;
                 dot.dotY=j;
+                dot.match=NO;
             }
             
             x+=_tileColumnWidth;
@@ -126,6 +129,7 @@ static const int TILE_SIZE=3;
         
         self.dotColorArray=[self rotateColorMatrix:self.dotColorArray];
         self.dotColorArrayCopy=self.dotColorArray;
+        self.tileArray=[self rotateColorMatrix:self.tileArray];
         
         [(Grid*)self.parent checkTile:self];
     }
@@ -150,6 +154,11 @@ static const int TILE_SIZE=3;
     self.dotColorArray=[self rotateColorMatrix:self.dotColorArray];
     self.dotColorArray=[self rotateColorMatrix:self.dotColorArray];
     self.dotColorArray=[self rotateColorMatrix:self.dotColorArray];
+    self.dotColorArrayCopy=self.dotColorArray;
+    
+    self.tileArray=[self rotateColorMatrix:self.tileArray];
+    self.tileArray=[self rotateColorMatrix:self.tileArray];
+    self.tileArray=[self rotateColorMatrix:self.tileArray];
     
     [(Grid*)self.parent checkVerticallyTile:self];
     [(Grid*)self.parent checkHorizontallyTile:self];
