@@ -50,7 +50,7 @@
 -(void)second{
     timeRemaining-=1;
     _timer.string= [NSString stringWithFormat:@"%d", timeRemaining];
-    if (timeRemaining==0) {
+    if (timeRemaining==50) {
         [myTimer invalidate];
         myTimer=nil;
         [self timerExpired];

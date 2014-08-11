@@ -82,7 +82,6 @@ static const int GRID_SIZE=3;
         }
     }
     if (tilesNotMoving==9 && falling==YES) {
-        falling=NO;
         [self tilesDoneFalling];
         if (self.timerExpired==YES && shuffling==NO) {
             CCNode *_node=self.parent;
@@ -90,12 +89,15 @@ static const int GRID_SIZE=3;
                 [(Gameplay*)_node.parent gameOver];
             } delay:.3];
         }
+        falling=NO;
     }
     else if (falling==NO){
         if (self.timerExpired==YES && shuffling==NO) {
             CCNode *_node=self.parent;
             [self scheduleBlock:^(CCTimer *timer) {
-                [(Gameplay*)_node.parent gameOver];
+                if (falling==NO){
+                    [(Gameplay*)_node.parent gameOver];
+                }
             } delay:.3];
         }
     }
@@ -316,7 +318,6 @@ static const int GRID_SIZE=3;
     }
     _totalScore=score;
     if (score>scoreCheck) {
-        //[self removeTiles];
         [NSTimer scheduledTimerWithTimeInterval:.7 target:self selector:@selector(removeTiles) userInfo:nil repeats:NO];
     }
     else if (afterFalling==NO){
