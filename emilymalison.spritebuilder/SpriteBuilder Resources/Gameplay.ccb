@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>30</integer>
+	<integer>31</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -1207,7 +1207,7 @@
 						<key>value</key>
 						<array>
 							<real>0.0</real>
-							<real>-400</real>
+							<real>-500</real>
 						</array>
 					</dict>
 					<dict>
@@ -2134,9 +2134,9 @@
 			</dict>
 			<dict>
 				<key>UUID</key>
-				<integer>16</integer>
+				<integer>30</integer>
 				<key>baseClass</key>
-				<string>CCNodeColor</string>
+				<string>CCNodeGradient</string>
 				<key>children</key>
 				<array/>
 				<key>customClass</key>
@@ -2218,24 +2218,56 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>color</string>
+						<string>startColor</string>
 						<key>type</key>
 						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<real>0.90196079015731812</real>
-							<real>0.90196079015731812</real>
-							<real>0.90196079015731812</real>
-							<real>0.89999997615814209</real>
+							<real>0.0</real>
+							<real>0.50196081399917603</real>
+							<real>1</real>
+							<real>0.94999998807907104</real>
 						</array>
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>opacity</string>
+						<string>startOpacity</string>
 						<key>type</key>
 						<string>Float</string>
 						<key>value</key>
-						<real>0.89999997615814209</real>
+						<real>0.94999998807907104</real>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>endColor</string>
+						<key>type</key>
+						<string>Color3</string>
+						<key>value</key>
+						<array>
+							<real>0.62915337085723877</real>
+							<real>0.77627497911453247</real>
+							<real>1</real>
+							<real>0.94999998807907104</real>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>endOpacity</string>
+						<key>type</key>
+						<string>Float</string>
+						<key>value</key>
+						<real>0.94999998807907104</real>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>vector</string>
+						<key>type</key>
+						<string>Point</string>
+						<key>value</key>
+						<array>
+							<real>0.0</real>
+							<real>-1</real>
+						</array>
 					</dict>
 				</array>
 			</dict>
@@ -2351,19 +2383,6 @@ Shuffling…</string>
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>color</string>
-						<key>type</key>
-						<string>Color3</string>
-						<key>value</key>
-						<array>
-							<real>0.0</real>
-							<real>0.0</real>
-							<real>0.0</real>
-							<real>1</real>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
 						<string>dimensions</string>
 						<key>type</key>
 						<string>Size</string>
@@ -2467,6 +2486,8 @@ Shuffling…</string>
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -3669,8 +3690,6 @@ press play.</string>
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>

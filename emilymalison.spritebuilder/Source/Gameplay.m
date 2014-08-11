@@ -50,7 +50,7 @@
 -(void)second{
     timeRemaining-=1;
     _timer.string= [NSString stringWithFormat:@"%d", timeRemaining];
-    if (timeRemaining==50) {
+    if (timeRemaining==0) {
         [myTimer invalidate];
         myTimer=nil;
         [self timerExpired];
@@ -96,6 +96,7 @@
     shufflingScreen.visible=NO;
     shufflingText.visible=NO;
     [_grid enableUserInteraction];
+    [_grid checkForMoves];
     self.shuffling=NO;
 }
 
