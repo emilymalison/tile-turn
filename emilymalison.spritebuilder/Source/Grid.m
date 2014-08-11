@@ -61,6 +61,7 @@ static const int GRID_SIZE=3;
     _newTileArray2=[NSMutableArray array];
     falling=NO;
     afterFalling=NO;
+    self.timerExpired=NO;
 }
 
 -(void)update:(CCTime)delta{
@@ -83,6 +84,12 @@ static const int GRID_SIZE=3;
     if (tilesNotMoving==9 && falling==YES) {
         falling=NO;
         [self tilesDoneFalling];
+        if (self.timerExpired==YES) {
+            CCNode *_node=self.parent;
+            [self scheduleBlock:^(CCTimer *timer) {
+                [(Gameplay*)_node.parent gameOver];
+            } delay:.3];
+        }
     }
 }
 

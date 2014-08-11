@@ -14,6 +14,7 @@
 -(void)timerExpired;
 -(void)noPossibleMatches;
 -(void)shufflingDone;
+-(void)gameOver;
 
 @property (nonatomic, assign) BOOL shuffling;
 

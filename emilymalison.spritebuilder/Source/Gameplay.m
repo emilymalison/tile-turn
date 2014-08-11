@@ -58,6 +58,9 @@
 }
 
 -(void)timerExpired{
+    _grid.timerExpired=YES;
+}
+-(void)gameOver{
     GameOver *gameover = (GameOver*)[CCBReader load:@"GameOver"];
     gameover.finalScore = _grid.totalScore;
     CCScene *gameoverScene = [CCScene node];

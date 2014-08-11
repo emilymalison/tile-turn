@@ -23,7 +23,7 @@
 
 //@property(nonatomic, strong)NSMutableArray *gridArray;
 
-
+@property (nonatomic, assign)BOOL timerExpired;
 @property(nonatomic, assign)int totalScore;
 
 @end
