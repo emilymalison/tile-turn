@@ -8,6 +8,7 @@
 
 #import "Tutorial.h"
 #import "TutorialTile.h"
+#import "Dot.h"
 
 @implementation Tutorial{
     TutorialTile *tileLeft;
@@ -48,15 +49,41 @@
 -(void)check{
     if (tileRight.rotationMeasure==1) {
         tileRight.rotationMeasure=0;
-        greatJob.visible=YES;
-        [greatJob.animationManager runAnimationsForSequenceNamed:(@"Animation")];
-        [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(resetAnimation) userInfo:nil repeats:NO];
+        Dot* dot1=tileLeft.tileArray[2][0];
+        Dot* dot2=tileLeft.tileArray[2][1];
+        Dot* dot3=tileLeft.tileArray[2][2];
+        Dot* dot4=tileRight.tileArray[2][0];
+        Dot* dot5=tileRight.tileArray[2][1];
+        [dot1.animationManager runAnimationsForSequenceNamed:(@"Animation")];
+        [dot2.animationManager runAnimationsForSequenceNamed:(@"Animation")];
+        [dot3.animationManager runAnimationsForSequenceNamed:(@"Animation")];
+        [dot4.animationManager runAnimationsForSequenceNamed:(@"Animation")];
+        [dot5.animationManager runAnimationsForSequenceNamed:(@"Animation")];
+        [self scheduleBlock:^(CCTimer *timer) {
+            [greatJob.animationManager runAnimationsForSequenceNamed:(@"Animation")];
+            [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(resetAnimation) userInfo:nil repeats:NO];
+            greatJob.visible=YES;
+        } delay:.4];
     }
     else if (tutorialTile4.rotationMeasure==3){
         tutorialTile4.rotationMeasure=0;
-        greatText.visible=YES;
-        [greatText.animationManager runAnimationsForSequenceNamed:(@"Animation")];
-        [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(resetSecondAnimation) userInfo:nil repeats:NO];
+        Dot* dot1=tutorialTile3.tileArray[2][0];
+        Dot* dot2=tutorialTile3.tileArray[2][1];
+        Dot* dot3=tutorialTile3.tileArray[2][2];
+        Dot* dot4=tutorialTile4.tileArray[2][0];
+        Dot* dot5=tutorialTile4.tileArray[2][1];
+        Dot* dot6=tutorialTile4.tileArray[2][2];
+        [dot1.animationManager runAnimationsForSequenceNamed:(@"Animation")];
+        [dot2.animationManager runAnimationsForSequenceNamed:(@"Animation")];
+        [dot3.animationManager runAnimationsForSequenceNamed:(@"Animation")];
+        [dot4.animationManager runAnimationsForSequenceNamed:(@"Animation")];
+        [dot5.animationManager runAnimationsForSequenceNamed:(@"Animation")];
+        [dot6.animationManager runAnimationsForSequenceNamed:(@"Animation")];
+        [self scheduleBlock:^(CCTimer *timer) {
+            greatText.visible=YES;
+            [greatText.animationManager runAnimationsForSequenceNamed:(@"Animation")];
+            [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(resetSecondAnimation) userInfo:nil repeats:NO];
+        } delay:.4];
     }
 }
 

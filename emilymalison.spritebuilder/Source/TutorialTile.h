@@ -12,6 +12,7 @@
 
 @property(nonatomic, assign)int number;
 @property(nonatomic, assign)int rotationMeasure;
+@property(nonatomic, strong)NSMutableArray* tileArray;
 
 -(void)setUpTutorialTile;
 @end
