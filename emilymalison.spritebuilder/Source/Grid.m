@@ -62,11 +62,17 @@ static const int GRID_SIZE=3;
     falling=NO;
     self.timerExpired=NO;
     tilesChecked=9;
+    
+    NSURL *turnSoundURL=[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"jingles_STEEL00" ofType:@"mp3"]];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)turnSoundURL, &matchSound);
 }
 
 -(void)update:(CCTime)delta{
     tilesNotMoving=0;
+    CCNode *_node=self.parent;
+    Gameplay* _gameplay=_node.parent;
     for (Tile* tile in self.children) {
+        tile.sound=_gameplay.sound;
         tile.tileX=round((tile.position.y/tile.contentSize.height)/2);
         tile.tileY=round((tile.position.x/tile.contentSize.width)/2);
         if (tile.tileX<=2) {
@@ -83,7 +89,7 @@ static const int GRID_SIZE=3;
     }
     if (tilesNotMoving==9 && falling==YES) {
         [self tilesDoneFalling];
-        if (self.timerExpired==YES && shuffling==NO) {
+        if (self.timerExpired==YES && shuffling==NO && tilesChecked==9) {
             CCNode *_node=self.parent;
             [self scheduleBlock:^(CCTimer *timer) {
                 [(Gameplay*)_node.parent gameOver];
@@ -91,7 +97,7 @@ static const int GRID_SIZE=3;
         }
     }
     else if (falling==NO){
-        if (self.timerExpired==YES && shuffling==NO) {
+        if (self.timerExpired==YES && shuffling==NO && tilesChecked==9) {
             CCNode *_node=self.parent;
             [self scheduleBlock:^(CCTimer *timer) {
                 if (falling==NO){
@@ -404,6 +410,7 @@ static const int GRID_SIZE=3;
                         if (matchDot.match==YES) {
                             [self scheduleBlock:^(CCTimer *timer) {
                                 [self dotAnimation:matchDot];
+                                AudioServicesPlaySystemSound(matchSound);
                             } delay:.5];
                         }
                     }

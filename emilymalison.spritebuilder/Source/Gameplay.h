@@ -17,5 +17,6 @@
 -(void)gameOver;
 
 @property (nonatomic, assign) BOOL shuffling;
+@property (nonatomic, assign) BOOL sound;
 
 @end

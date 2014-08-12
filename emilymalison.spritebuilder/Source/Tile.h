@@ -25,5 +25,6 @@
 @property(nonatomic, assign)BOOL match;
 @property(nonatomic, assign)BOOL checking;
 @property(nonatomic, assign)BOOL tutorialTile;
+@property(nonatomic, assign)BOOL sound;
 
 @end

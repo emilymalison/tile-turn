@@ -29,6 +29,7 @@
     CCNode *retry;
     CCNode *play;
     CCNode *home;
+    CCButton *soundButton;
 }
 
 #pragma mark - Timer
@@ -45,6 +46,8 @@
     
     [self schedule:@selector(updateScore) interval:0.5f];
     self.shuffling=NO;
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    self.sound=[defaults objectForKey:@"sound"];
 }
 
 

@@ -10,7 +10,9 @@
 #import "Tile.h"
 @class Gameplay;
 
-@interface Grid : CCNodeColor
+@interface Grid : CCNodeColor{
+    SystemSoundID matchSound;
+}
 
 -(void)setUpGrid;
 -(void)checkTile:(Tile*)rotatedTile;

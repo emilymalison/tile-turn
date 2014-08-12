@@ -15,6 +15,7 @@
 		4FA7740A196C793800B78702 /* Grid.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FA77409196C793800B78702 /* Grid.m */; };
 		4FF8D5DE19993ED30074BF1D /* Dot.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FF8D5DD19993ED30074BF1D /* Dot.m */; };
 		4FF8D5E3199A68850074BF1D /* cardSlide1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4FF8D5E2199A68840074BF1D /* cardSlide1.mp3 */; };
+		4FF8D5E5199A8F410074BF1D /* jingles_STEEL00.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4FF8D5E4199A8F410074BF1D /* jingles_STEEL00.mp3 */; };
 		8392007A18EE8E3300B6C429 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8392007918EE8E3300B6C429 /* GLKit.framework */; };
 		B71F5911188484E7003F4D28 /* iPad-old.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5907188484E7003F4D28 /* iPad-old.png */; };
 		B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5908188484E7003F4D28 /* iPad-old@2x.png */; };
@@ -79,6 +80,7 @@
 		4FF8D5DC19993ED30074BF1D /* Dot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dot.h; path = Source/Dot.h; sourceTree = "<group>"; };
 		4FF8D5DD19993ED30074BF1D /* Dot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Dot.m; path = Source/Dot.m; sourceTree = "<group>"; };
 		4FF8D5E2199A68840074BF1D /* cardSlide1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cardSlide1.mp3; sourceTree = "<group>"; };
+		4FF8D5E4199A8F410074BF1D /* jingles_STEEL00.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = jingles_STEEL00.mp3; sourceTree = "<group>"; };
 		8392007918EE8E3300B6C429 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		B71F5907188484E7003F4D28 /* iPad-old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old.png"; path = "Icons/iPad-old.png"; sourceTree = "<group>"; };
 		B71F5908188484E7003F4D28 /* iPad-old@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old@2x.png"; path = "Icons/iPad-old@2x.png"; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				4FF8D5E2199A68840074BF1D /* cardSlide1.mp3 */,
+				4FF8D5E4199A8F410074BF1D /* jingles_STEEL00.mp3 */,
 				B737893C1807616C0076A88C /* Source */,
 				B77F1B4617B978D7009739AE /* Resources */,
 				9222E2B918734FF800A246C7 /* libs */,
@@ -337,6 +340,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B71F5919188484E7003F4D28 /* Settings.png in Resources */,
+				4FF8D5E5199A8F410074BF1D /* jingles_STEEL00.mp3 in Resources */,
 				B7378978180762440076A88C /* Default@2x.png in Resources */,
 				B71F5914188484E7003F4D28 /* iPad@2x.png in Resources */,
 				B71F5913188484E7003F4D28 /* iPad.png in Resources */,

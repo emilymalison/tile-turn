@@ -11,8 +11,6 @@
 #import "Dot.h"
 #import "OALSimpleAudio.h"
 
-static const int TILE_SIZE=3;
-
 @implementation Tile{
     CGFloat _dotMarginHorizontal;
     CGFloat _dotMarginVertical;
@@ -128,6 +126,9 @@ static const int TILE_SIZE=3;
         self.physicsBody.collisionMask=@[];
         canTouch = NO;
         CCActionRotateBy *rotateTile= [CCActionRotateBy actionWithDuration:.4 angle:90];
+        /*if (self.sound==YES) {
+            AudioServicesPlaySystemSound(turnSound);
+        }*/
         AudioServicesPlaySystemSound(turnSound);
         CCActionCallBlock *resetTouch = [CCActionCallBlock actionWithBlock:^{
             canTouch= YES;
