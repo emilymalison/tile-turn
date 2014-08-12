@@ -115,7 +115,9 @@ static const int GRID_SIZE=3;
         for (int y=0; y<GRID_SIZE; y++) {
             Tile *tile=_gridArray[x][y];
             tilesChecked+=1;
-            [self checkTile:tile];
+            if (tile.remove==NO) {
+                [self checkTile:tile];
+            }
         }
     }
     [self checkForMoves];

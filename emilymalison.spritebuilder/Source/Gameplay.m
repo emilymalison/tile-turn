@@ -46,6 +46,10 @@
     
     [self schedule:@selector(updateScore) interval:0.5f];
     self.shuffling=NO;
+    
+    NSURL *turnSoundURL=[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"zap1" ofType:@"mp3"]];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)turnSoundURL, &timerSound);
+    
     NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
     self.sound=[defaults objectForKey:@"sound"];
 }
@@ -56,12 +60,20 @@
     _timer.string= [NSString stringWithFormat:@"%d", timeRemaining];
     if (timeRemaining==10) {
         [_timer.animationManager runAnimationsForSequenceNamed:@"Animation"];
+        [self playTimerSound];
     }
     if (timeRemaining==0) {
         [_timer.animationManager runAnimationsForSequenceNamed:@"Default Timeline"];
         [myTimer invalidate];
         myTimer=nil;
         [self timerExpired];
+    }
+}
+
+-(void)playTimerSound{
+    AudioServicesPlaySystemSound(timerSound);
+    if (timeRemaining>0) {
+        [NSTimer timerWithTimeInterval:.9 target:self selector:@selector(playTimerSound) userInfo:nil repeats:NO];
     }
 }
 
