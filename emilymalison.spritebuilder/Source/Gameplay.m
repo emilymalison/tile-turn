@@ -34,7 +34,8 @@
 #pragma mark - Timer
 
 -(void)onEnter{
-    [super onEnter];    
+    
+    [super onEnter];
     _gameOver.visible=NO;
     
     _physicsNode.collisionDelegate = self;

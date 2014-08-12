@@ -8,7 +8,9 @@
 
 #import "CCNode.h"
 
-@interface Tile: CCNode
+@interface Tile: CCNode{
+    SystemSoundID turnSound;
+}
 
 -(void)rotateBackwards;
 -(NSMutableArray*)rotateColorMatrix:(NSMutableArray*)matrix;

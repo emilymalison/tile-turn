@@ -60,7 +60,6 @@ static const int GRID_SIZE=3;
     _newTileArray1=[NSMutableArray array];
     _newTileArray2=[NSMutableArray array];
     falling=NO;
-    afterFalling=NO;
     self.timerExpired=NO;
 }
 
@@ -89,7 +88,6 @@ static const int GRID_SIZE=3;
                 [(Gameplay*)_node.parent gameOver];
             } delay:.3];
         }
-        falling=NO;
     }
     else if (falling==NO){
         if (self.timerExpired==YES && shuffling==NO) {
@@ -104,7 +102,7 @@ static const int GRID_SIZE=3;
 }
 
 -(void)tilesDoneFalling{
-    //afterFalling=YES;
+    falling=NO;
     for (int x=0; x<GRID_SIZE; x++) {
         for (int y=0; y<GRID_SIZE; y++) {
             Tile *tile=_gridArray[x][y];
@@ -390,6 +388,7 @@ static const int GRID_SIZE=3;
     }
     _totalScore=score;
     if (score>scoreCheck) {
+        [self disableUserInteraction];
        for (Tile* toBeRemoved in self.children){
             if (toBeRemoved.remove==YES) {
                 [self scheduleBlock:^(CCTimer *timer) {
@@ -408,7 +407,7 @@ static const int GRID_SIZE=3;
             }
         }
     }
-    else if (afterFalling==NO){
+    else if (score==scoreCheck && falling==NO){
         [self enableUserInteraction];
     }
 }
@@ -453,7 +452,6 @@ static const int GRID_SIZE=3;
                 if ([self.children containsObject:tile]) {
                     [self removeChild:tile];
                     [self scheduleBlock:^(CCTimer *timer) {
-                        falling=YES;
                     } delay:.5];
                 }
                 
@@ -489,6 +487,7 @@ static const int GRID_SIZE=3;
                             newTile.physicsBody.collisionMask=nil;
                             newTile.physicsBody.affectedByGravity=YES;
                             newTile.visible=YES;
+                            falling=YES;
                         } delay:.2];
                     }
                     [_newTileArray0 addObject:newTile];
@@ -511,6 +510,7 @@ static const int GRID_SIZE=3;
                             newTile.physicsBody.collisionMask=nil;
                             newTile.physicsBody.affectedByGravity=YES;
                             newTile.visible=YES;
+                            falling=YES;
                         } delay:.2];
                     }
                     [_newTileArray1 addObject:newTile];
@@ -532,6 +532,7 @@ static const int GRID_SIZE=3;
                             newTile.physicsBody.collisionMask=nil;
                             newTile.physicsBody.affectedByGravity=YES;
                             newTile.visible=YES;
+                            falling=YES;
                         } delay:.2];
                     }
                     [_newTileArray2 addObject:newTile];

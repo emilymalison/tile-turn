@@ -9,6 +9,7 @@
 #import "Tile.h"
 #import "Grid.h"
 #import "Dot.h"
+#import "OALSimpleAudio.h"
 
 static const int TILE_SIZE=3;
 
@@ -21,13 +22,19 @@ static const int TILE_SIZE=3;
     BOOL canTouch;
     CCSprite *_tile;
     //Tile *tutorialTile;
+    //OALSimpleAudio *audio;
 }
 
 - (void)onEnter
 {
     [super onEnter];
     [self setUpTile];
-
+    
+    NSURL *turnSoundURL=[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"cardSlide1" ofType:@"mp3"]];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)turnSoundURL, &turnSound);
+    
+    //audio = [OALSimpleAudio sharedInstance];
+    //[audio preloadEffect:@"cardSlide1.mp3"];
     
     self.userInteractionEnabled = YES;
     canTouch = YES;
@@ -121,6 +128,7 @@ static const int TILE_SIZE=3;
         self.physicsBody.collisionMask=@[];
         canTouch = NO;
         CCActionRotateBy *rotateTile= [CCActionRotateBy actionWithDuration:.4 angle:90];
+        AudioServicesPlaySystemSound(turnSound);
         CCActionCallBlock *resetTouch = [CCActionCallBlock actionWithBlock:^{
             canTouch= YES;
             self.physicsBody.collisionMask = nil;
