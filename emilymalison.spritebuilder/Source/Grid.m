@@ -40,7 +40,7 @@ static const int GRID_SIZE=3;
     NSTimer *secondIndicateTimer;
     BOOL newGrid;
     BOOL afterFalling;
-
+    int tilesChecked;
 }
 
 - (void)onEnter
@@ -61,6 +61,7 @@ static const int GRID_SIZE=3;
     _newTileArray2=[NSMutableArray array];
     falling=NO;
     self.timerExpired=NO;
+    tilesChecked=9;
 }
 
 -(void)update:(CCTime)delta{
@@ -102,10 +103,12 @@ static const int GRID_SIZE=3;
 }
 
 -(void)tilesDoneFalling{
+    tilesChecked=0;
     falling=NO;
     for (int x=0; x<GRID_SIZE; x++) {
         for (int y=0; y<GRID_SIZE; y++) {
             Tile *tile=_gridArray[x][y];
+            tilesChecked+=1;
             [self checkTile:tile];
         }
     }
@@ -388,6 +391,7 @@ static const int GRID_SIZE=3;
     }
     _totalScore=score;
     if (score>scoreCheck) {
+        tilesChecked=0;
         [self disableUserInteraction];
        for (Tile* toBeRemoved in self.children){
             if (toBeRemoved.remove==YES) {
@@ -407,7 +411,7 @@ static const int GRID_SIZE=3;
             }
         }
     }
-    else if (score==scoreCheck && falling==NO){
+    else if (score==scoreCheck && falling==NO && tilesChecked==9){
         [self enableUserInteraction];
     }
 }
