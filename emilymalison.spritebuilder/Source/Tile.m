@@ -126,10 +126,9 @@
         self.physicsBody.collisionMask=@[];
         canTouch = NO;
         CCActionRotateBy *rotateTile= [CCActionRotateBy actionWithDuration:.4 angle:90];
-        /*if (self.sound==YES) {
+        if (self.sound==YES) {
             AudioServicesPlaySystemSound(turnSound);
-        }*/
-        AudioServicesPlaySystemSound(turnSound);
+        }
         CCActionCallBlock *resetTouch = [CCActionCallBlock actionWithBlock:^{
             canTouch= YES;
             self.physicsBody.collisionMask = nil;

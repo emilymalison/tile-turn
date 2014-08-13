@@ -18,8 +18,16 @@
     [super onEnter];
     NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
     if ([defaults objectForKey:@"sound"]==nil) {
-        [defaults setBool:YES forKey:@"sound"];
+        [defaults setObject:[NSNumber numberWithBool:YES] forKey:@"sound"];
         [defaults synchronize];
+    }
+    else if ([[defaults objectForKey:@"sound"] boolValue]==YES) {
+        soundOnButton.visible=YES;
+        soundOffButton.visible=NO;
+    }
+    else if ([[defaults objectForKey:@"sound"] boolValue]==NO) {
+        soundOffButton.visible=YES;
+        soundOnButton.visible=NO;
     }
 }
 -(void) startGame{
@@ -44,14 +52,14 @@
 
 -(void)soundChange{
     NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
-    if ([defaults objectForKey:@"sound"]==YES) {
-        [defaults setBool:NO forKey:@"sound"];
+    if ([[defaults objectForKey:@"sound"] boolValue]==YES) {
+        [defaults setObject:[NSNumber numberWithBool:NO] forKey:@"sound"];
         [defaults synchronize];
         soundOnButton.visible=NO;
         soundOffButton.visible=YES;
     }
-    if ([defaults objectForKey:@"sound"]==NO) {
-        [defaults setBool:YES forKey:@"sound"];
+    else if ([[defaults objectForKey:@"sound"] boolValue]==NO) {
+        [defaults setObject:[NSNumber numberWithBool:YES] forKey:@"sound"];
         [defaults synchronize];
         soundOffButton.visible=NO;
         soundOnButton.visible=YES;

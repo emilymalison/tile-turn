@@ -63,14 +63,14 @@ static const int GRID_SIZE=3;
     self.timerExpired=NO;
     tilesChecked=9;
     
-    NSURL *turnSoundURL=[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"jingles_STEEL00" ofType:@"mp3"]];
+    NSURL *turnSoundURL=[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"jingles_PIZZA00" ofType:@"mp3"]];
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)turnSoundURL, &matchSound);
 }
 
 -(void)update:(CCTime)delta{
     tilesNotMoving=0;
     CCNode *_node=self.parent;
-    Gameplay* _gameplay=_node.parent;
+    Gameplay* _gameplay=(Gameplay*)_node.parent;
     for (Tile* tile in self.children) {
         tile.sound=_gameplay.sound;
         tile.tileX=round((tile.position.y/tile.contentSize.height)/2);
@@ -412,7 +412,9 @@ static const int GRID_SIZE=3;
                         if (matchDot.match==YES) {
                             [self scheduleBlock:^(CCTimer *timer) {
                                 [self dotAnimation:matchDot];
-                                AudioServicesPlaySystemSound(matchSound);
+                                if (toBeRemoved.sound==YES) {
+                                    AudioServicesPlaySystemSound(matchSound);
+                                }
                             } delay:.5];
                         }
                     }
@@ -700,6 +702,7 @@ static const int GRID_SIZE=3;
 #pragma mark - Checking For Possible Moves
 
 -(void)checkForMoves{
+    possibleMatch=NO;
     _tileMatchArray=[NSMutableArray array];
      for (int x=0; x<GRID_SIZE; x++) {
         for (int y=0; y<GRID_SIZE; y++){
@@ -818,7 +821,7 @@ static const int GRID_SIZE=3;
             }
         }
     }
-    if (possibleMatch==NO) {
+    if (possibleMatch==NO || [_tileMatchArray count]==0) {
         NSLog(@"no possible matches");
         shuffling=YES;
         if (newGrid==NO) {
@@ -826,7 +829,7 @@ static const int GRID_SIZE=3;
             [(Gameplay*)_node.parent noPossibleMatches];
             shuffling=YES;
             [self setUpGrid];
-            shufflingTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(resetShuffling) userInfo:nil repeats:NO];
+            shufflingTimer=[NSTimer scheduledTimerWithTimeInterval:.7 target:self selector:@selector(resetShuffling) userInfo:nil repeats:NO];
         }
         else if (newGrid==YES){
             NSLog(@"no possible matches on new grid");
