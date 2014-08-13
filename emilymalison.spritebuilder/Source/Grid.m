@@ -428,6 +428,7 @@ static const int GRID_SIZE=3;
     }
     _totalScore=score;
     if (score>scoreCheck) {
+        [indicateTimer invalidate];
         tilesChecked=0;
         [self disableUserInteraction];
        for (Tile* toBeRemoved in self.children){
@@ -850,7 +851,7 @@ static const int GRID_SIZE=3;
             }
         }
     }
-    if ([_tileMatchArray count]==0) {
+    if (possibleMatch==NO || [_tileMatchArray count]==0) {
         NSLog(@"no possible matches");
         shuffling=YES;
         if (newGrid==NO) {
@@ -866,7 +867,7 @@ static const int GRID_SIZE=3;
         }
     }
     
-    else if ([_tileMatchArray count]>0){
+    else if (possibleMatch==YES || [_tileMatchArray count]>0){
         possibleMatch=NO;
         [indicateTimer invalidate];
         indicatedTile=[_tileMatchArray objectAtIndex:(arc4random()% [_tileMatchArray count])];
@@ -889,7 +890,7 @@ static const int GRID_SIZE=3;
 -(void)indicateMove{
     [indicatedTile.animationManager runAnimationsForSequenceNamed:(@"Animation")];
     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(resetAnimation) userInfo:nil repeats:NO];
-    indicateTimer=[NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(indicateMove) userInfo:nil repeats:NO];
+    indicateTimer=[NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(indicateMove) userInfo:nil repeats:NO];
 }
 
 -(void)resetAnimation{

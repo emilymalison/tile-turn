@@ -90,7 +90,7 @@
         [_timer.animationManager runAnimationsForSequenceNamed:@"Default Timeline"];
         [myTimer invalidate];
         myTimer=nil;
-        //[self timerExpired];
+        [self timerExpired];
     }
 }
 
