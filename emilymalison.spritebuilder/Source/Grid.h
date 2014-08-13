@@ -27,5 +27,6 @@
 
 @property (nonatomic, assign)BOOL timerExpired;
 @property(nonatomic, assign)int totalScore;
+@property(nonatomic, assign)BOOL pause;
 
 @end

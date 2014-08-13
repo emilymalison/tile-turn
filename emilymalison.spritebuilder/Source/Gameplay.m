@@ -34,6 +34,20 @@
 
 #pragma mark - Timer
 
+/*-(void)didLoadFromCCB{
+    _physicsNode.collisionDelegate = self;
+    myTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(second) userInfo:nil repeats:YES];
+
+    timeRemaining=60;
+    
+    [self schedule:@selector(updateScore) interval:0.5f];
+    self.shuffling=NO;
+    
+    NSURL *timerSoundURL=[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"zap2" ofType:@"mp3"]];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)timerSoundURL, &timerSound);
+    
+}*/
+
 -(void)onEnter{
     
     [super onEnter];
@@ -56,15 +70,21 @@
 }
 
 
+
+
 -(void)second{
     timeRemaining-=1;
     _timer.string= [NSString stringWithFormat:@"%d", timeRemaining];
     if (timeRemaining==10) {
         [_timer.animationManager runAnimationsForSequenceNamed:@"Animation"];
-        AudioServicesPlaySystemSound(timerSound);
+        if (self.sound==YES) {
+            AudioServicesPlaySystemSound(timerSound);
+        }
     }
     else if (timeRemaining<10 && timeRemaining>0){
-        AudioServicesPlaySystemSound(timerSound);
+        if (self.sound==YES) {
+            AudioServicesPlaySystemSound(timerSound);
+        }
     }
     else if (timeRemaining==0) {
         [_timer.animationManager runAnimationsForSequenceNamed:@"Default Timeline"];
@@ -129,6 +149,11 @@
     home.visible=YES;
     [myTimer invalidate];
     [_grid disableUserInteraction];
+    _grid.pause=YES;
+    
+    //CCScene *pauseScene = [CCBReader loadAsScene:@"PauseScene"];
+        
+    //[[CCDirector sharedDirector] pushScene:pauseScene];
 }
 
 -(void)continuePlay{
@@ -142,6 +167,7 @@
     continuePlayButton.visible=NO;
     myTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(second) userInfo:nil repeats:YES];
     [_grid enableUserInteraction];
+    _grid.pause=NO;
 }
 
 -(void)loadMenu{

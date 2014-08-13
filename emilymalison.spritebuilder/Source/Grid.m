@@ -43,9 +43,27 @@ static const int GRID_SIZE=3;
     int tilesChecked;
 }
 
+/*-(void)didLoadFromCCB{
+    [self setUpGrid];
+    
+    possibleMatch=NO;
+    moveIndicated=NO;
+    _newTileArray=[NSMutableArray array];
+    
+    shuffling=NO;
+    _newTileArray0=[NSMutableArray array];
+    _newTileArray1=[NSMutableArray array];
+    _newTileArray2=[NSMutableArray array];
+    falling=NO;
+    self.timerExpired=NO;
+    tilesChecked=9;
+    
+    NSURL *turnSoundURL=[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"jingles_PIZZA00" ofType:@"mp3"]];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)turnSoundURL, &matchSound);
+}*/
+
 - (void)onEnter
 {
-    
     [super onEnter];
     possibleMatch=NO;
     
@@ -123,7 +141,7 @@ static const int GRID_SIZE=3;
     [self checkForMoves];
 }
 
-
+#pragma mark - UI and Gravity
 -(void)disableUserInteraction{
     for (int x=0; x<GRID_SIZE; x++) {
         for (int y=0; y<GRID_SIZE; y++) {
@@ -142,6 +160,7 @@ static const int GRID_SIZE=3;
         }
     }
 }
+
 
 #pragma mark - Filling Grid with Tiles
 
