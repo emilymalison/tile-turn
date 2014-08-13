@@ -47,7 +47,7 @@
     [self schedule:@selector(updateScore) interval:0.5f];
     self.shuffling=NO;
     
-    NSURL *timerSoundURL=[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"jingles_STEEL00" ofType:@"mp3"]];
+    NSURL *timerSoundURL=[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"zap2" ofType:@"mp3"]];
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)timerSoundURL, &timerSound);
     
     NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
@@ -61,22 +61,16 @@
     _timer.string= [NSString stringWithFormat:@"%d", timeRemaining];
     if (timeRemaining==10) {
         [_timer.animationManager runAnimationsForSequenceNamed:@"Animation"];
-        if (self.sound==YES) {
-            [self playTimerSound];
-        }
+        AudioServicesPlaySystemSound(timerSound);
     }
-    if (timeRemaining==0) {
+    else if (timeRemaining<10 && timeRemaining>0){
+        AudioServicesPlaySystemSound(timerSound);
+    }
+    else if (timeRemaining==0) {
         [_timer.animationManager runAnimationsForSequenceNamed:@"Default Timeline"];
         [myTimer invalidate];
         myTimer=nil;
         [self timerExpired];
-    }
-}
-
--(void)playTimerSound{
-    AudioServicesPlaySystemSound(timerSound);
-    if (timeRemaining>0) {
-        [NSTimer timerWithTimeInterval:.9 target:self selector:@selector(playTimerSound) userInfo:nil repeats:NO];
     }
 }
 
