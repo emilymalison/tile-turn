@@ -100,6 +100,7 @@
 
 -(void)nextScreen{
     if (numberScene==1) {
+        [MGWU logEvent:@"completedtutorialpage1" withParams:nil];
         continueButton.visible=NO;
         continueBackground.visible=NO;
         newScreen.visible=YES;
@@ -109,6 +110,7 @@
         numberScene+=1;
     }
     else if (numberScene==2){
+        [MGWU logEvent:@"completedtutorialpage2" withParams:nil];
         continueButton.visible=NO;
         continueBackground.visible=NO;
         tutorialTile3.visible=NO;
@@ -128,6 +130,7 @@
 }
 
 -(void) startGame{
+    [MGWU logEvent:@"completedtutorial" withParams:nil];
     CCScene *gameplayScene=[CCBReader loadAsScene:@"Gameplay"];
     [[CCDirector sharedDirector] replaceScene:gameplayScene];
 }

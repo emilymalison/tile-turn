@@ -83,6 +83,8 @@ static const int GRID_SIZE=3;
     
     NSURL *turnSoundURL=[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"jingles_PIZZA00" ofType:@"mp3"]];
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)turnSoundURL, &matchSound);
+    
+    self.pause=NO;
 }
 
 -(void)update:(CCTime)delta{
@@ -149,7 +151,15 @@ static const int GRID_SIZE=3;
             tile.userInteractionEnabled=NO;
         }
     }
-    [indicateTimer invalidate];
+    if (shuffling==YES) {
+        [indicateTimer invalidate];
+    }
+    else if (self.pause==YES){
+        [indicateTimer invalidate];
+    }
+    else if (self.timerExpired==YES){
+        [indicateTimer invalidate];
+    }
 }
 
 -(void)enableUserInteraction{
@@ -840,7 +850,7 @@ static const int GRID_SIZE=3;
             }
         }
     }
-    if (possibleMatch==NO || [_tileMatchArray count]==0) {
+    if ([_tileMatchArray count]==0) {
         NSLog(@"no possible matches");
         shuffling=YES;
         if (newGrid==NO) {
@@ -856,11 +866,11 @@ static const int GRID_SIZE=3;
         }
     }
     
-    else if (possibleMatch==YES){
+    else if ([_tileMatchArray count]>0){
         possibleMatch=NO;
         [indicateTimer invalidate];
         indicatedTile=[_tileMatchArray objectAtIndex:(arc4random()% [_tileMatchArray count])];
-        indicateTimer=[NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(indicateMove) userInfo:nil repeats:NO];
+        indicateTimer=[NSTimer scheduledTimerWithTimeInterval:7 target:self selector:@selector(indicateMove) userInfo:nil repeats:NO];
         if (newGrid==YES) {
             newGrid=NO;
             self.visible=YES;
