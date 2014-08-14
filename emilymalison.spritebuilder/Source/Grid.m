@@ -236,6 +236,7 @@ static const int GRID_SIZE=3;
     int match;
     BOOL firstDot;
     int scoreCheck=score;
+    int scoreAddOn=0;
     for (int j=0; j<3; j++) {
         match=1;
         firstDot=true;
@@ -252,7 +253,7 @@ static const int GRID_SIZE=3;
                                     Tile* tileBefore=_gridArray[currentTile.tileX][currentTile.tileY-1];
                                     tileBefore.remove=true;
                                     if (match==5) {
-                                        score+=5;
+                                        scoreAddOn+=5;
                                         Dot* dot1=currentTile.tileArray[j][k];
                                         dot1.match=YES;
                                         if (k==2) {
@@ -279,7 +280,7 @@ static const int GRID_SIZE=3;
                                     else if (match>5){
                                         Dot* dot6=currentTile.tileArray[j][k];
                                         dot6.match=YES;
-                                        score+=1;
+                                        scoreAddOn+=1;
                                     }
                                 }
 
@@ -296,7 +297,7 @@ static const int GRID_SIZE=3;
                                     currentTile.remove=true;
                                     tileBefore.remove=true;
                                     if (match==5) {
-                                        score+=5;
+                                        scoreAddOn+=5;
                                         Tile* tileBeforeBefore=_gridArray[currentTile.tileX][currentTile.tileY-2];
                                         tileBeforeBefore.remove=TRUE;
                                         Dot* dot1=currentTile.tileArray[j][k];
@@ -315,7 +316,7 @@ static const int GRID_SIZE=3;
                                     else if (match>5){
                                         Dot* dot6=currentTile.tileArray[j][k];
                                         dot6.match=YES;
-                                        score+=1;
+                                        scoreAddOn+=1;
                                     }
                                 }
                             }
@@ -348,7 +349,7 @@ static const int GRID_SIZE=3;
                                     Tile* tileBefore=_gridArray[currentTile.tileX-1][currentTile.tileY];
                                     tileBefore.remove=true;
                                     if (match==5) {
-                                        score+=5;
+                                        scoreAddOn+=5;
                                         Dot* dot1=currentTile.tileArray[k][j];
                                         dot1.match=YES;
                                         if (k==2) {
@@ -375,7 +376,7 @@ static const int GRID_SIZE=3;
                                     else if (match>5){
                                         Dot* dot6=currentTile.tileArray[k][j];
                                         dot6.match=YES;
-                                        score+=1;
+                                        scoreAddOn+=1;
                                     }
                                 }
                             }
@@ -393,7 +394,7 @@ static const int GRID_SIZE=3;
                                     if (match==5) {
                                         Tile* tileBeforeBefore=_gridArray[currentTile.tileX-2][currentTile.tileY];
                                         tileBeforeBefore.remove=TRUE;
-                                        score+=5;
+                                        scoreAddOn+=5;
                                         Dot* dot1=currentTile.tileArray[k][j];
                                         dot1.match=YES;
                                         if (k==0){
@@ -410,7 +411,7 @@ static const int GRID_SIZE=3;
                                     else if (match>5){
                                         Dot* dot6=currentTile.tileArray[k][j];
                                         dot6.match=YES;
-                                        score+=1;
+                                        scoreAddOn+=1;
                                     }
                                 }
                             }
@@ -426,8 +427,7 @@ static const int GRID_SIZE=3;
             }
         }
     }
-    _totalScore=score;
-    if (score>scoreCheck) {
+    if (scoreAddOn>0) {
         [indicateTimer invalidate];
         tilesChecked=0;
         [self disableUserInteraction];
@@ -451,8 +451,15 @@ static const int GRID_SIZE=3;
                 }
             }
         }
+        if (scoreAddOn>9) {
+            score=score+(2*scoreAddOn);
+        }
+        else{
+            score=score+scoreAddOn;
+        }
+        _totalScore=score;
     }
-    else if (score==scoreCheck && falling==NO && tilesChecked==9){
+    else if (scoreAddOn==0 && falling==NO && tilesChecked==9){
         [self enableUserInteraction];
     }
 }

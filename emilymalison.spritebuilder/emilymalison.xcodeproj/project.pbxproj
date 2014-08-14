@@ -94,7 +94,6 @@
 		4FA7A002199BF1D6005ACCDC /* PauseScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FA7A001199BF1D6005ACCDC /* PauseScene.m */; };
 		4FCB735E199CFD5400502609 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FCB735D199CFD5400502609 /* Images-2.xcassets */; };
 		4FF6D79E199CEEDF00F90D9C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FF6D79D199CEEDF00F90D9C /* Images.xcassets */; };
-		4FF6D7A0199CEF3300F90D9C /* AppIcon.psd in Resources */ = {isa = PBXBuildFile; fileRef = 4FF6D79F199CEF3300F90D9C /* AppIcon.psd */; };
 		4FF8D5DE19993ED30074BF1D /* Dot.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FF8D5DD19993ED30074BF1D /* Dot.m */; };
 		4FF8D5EB199A95DD0074BF1D /* cardSlide1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4FF8D5EA199A95DD0074BF1D /* cardSlide1.mp3 */; };
 		8392007A18EE8E3300B6C429 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8392007918EE8E3300B6C429 /* GLKit.framework */; };
@@ -240,7 +239,6 @@
 		4FA7A001199BF1D6005ACCDC /* PauseScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PauseScene.m; path = Source/PauseScene.m; sourceTree = "<group>"; };
 		4FCB735D199CFD5400502609 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = "Images-2.xcassets"; path = "emilymalison/Images-2.xcassets"; sourceTree = SOURCE_ROOT; };
 		4FF6D79D199CEEDF00F90D9C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = emilymalison/Images.xcassets; sourceTree = SOURCE_ROOT; };
-		4FF6D79F199CEF3300F90D9C /* AppIcon.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppIcon.psd; sourceTree = "<group>"; };
 		4FF8D5DC19993ED30074BF1D /* Dot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dot.h; path = Source/Dot.h; sourceTree = "<group>"; };
 		4FF8D5DD19993ED30074BF1D /* Dot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Dot.m; path = Source/Dot.m; sourceTree = "<group>"; };
 		4FF8D5EA199A95DD0074BF1D /* cardSlide1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cardSlide1.mp3; sourceTree = "<group>"; };
@@ -461,7 +459,6 @@
 		B77F1B2517B978D7009739AE = {
 			isa = PBXGroup;
 			children = (
-				4FF6D79F199CEF3300F90D9C /* AppIcon.psd */,
 				4FA79F64199BC869005ACCDC /* zap2.mp3 */,
 				4F91AD7A199BA822007955BA /* jingles_PIZZA00.mp3 */,
 				4FF8D5EA199A95DD0074BF1D /* cardSlide1.mp3 */,
@@ -679,7 +676,6 @@
 				4FA79FCC199BCE6B005ACCDC /* hipmobsend_field.png in Resources */,
 				B71F5917188484E7003F4D28 /* iPhone.png in Resources */,
 				4FA79FEC199BCE6B005ACCDC /* MGWUClose@2x.png in Resources */,
-				4FF6D7A0199CEF3300F90D9C /* AppIcon.psd in Resources */,
 				B7378975180762440076A88C /* Default-568h@2x.png in Resources */,
 				4FA79FE6199BCE6B005ACCDC /* MGWUBackgroundDark-Landscape~iphone.png in Resources */,
 				B71F5918188484E7003F4D28 /* iPhone@2x.png in Resources */,
