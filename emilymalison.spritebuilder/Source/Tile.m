@@ -23,6 +23,26 @@
     //OALSimpleAudio *audio;
 }
 
+/*-(void)didLoadFromCCB{
+    [super onEnter];
+    [self setUpTile];
+    
+    NSURL *turnSoundURL=[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"cardSlide1" ofType:@"mp3"]];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)turnSoundURL, &turnSound);
+    
+    //audio = [OALSimpleAudio sharedInstance];
+    //[audio preloadEffect:@"cardSlide1.mp3"];
+    
+    self.userInteractionEnabled = YES;
+    canTouch = YES;
+    
+    self.remove=NO;
+    self.rotationMeasure=0;
+    self.match=NO;
+    self.checking=NO;
+    self.physicsBody.collisionMask=@[];
+}*/
+
 - (void)onEnter
 {
     [super onEnter];

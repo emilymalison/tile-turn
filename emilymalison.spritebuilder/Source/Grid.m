@@ -41,6 +41,7 @@ static const int GRID_SIZE=3;
     BOOL newGrid;
     BOOL afterFalling;
     int tilesChecked;
+    CCLabelTTF *comboText;
 }
 
 /*-(void)didLoadFromCCB{
@@ -235,7 +236,6 @@ static const int GRID_SIZE=3;
     [self disableUserInteraction];
     int match;
     BOOL firstDot;
-    int scoreCheck=score;
     int scoreAddOn=0;
     for (int j=0; j<3; j++) {
         match=1;
@@ -428,6 +428,17 @@ static const int GRID_SIZE=3;
         }
     }
     if (scoreAddOn>0) {
+        if (scoreAddOn>9 && falling==NO) {
+            score=score+(2*scoreAddOn);
+            [self scheduleBlock:^(CCTimer *timer) {
+                CCNode *_node=self.parent;
+                [(Gameplay*)_node.parent combo];
+            } delay:.5];
+        }
+        else{
+            score=score+scoreAddOn;
+        }
+        _totalScore=score;
         [indicateTimer invalidate];
         tilesChecked=0;
         [self disableUserInteraction];
@@ -451,13 +462,6 @@ static const int GRID_SIZE=3;
                 }
             }
         }
-        if (scoreAddOn>9) {
-            score=score+(2*scoreAddOn);
-        }
-        else{
-            score=score+scoreAddOn;
-        }
-        _totalScore=score;
     }
     else if (scoreAddOn==0 && falling==NO && tilesChecked==9){
         [self enableUserInteraction];
@@ -859,7 +863,6 @@ static const int GRID_SIZE=3;
         }
     }
     if (possibleMatch==NO || [_tileMatchArray count]==0) {
-        NSLog(@"no possible matches");
         shuffling=YES;
         if (newGrid==NO) {
             CCNode *_node=self.parent;
@@ -869,7 +872,6 @@ static const int GRID_SIZE=3;
             shufflingTimer=[NSTimer scheduledTimerWithTimeInterval:.7 target:self selector:@selector(resetShuffling) userInfo:nil repeats:NO];
         }
         else if (newGrid==YES){
-            NSLog(@"no possible matches on new grid");
             [self setUpGrid];
         }
     }

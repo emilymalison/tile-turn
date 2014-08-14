@@ -17,6 +17,7 @@
 -(void)noPossibleMatches;
 -(void)shufflingDone;
 -(void)gameOver;
+-(void)combo;
 
 @property (nonatomic, assign) BOOL shuffling;
 @property (nonatomic, assign) BOOL sound;

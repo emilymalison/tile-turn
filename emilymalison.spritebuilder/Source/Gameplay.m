@@ -30,14 +30,18 @@
     CCNode *play;
     CCNode *home;
     CCButton *soundButton;
+    CCLabelTTF *comboText;
 }
 
 #pragma mark - Timer
 
 /*-(void)didLoadFromCCB{
+    [super onEnter];
+    _gameOver.visible=NO;
+    
     _physicsNode.collisionDelegate = self;
+    
     myTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(second) userInfo:nil repeats:YES];
-
     timeRemaining=60;
     
     [self schedule:@selector(updateScore) interval:0.5f];
@@ -46,7 +50,12 @@
     NSURL *timerSoundURL=[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"zap2" ofType:@"mp3"]];
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)timerSoundURL, &timerSound);
     
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    self.sound=[[defaults objectForKey:@"sound"] boolValue];
+    [defaults synchronize];
+    
 }*/
+
 
 -(void)onEnter{
     
@@ -141,6 +150,16 @@
     self.shuffling=NO;
 }
 
+#pragma mark - Combo
+-(void)combo{
+    comboText.visible=YES;
+    [comboText.animationManager runAnimationsForSequenceNamed:@"Animation2"];
+    [self scheduleBlock:^(CCTimer *timer) {
+        comboText.visible=NO;
+        [comboText.animationManager runAnimationsForSequenceNamed:@"Default Timeline"];
+    } delay:1.5];
+}
+
 #pragma mark - Pause Screen
 -(void)pause{
     pauseScreen.visible=YES;
@@ -153,6 +172,7 @@
     home.visible=YES;
     [myTimer invalidate];
     [_grid disableUserInteraction];
+    //_physicsNode.gravity=ccp(0, 0);
     _grid.pause=YES;
     
     //CCScene *pauseScene = [CCBReader loadAsScene:@"PauseScene"];
@@ -172,6 +192,7 @@
     myTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(second) userInfo:nil repeats:YES];
     [_grid enableUserInteraction];
     _grid.pause=NO;
+    _physicsNode.gravity=ccp(0, -500);
 }
 
 -(void)loadMenu{
