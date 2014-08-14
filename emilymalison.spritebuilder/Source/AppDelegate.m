@@ -33,6 +33,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [MGWU loadMGWU:@"IamPoseidongirl7"];
+    //[MGWU setAppiraterAppId:appid andAppName:@"Tile Turn"];
+    [MGWU setReminderMessage:@"Come play Tile Turn for 60 seconds of brain-teasing excitement!"];
+    
     // Configure Cocos2d with the options set in SpriteBuilder
     NSString* configPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Published-iOS"]; // TODO: add support for Published-Android support
     configPath = [configPath stringByAppendingPathComponent:@"configCocos2d.plist"];

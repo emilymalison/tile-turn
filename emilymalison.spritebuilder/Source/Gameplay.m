@@ -99,10 +99,10 @@
     [_grid disableUserInteraction];
 }
 -(void)gameOver{
-    /*NSNumber* score = [NSNumber numberWithInt:9001];
-    NSNumber* timesplayed = [NSNumber numberWithInt:1];
-    NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys: score, @"score", levelnumber, @"level_number", nil];
-    [MGWU logEvent:@"level_complete" withParams:params];*/
+    NSNumber* score = [NSNumber numberWithInt:_grid.totalScore];
+    NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys: score, @"score", nil];
+    [MGWU logEvent:@"game_finished" withParams:params];
+    
     GameOver *gameover = (GameOver*)[CCBReader load:@"GameOver"];
     gameover.finalScore = _grid.totalScore;
     CCScene *gameoverScene = [CCScene node];
