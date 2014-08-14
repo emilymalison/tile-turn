@@ -162,6 +162,7 @@
 
 #pragma mark - Pause Screen
 -(void)pause{
+    
     pauseScreen.visible=YES;
     pauseText.visible=YES;
     continuePlayButton.visible=YES;
@@ -171,9 +172,12 @@
     play.visible=YES;
     home.visible=YES;
     [myTimer invalidate];
-    [_grid disableUserInteraction];
-    //_physicsNode.gravity=ccp(0, 0);
     _grid.pause=YES;
+    [_grid disableUserInteraction];
+    if (timeRemaining<=10) {
+        [_timer.animationManager runAnimationsForSequenceNamed:@"Default Timeline"];
+    }
+    //_physicsNode.gravity=ccp(0, 0);
     
     //CCScene *pauseScene = [CCBReader loadAsScene:@"PauseScene"];
         
@@ -181,6 +185,9 @@
 }
 
 -(void)continuePlay{
+    if (timeRemaining<=10) {
+        [_timer.animationManager runAnimationsForSequenceNamed:@"Animation"];
+    }
     pauseScreen.visible=NO;
     pauseText.visible=NO;
     menuButton.visible=NO;
@@ -190,6 +197,7 @@
     home.visible=NO;
     continuePlayButton.visible=NO;
     myTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(second) userInfo:nil repeats:YES];
+    [_grid checkForMoves];
     [_grid enableUserInteraction];
     _grid.pause=NO;
     _physicsNode.gravity=ccp(0, -500);
