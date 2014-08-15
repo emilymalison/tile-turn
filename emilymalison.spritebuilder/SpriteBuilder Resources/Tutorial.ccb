@@ -431,6 +431,8 @@ right to rotate it!</string>
 								<string>tutorialTile.ccb</string>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
@@ -1324,7 +1326,7 @@ Ready to play?</string>
 								<key>type</key>
 								<string>CCBFile</string>
 								<key>value</key>
-								<string>TutorialTile.ccb</string>
+								<string>tutorialTile.ccb</string>
 							</dict>
 						</array>
 					</dict>
@@ -2842,8 +2844,6 @@ make a match.</string>
 				</array>
 			</dict>
 		</array>
-		<key>selected</key>
-		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>
