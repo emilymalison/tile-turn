@@ -9,7 +9,8 @@
 #import "Gameplay.h"
 #import "Grid.h"
 #import "GameOver.h"
-#import <Crashlytics/Crashlytics.h>
+//#import <Crashlytics/Crashlytics.h>
+#import "OALSimpleAudio.h"
 
 @implementation Gameplay{
     Grid *_grid;
@@ -49,6 +50,7 @@
     
     NSURL *timerSoundURL=[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"zap2-3" ofType:@"mp3"]];
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)timerSoundURL, &timerSound);
+    //[[OALSimpleAudio sharedInstance] preloadEffect:@"zap2.mp3"];
     
     NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
     self.sound=[[defaults objectForKey:@"sound"] boolValue];
@@ -66,6 +68,9 @@
         [_timer.animationManager runAnimationsForSequenceNamed:@"Animation"];
         if (self.sound==YES) {
             AudioServicesPlaySystemSound(timerSound);
+            //OALSimpleAudio *audio=[OALSimpleAudio sharedInstance];
+            //audio.effectsVolume=1.0;
+            //[[OALSimpleAudio sharedInstance] playEffect:@"zap2.mp3"];
         }
     }
     else if (timeRemaining<10 && timeRemaining>0){

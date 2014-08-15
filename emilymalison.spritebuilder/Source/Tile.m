@@ -36,6 +36,8 @@
     self.match=NO;
     self.checking=NO;
     self.physicsBody.collisionMask=@[];
+    
+    //[[OALSimpleAudio sharedInstance] preloadEffect:@"cardSlide1-2.mp3"];
 }
 
 #pragma mark - Filling Tile with Dots
@@ -122,6 +124,9 @@
         CCActionRotateBy *rotateTile= [CCActionRotateBy actionWithDuration:.4 angle:90];
         if (self.sound==YES) {
             AudioServicesPlaySystemSound(turnSound);
+            //OALSimpleAudio *audio=[OALSimpleAudio sharedInstance];
+            //audio.effectsVolume=1.0;
+            //[[OALSimpleAudio sharedInstance] playEffect:@"cardSlide1-2.mp3"];
         }
         CCActionCallBlock *resetTouch = [CCActionCallBlock actionWithBlock:^{
             canTouch= YES;
@@ -171,7 +176,7 @@
 - (void)tileRemoved{
     CCParticleSystem *tileRemoved = (CCParticleSystem *)[CCBReader load:@"Tile Removed"];
     tileRemoved.autoRemoveOnFinish = TRUE;
-    tileRemoved.position = ccp(self.position.x + self.contentSize.width, self.position.y +(1.5*self.contentSize.height));
+    tileRemoved.position = ccp(self.position.x, self.position.y +(2*self.contentSize.height));
     Grid *_grid=self.parent;
     CCNode *_node=_grid.parent;
     [_node.parent addChild:tileRemoved];

@@ -11,6 +11,7 @@
 #import "Gameplay.h"
 #import "Tile.h"
 #import "Dot.h"
+#import "OALSimpleAudio.h"
 
 static const int GRID_SIZE=3;
 
@@ -63,6 +64,7 @@ static const int GRID_SIZE=3;
     
     NSURL *turnSoundURL=[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"jingles_PIZZA00-4" ofType:@"mp3"]];
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)turnSoundURL, &matchSound);
+    //[[OALSimpleAudio sharedInstance] preloadEffect:@"jingles_PIZZA00.mp3"];
     
     self.pause=NO;
 }
@@ -434,6 +436,9 @@ static const int GRID_SIZE=3;
                                 [self dotAnimation:matchDot];
                                 if (toBeRemoved.sound==YES) {
                                     AudioServicesPlaySystemSound(matchSound);
+                                    //OALSimpleAudio *audio=[OALSimpleAudio sharedInstance];
+                                    //audio.effectsVolume=1.0;
+                                    //[[OALSimpleAudio sharedInstance] playEffect:@"jingles_PIZZA00.mp3"];
                                 }
                             } delay:.5];
                         }
