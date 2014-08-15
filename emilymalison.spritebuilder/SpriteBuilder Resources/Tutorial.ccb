@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>36</integer>
+	<integer>38</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -428,7 +428,7 @@ right to rotate it!</string>
 								<key>type</key>
 								<string>CCBFile</string>
 								<key>value</key>
-								<string>tutorialTile.ccb</string>
+								<string>TutorialTile.ccb</string>
 							</dict>
 						</array>
 					</dict>
@@ -490,11 +490,9 @@ right to rotate it!</string>
 								<key>type</key>
 								<string>CCBFile</string>
 								<key>value</key>
-								<string>tutorialTile.ccb</string>
+								<string>TutorialTile.ccb</string>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
@@ -690,8 +688,8 @@ right to rotate it!</string>
 						<string>ScaleLock</string>
 						<key>value</key>
 						<array>
-							<real>0.44444447755813599</real>
-							<real>0.44444447755813599</real>
+							<real>0.0</real>
+							<real>0.0</real>
 							<false/>
 							<integer>0</integer>
 						</array>
@@ -1256,13 +1254,13 @@ Ready to play?</string>
 								<key>type</key>
 								<string>CCBFile</string>
 								<key>value</key>
-								<string>tutorialTile.ccb</string>
+								<string>TutorialTile.ccb</string>
 							</dict>
 						</array>
 					</dict>
 					<dict>
 						<key>UUID</key>
-						<integer>20</integer>
+						<integer>36</integer>
 						<key>baseClass</key>
 						<string>CCBFile</string>
 						<key>children</key>
@@ -1272,7 +1270,7 @@ Ready to play?</string>
 						<key>displayName</key>
 						<string>TutorialTile</string>
 						<key>memberVarAssignmentName</key>
-						<string>tutorialTile3</string>
+						<string></string>
 						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
 						<key>properties</key>
@@ -1326,9 +1324,11 @@ Ready to play?</string>
 								<key>type</key>
 								<string>CCBFile</string>
 								<key>value</key>
-								<string>tutorialTile.ccb</string>
+								<string>TutorialTile.ccb</string>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
@@ -1741,8 +1741,8 @@ times...</string>
 						<string>ScaleLock</string>
 						<key>value</key>
 						<array>
-							<real>1</real>
-							<real>1</real>
+							<real>0.5</real>
+							<real>0.5</real>
 							<false/>
 							<integer>0</integer>
 						</array>
@@ -2949,7 +2949,7 @@ make a match.</string>
 			<key>offset</key>
 			<real>0.0</real>
 			<key>position</key>
-			<real>0.5</real>
+			<real>0.0</real>
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>
