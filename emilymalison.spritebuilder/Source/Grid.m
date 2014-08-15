@@ -41,7 +41,6 @@ static const int GRID_SIZE=3;
     BOOL afterFalling;
     int tilesChecked;
     CCLabelTTF *comboText;
-    int scoreAdded;
 }
 - (void)onEnter
 {
