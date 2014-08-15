@@ -25,7 +25,7 @@
     [super onEnter];
     [self setUpTile];
     
-    NSURL *turnSoundURL=[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"cardSlide1" ofType:@"mp3"]];
+    NSURL *turnSoundURL=[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"cardSlide1-2" ofType:@"mp3"]];
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)turnSoundURL, &turnSound);
     
     self.userInteractionEnabled = YES;
