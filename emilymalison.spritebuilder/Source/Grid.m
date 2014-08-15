@@ -627,8 +627,10 @@ static const int GRID_SIZE=3;
 
 #pragma mark - Match Animations
 -(void)matchAnimationOnTile:(Tile*)removedTile{
-      [removedTile.animationManager runAnimationsForSequenceNamed:(@"Match Timeline")];
-      [NSTimer scheduledTimerWithTimeInterval:.5 target:self selector:@selector(removeTiles) userInfo:nil repeats:NO];
+    [removedTile.animationManager runAnimationsForSequenceNamed:(@"Match Timeline")];
+    [removedTile tileRemoved];
+    
+    [NSTimer scheduledTimerWithTimeInterval:.5 target:self selector:@selector(removeTiles) userInfo:nil repeats:NO];
 }
 
 -(void)dotAnimation:(Dot*)matchDot{

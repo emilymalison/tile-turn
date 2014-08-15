@@ -14,6 +14,7 @@
 
 -(void)rotateBackwards;
 -(NSMutableArray*)rotateColorMatrix:(NSMutableArray*)matrix;
+-(void)tileRemoved;
 
 @property(nonatomic, strong)NSMutableArray* dotColorArray;
 @property(nonatomic, strong)NSMutableArray* tileArray;
