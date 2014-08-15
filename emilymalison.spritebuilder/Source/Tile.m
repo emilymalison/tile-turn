@@ -169,13 +169,9 @@
 
 #pragma mark - Particle Effect When Removed
 - (void)tileRemoved{
-    // load particle effect
     CCParticleSystem *tileRemoved = (CCParticleSystem *)[CCBReader load:@"Tile Removed"];
-    // make the particle effect clean itself up, once it is completed
     tileRemoved.autoRemoveOnFinish = TRUE;
-    // place the particle effect on the seals position
-    tileRemoved.position = ccp(self.position.x, self.position.y +(1.5*self.contentSize.height));
-    // add the particle effect to the same node the seal is on
+    tileRemoved.position = ccp(self.position.x + self.contentSize.width, self.position.y +(1.5*self.contentSize.height));
     Grid *_grid=self.parent;
     CCNode *_node=_grid.parent;
     [_node.parent addChild:tileRemoved];

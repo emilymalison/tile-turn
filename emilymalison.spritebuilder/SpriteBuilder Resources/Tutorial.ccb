@@ -1270,7 +1270,7 @@ Ready to play?</string>
 						<key>displayName</key>
 						<string>TutorialTile</string>
 						<key>memberVarAssignmentName</key>
-						<string></string>
+						<string>tutorialTile3</string>
 						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
 						<key>properties</key>
