@@ -431,8 +431,6 @@ right to rotate it!</string>
 								<string>tutorialTile.ccb</string>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
@@ -495,6 +493,8 @@ right to rotate it!</string>
 								<string>tutorialTile.ccb</string>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
