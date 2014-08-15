@@ -61,7 +61,7 @@ static const int GRID_SIZE=3;
     self.timerExpired=NO;
     tilesChecked=9;
     
-    NSURL *turnSoundURL=[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"jingles_PIZZA00" ofType:@"mp3"]];
+    NSURL *turnSoundURL=[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"jingles_PIZZA00-4" ofType:@"mp3"]];
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)turnSoundURL, &matchSound);
     
     self.pause=NO;
