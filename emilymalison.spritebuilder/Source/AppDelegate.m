@@ -27,6 +27,7 @@
 
 #import "AppDelegate.h"
 #import "CCBuilderReader.h"
+#import <Crashlytics/Crashlytics.h>
 
 @implementation AppController
 
@@ -35,6 +36,8 @@
     [MGWU loadMGWU:@"IamPoseidongirl7"];
     //[MGWU setAppiraterAppId:appid andAppName:@"Tile Turn"];
     [MGWU setReminderMessage:@"Come play Tile Turn for 60 seconds of brain-teasing excitement!"];
+    
+    [Crashlytics startWithAPIKey:@"285581153a5b0383ca99758d69228afa58cb761b"];
     
     // Configure Cocos2d with the options set in SpriteBuilder
     NSString* configPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Published-iOS"]; // TODO: add support for Published-Android support

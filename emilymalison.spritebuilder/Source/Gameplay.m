@@ -9,6 +9,7 @@
 #import "Gameplay.h"
 #import "Grid.h"
 #import "GameOver.h"
+#import <Crashlytics/Crashlytics.h>
 
 @implementation Gameplay{
     Grid *_grid;
@@ -35,7 +36,7 @@
 
 #pragma mark - Timer
 -(void)onEnter{
-    
+    //[[Crashlytics sharedInstance] crash];
     [super onEnter];
     _gameOver.visible=NO;
     
