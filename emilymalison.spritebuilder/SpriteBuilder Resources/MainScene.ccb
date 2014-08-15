@@ -290,7 +290,7 @@
 							<key>collisionMask</key>
 							<array/>
 							<key>collisionType</key>
-							<string></string>
+							<string>playButton</string>
 							<key>cornerRadius</key>
 							<real>0.0</real>
 							<key>density</key>
@@ -360,7 +360,7 @@
 								<key>value</key>
 								<array>
 									<real>0.47999998927116394</real>
-									<real>0.69999998807907104</real>
+									<real>0.80000001192092896</real>
 									<integer>3</integer>
 									<integer>2</integer>
 									<integer>2</integer>
@@ -707,7 +707,7 @@
 							<key>collisionMask</key>
 							<array/>
 							<key>collisionType</key>
-							<string></string>
+							<string>title</string>
 							<key>cornerRadius</key>
 							<real>0.0</real>
 							<key>density</key>
@@ -777,7 +777,7 @@
 								<key>value</key>
 								<array>
 									<real>0.5</real>
-									<real>0.10499999672174454</real>
+									<real>0.0</real>
 									<integer>1</integer>
 									<integer>2</integer>
 									<integer>2</integer>
@@ -1520,8 +1520,6 @@
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
@@ -2028,7 +2026,7 @@
 							<key>collisionMask</key>
 							<array/>
 							<key>collisionType</key>
-							<string></string>
+							<string>titleBottom</string>
 							<key>cornerRadius</key>
 							<real>0.0</real>
 							<key>density</key>
@@ -2221,7 +2219,7 @@
 						<key>value</key>
 						<array>
 							<real>0.0</real>
-							<real>-800</real>
+							<real>-1000</real>
 						</array>
 					</dict>
 					<dict>
@@ -2233,6 +2231,8 @@
 						<real>0.5</real>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>

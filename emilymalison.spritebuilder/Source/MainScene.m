@@ -22,7 +22,8 @@
     [self scheduleBlock:^(CCTimer *timer) {
         playBackground.position=playButton.position;
         playBackground.visible=YES;
-    } delay:.7];
+    } delay:1];
+    _physicsNode.collisionDelegate=self;
     NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
     if ([defaults objectForKey:@"sound"]==nil) {
         [defaults setObject:[NSNumber numberWithBool:YES] forKey:@"sound"];
@@ -73,8 +74,10 @@
     }
 }
 
--(void)runAnimationOnButton:(CCButton*)button{
-    //[button runAction:];
+#pragma mark - Collisions
+
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair playButton:(CCNode *)nodeA titleBottom:(CCNode *)nodeB {
+    return NO;
 }
 
 

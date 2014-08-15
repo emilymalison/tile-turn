@@ -19,8 +19,6 @@
     Dot *dot;
     BOOL canTouch;
     CCSprite *_tile;
-    //Tile *tutorialTile;
-    //OALSimpleAudio *audio;
 }
 - (void)onEnter
 {
