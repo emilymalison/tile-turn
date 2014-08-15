@@ -12,7 +12,7 @@
 
 @implementation Gameplay{
     Grid *_grid;
-    int timeRemaining;
+    float timeRemaining;
     CCLabelTTF *_timer;
     NSTimer *myTimer;
     CCLabelTTF *_score;
@@ -34,29 +34,6 @@
 }
 
 #pragma mark - Timer
-
-/*-(void)didLoadFromCCB{
-    [super onEnter];
-    _gameOver.visible=NO;
-    
-    _physicsNode.collisionDelegate = self;
-    
-    myTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(second) userInfo:nil repeats:YES];
-    timeRemaining=60;
-    
-    [self schedule:@selector(updateScore) interval:0.5f];
-    self.shuffling=NO;
-    
-    NSURL *timerSoundURL=[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"zap2" ofType:@"mp3"]];
-    AudioServicesCreateSystemSoundID((__bridge CFURLRef)timerSoundURL, &timerSound);
-    
-    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
-    self.sound=[[defaults objectForKey:@"sound"] boolValue];
-    [defaults synchronize];
-    
-}*/
-
-
 -(void)onEnter{
     
     [super onEnter];
@@ -83,7 +60,8 @@
 
 -(void)second{
     timeRemaining-=1;
-    _timer.string= [NSString stringWithFormat:@"%d", timeRemaining];
+    int newTimeRemaining=round(timeRemaining);
+    _timer.string= [NSString stringWithFormat:@"%d", newTimeRemaining];
     if (timeRemaining==10) {
         [_timer.animationManager runAnimationsForSequenceNamed:@"Animation"];
         if (self.sound==YES) {
@@ -162,7 +140,8 @@
 
 #pragma mark - Pause Screen
 -(void)pause{
-    
+    _grid.pause=YES;
+    self.paused=YES;
     pauseScreen.visible=YES;
     pauseText.visible=YES;
     continuePlayButton.visible=YES;
@@ -172,19 +151,15 @@
     play.visible=YES;
     home.visible=YES;
     [myTimer invalidate];
-    _grid.pause=YES;
     [_grid disableUserInteraction];
     if (timeRemaining<=10) {
         [_timer.animationManager runAnimationsForSequenceNamed:@"Default Timeline"];
     }
-    //_physicsNode.gravity=ccp(0, 0);
-    
-    //CCScene *pauseScene = [CCBReader loadAsScene:@"PauseScene"];
-        
-    //[[CCDirector sharedDirector] pushScene:pauseScene];
 }
 
 -(void)continuePlay{
+    _grid.pause=NO;
+    self.paused=NO;
     if (timeRemaining<=10) {
         [_timer.animationManager runAnimationsForSequenceNamed:@"Animation"];
     }
@@ -199,8 +174,6 @@
     myTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(second) userInfo:nil repeats:YES];
     [_grid checkForMoves];
     [_grid enableUserInteraction];
-    _grid.pause=NO;
-    _physicsNode.gravity=ccp(0, -500);
 }
 
 -(void)loadMenu{

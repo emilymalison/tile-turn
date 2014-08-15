@@ -23,7 +23,6 @@
 -(void)disableUserInteraction;
 -(void)enableUserInteraction;
 
-
 //@property(nonatomic, strong)NSMutableArray *gridArray;
 
 @property (nonatomic, assign)BOOL timerExpired;

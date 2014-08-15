@@ -37,32 +37,11 @@ static const int GRID_SIZE=3;
     NSMutableArray *_newTileArray2;
     int tilesNotMoving;
     BOOL falling;
-    NSTimer *secondIndicateTimer;
     BOOL newGrid;
     BOOL afterFalling;
     int tilesChecked;
     CCLabelTTF *comboText;
 }
-
-/*-(void)didLoadFromCCB{
-    [self setUpGrid];
-    
-    possibleMatch=NO;
-    moveIndicated=NO;
-    _newTileArray=[NSMutableArray array];
-    
-    shuffling=NO;
-    _newTileArray0=[NSMutableArray array];
-    _newTileArray1=[NSMutableArray array];
-    _newTileArray2=[NSMutableArray array];
-    falling=NO;
-    self.timerExpired=NO;
-    tilesChecked=9;
-    
-    NSURL *turnSoundURL=[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"jingles_PIZZA00" ofType:@"mp3"]];
-    AudioServicesCreateSystemSoundID((__bridge CFURLRef)turnSoundURL, &matchSound);
-}*/
-
 - (void)onEnter
 {
     [super onEnter];
@@ -108,7 +87,7 @@ static const int GRID_SIZE=3;
             tile.userInteractionEnabled=NO;
         }
     }
-    if (tilesNotMoving==9 && falling==YES) {
+    if (tilesNotMoving==9 && falling==YES && self.pause==NO) {
         [self tilesDoneFalling];
         if (self.timerExpired==YES && shuffling==NO && tilesChecked==9) {
             CCNode *_node=self.parent;
@@ -528,15 +507,20 @@ static const int GRID_SIZE=3;
                 
                 if (newTile.tileY==0) {
                     if ([_newTileArray0 count]==1) {
-                        [NSTimer scheduledTimerWithTimeInterval:.9 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
-                        newTile.visible=NO;
-                        newTile.physicsBody.collisionMask=@[];
+                        if (self.pause==NO) {
+                           [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
+                            newTile.position=ccp(newTile.position.x, newTile.position.y+250);
+                            newTile.visible=NO;
+                            newTile.physicsBody.collisionMask=@[];
+                        }
                     }
                     else if ([_newTileArray0 count]==2){
-                        [NSTimer scheduledTimerWithTimeInterval:1.6 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
-                        newTile.visible=NO;
-                        newTile.physicsBody.collisionMask=@[];
-                        
+                        if (self.pause==NO) {
+                            [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
+                            newTile.position=ccp(newTile.position.x, newTile.position.y+500);
+                            newTile.visible=NO;
+                            newTile.physicsBody.collisionMask=@[];
+                        }
                     }
                     else if ([_newTileArray0 count]==0) {
                         [self scheduleBlock:^(CCTimer *timer) {
@@ -550,13 +534,15 @@ static const int GRID_SIZE=3;
                 }
                 if (newTile.tileY==1) {
                     if ([_newTileArray1 count]==1) {
-                        [NSTimer scheduledTimerWithTimeInterval:.9 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
+                        [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
+                        newTile.position=ccp(newTile.position.x, newTile.position.y+250);
                         newTile.visible=NO;
                         newTile.physicsBody.collisionMask=@[];
                         newTile.physicsBody.affectedByGravity=NO;
                     }
                     else if ([_newTileArray1 count]==2){
-                        [NSTimer scheduledTimerWithTimeInterval:1.6 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
+                        [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
+                        newTile.position=ccp(newTile.position.x, newTile.position.y+500);
                         newTile.visible=NO;
                         newTile.physicsBody.collisionMask=@[];
                     }
@@ -573,13 +559,15 @@ static const int GRID_SIZE=3;
                 }
                 if (newTile.tileY==2) {
                     if ([_newTileArray2 count]==1) {
-                        [NSTimer scheduledTimerWithTimeInterval:.9 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
+                        [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
+                        newTile.position=ccp(newTile.position.x, newTile.position.y+250);
                         newTile.visible=NO;
                         newTile.physicsBody.collisionMask=@[];
                         newTile.physicsBody.affectedByGravity=NO;
                     }
                     else if ([_newTileArray2 count]==2){
-                        [NSTimer scheduledTimerWithTimeInterval:1.6 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
+                        [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(dropNewTile:) userInfo:newTile repeats:NO];
+                        newTile.position=ccp(newTile.position.x, newTile.position.y+500);
                         newTile.visible=NO;
                         newTile.physicsBody.collisionMask=@[];
                     }
@@ -635,6 +623,7 @@ static const int GRID_SIZE=3;
         [_newTileArray2 removeObject:newTile];
     }
 }
+
 
 #pragma mark - Match Animations
 -(void)matchAnimationOnTile:(Tile*)removedTile{
