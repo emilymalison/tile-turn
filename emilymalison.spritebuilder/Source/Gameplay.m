@@ -36,7 +36,6 @@
 
 #pragma mark - Timer
 -(void)onEnter{
-    //[[Crashlytics sharedInstance] crash];
     [super onEnter];
     _gameOver.visible=NO;
     

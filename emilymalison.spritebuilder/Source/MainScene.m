@@ -11,11 +11,18 @@
 @implementation MainScene{
     CCButton *soundOnButton;
     CCButton *soundOffButton;
+    CCPhysicsNode *_physicsNode;
+    CCButton *playButton;
+    CCSprite *playBackground;
 }
 
 #pragma mark - Loading Gameplay Scene
 -(void)onEnter{
     [super onEnter];
+    [self scheduleBlock:^(CCTimer *timer) {
+        playBackground.position=playButton.position;
+        playBackground.visible=YES;
+    } delay:.7];
     NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
     if ([defaults objectForKey:@"sound"]==nil) {
         [defaults setObject:[NSNumber numberWithBool:YES] forKey:@"sound"];
@@ -64,6 +71,10 @@
         soundOffButton.visible=NO;
         soundOnButton.visible=YES;
     }
+}
+
+-(void)runAnimationOnButton:(CCButton*)button{
+    //[button runAction:];
 }
 
 
