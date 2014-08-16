@@ -49,6 +49,7 @@
 -(void)check{
     if (tileRight.rotationMeasure==1) {
         tileRight.rotationMeasure=0;
+        tileRight.userInteractionEnabled=NO;
         Dot* dot1=tileLeft.tileArray[2][0];
         Dot* dot2=tileLeft.tileArray[2][1];
         Dot* dot3=tileLeft.tileArray[2][2];
@@ -67,6 +68,7 @@
     }
     else if (tutorialTile4.rotationMeasure==3){
         tutorialTile4.rotationMeasure=0;
+        tutorialTile4.userInteractionEnabled=NO;
         Dot* dot1=tutorialTile3.tileArray[2][0];
         Dot* dot2=tutorialTile3.tileArray[2][1];
         Dot* dot3=tutorialTile3.tileArray[2][2];
