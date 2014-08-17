@@ -14,7 +14,7 @@
 
 @implementation Gameplay{
     Grid *_grid;
-    float timeRemaining;
+    int timeRemaining;
     CCLabelTTF *_timer;
     NSTimer *myTimer;
     CCLabelTTF *_score;
@@ -50,7 +50,6 @@
     
     NSURL *timerSoundURL=[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"zap2-3" ofType:@"mp3"]];
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)timerSoundURL, &timerSound);
-    //[[OALSimpleAudio sharedInstance] preloadEffect:@"zap2.mp3"];
     
     NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
     self.sound=[[defaults objectForKey:@"sound"] boolValue];
@@ -62,15 +61,11 @@
 
 -(void)second{
     timeRemaining-=1;
-    int newTimeRemaining=round(timeRemaining);
-    _timer.string= [NSString stringWithFormat:@"%d", newTimeRemaining];
+    _timer.string= [NSString stringWithFormat:@"%i", timeRemaining];
     if (timeRemaining==10) {
         [_timer.animationManager runAnimationsForSequenceNamed:@"Animation"];
         if (self.sound==YES) {
             AudioServicesPlaySystemSound(timerSound);
-            //OALSimpleAudio *audio=[OALSimpleAudio sharedInstance];
-            //audio.effectsVolume=1.0;
-            //[[OALSimpleAudio sharedInstance] playEffect:@"zap2.mp3"];
         }
     }
     else if (timeRemaining<10 && timeRemaining>0){
