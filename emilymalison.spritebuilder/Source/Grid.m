@@ -447,7 +447,7 @@ static const int GRID_SIZE=3;
             }
         }
     }
-    else if (scoreAddOn==0 && falling==NO && tilesChecked==9){
+    else if (scoreAddOn==0 && falling==NO && tilesChecked==9 && self.timerExpired==NO){
         [self enableUserInteraction];
     }
 }
