@@ -40,8 +40,8 @@
             [(Tutorial*)_node.parent check];
         }];
         [self runAction:[CCActionSequence actionOne:rotateTile two:resetTouch]];
+        self.tileArray=[self rotateColorMatrix:self.tileArray];
     }
-    self.tileArray=[self rotateColorMatrix:self.tileArray];
 }
 
 -(NSMutableArray*)rotateColorMatrix:(NSMutableArray*)matrix{

@@ -124,9 +124,6 @@
         CCActionRotateBy *rotateTile= [CCActionRotateBy actionWithDuration:.4 angle:90];
         if (self.sound==YES) {
             AudioServicesPlaySystemSound(turnSound);
-            //OALSimpleAudio *audio=[OALSimpleAudio sharedInstance];
-            //audio.effectsVolume=1.0;
-            //[[OALSimpleAudio sharedInstance] playEffect:@"cardSlide1-2.mp3"];
         }
         CCActionCallBlock *resetTouch = [CCActionCallBlock actionWithBlock:^{
             canTouch= YES;
@@ -176,10 +173,10 @@
 - (void)tileRemoved{
     CCParticleSystem *tileRemoved = (CCParticleSystem *)[CCBReader load:@"Tile Removed"];
     tileRemoved.autoRemoveOnFinish = TRUE;
-    tileRemoved.position = ccp(self.position.x, self.position.y +(2*self.contentSize.height));
+    tileRemoved.position = ccp(self.position.x, self.position.y);
     Grid *_grid=self.parent;
     CCNode *_node=_grid.parent;
-    [_node.parent addChild:tileRemoved];
+    [_node addChild:tileRemoved];
 }
 
 
