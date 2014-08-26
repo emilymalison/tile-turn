@@ -736,6 +736,9 @@ static const int GRID_SIZE=3;
 #pragma mark - Checking For Possible Moves
 
 -(void)checkForMoves{
+    for (Tile* tile in self.children) {
+        tile.tileMatchArray=[NSMutableArray array];
+    }
     possibleMatch=NO;
     _tileMatchArray=[NSMutableArray array];
      for (int x=0; x<GRID_SIZE; x++) {
