@@ -27,5 +27,6 @@
 @property(nonatomic, assign)BOOL checking;
 @property(nonatomic, assign)BOOL tutorialTile;
 @property(nonatomic, assign)BOOL sound;
+@property(nonatomic, strong)NSMutableArray* tileMatchArray;
 
 @end

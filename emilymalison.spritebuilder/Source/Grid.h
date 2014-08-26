@@ -28,5 +28,6 @@
 @property (nonatomic, assign)BOOL timerExpired;
 @property(nonatomic, assign)int totalScore;
 @property(nonatomic, assign)BOOL pause;
+@property(nonatomic, strong)Tile* indicatedTile;
 
 @end

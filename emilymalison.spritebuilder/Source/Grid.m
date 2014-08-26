@@ -23,7 +23,7 @@ static const int GRID_SIZE=3;
     CCSprite *tileSprite;
     NSMutableArray *_gridArray;
     Tile *tileRotated;
-    Tile *indicatedTile;
+    //Tile *indicatedTile;
     int score;
     BOOL possibleMatch;
     NSMutableArray *_tileMatchArray;
@@ -436,9 +436,6 @@ static const int GRID_SIZE=3;
                                 [self dotAnimation:matchDot];
                                 if (toBeRemoved.sound==YES) {
                                     AudioServicesPlaySystemSound(matchSound);
-                                    //OALSimpleAudio *audio=[OALSimpleAudio sharedInstance];
-                                    //audio.effectsVolume=1.0;
-                                    //[[OALSimpleAudio sharedInstance] playEffect:@"jingles_PIZZA00.mp3"];
                                 }
                             } delay:.5];
                         }
@@ -767,6 +764,20 @@ static const int GRID_SIZE=3;
                                             if (match>=5) {
                                                 possibleMatch=YES;
                                                 tile.match=YES;
+                                                if (match==5) {
+                                                    if (currentTile!=tile) {
+                                                        [tile.tileMatchArray addObject:currentTile];
+                                                    }
+                                                    else if (currentTile==tile){
+                                                        Tile* tileLeft=_gridArray[tile.tileX][tile.tileY-1];
+                                                        [tile.tileMatchArray addObject:tileLeft];
+                                                    }
+                                                }
+                                                else if (match>5) {
+                                                    if (currentTile!=tile) {
+                                                        [tile.tileMatchArray addObject:currentTile];
+                                                    }
+                                                }
                                             }
                                         }
                                         else{
@@ -784,6 +795,19 @@ static const int GRID_SIZE=3;
                                             if (match>=5) {
                                                 possibleMatch=YES;
                                                 tile.match=YES;
+                                                if (match==5) {
+                                                    if (currentTile!=tile) {
+                                                        [tile.tileMatchArray addObject:currentTile];
+                                                    }
+                                                    Tile* tileBefore=_gridArray[currentTile.tileX][currentTile.tileY-1];
+                                                    if (tileBefore!=tile) {
+                                                        [tile.tileMatchArray addObject:tileBefore];
+                                                    }
+                                                    Tile* tileBeforeBefore=_gridArray[currentTile.tileX][currentTile.tileY-1];
+                                                    if (tileBeforeBefore!=tile) {
+                                                        [tile.tileMatchArray addObject:tileBeforeBefore];
+                                                    }
+                                                }
                                             }
                                         }
                                         else{
@@ -817,6 +841,20 @@ static const int GRID_SIZE=3;
                                             if (match>=5) {
                                                 possibleMatch=YES;
                                                 tile.match=YES;
+                                                if (match==5) {
+                                                    if (currentTile!=tile) {
+                                                        [tile.tileMatchArray addObject:currentTile];
+                                                    }
+                                                    else if (currentTile==tile){
+                                                        Tile* tileLeft=_gridArray[tile.tileX-1][tile.tileY];
+                                                        [tile.tileMatchArray addObject:tileLeft];
+                                                    }
+                                                }
+                                                else if (match>5) {
+                                                    if (currentTile!=tile) {
+                                                        [tile.tileMatchArray addObject:currentTile];
+                                                    }
+                                                }
                                             }
                                         }
                                         else{
@@ -834,6 +872,19 @@ static const int GRID_SIZE=3;
                                             if (match>=5) {
                                                 possibleMatch=YES;
                                                 tile.match=YES;
+                                                if (match==5) {
+                                                    if (currentTile!=tile) {
+                                                        [tile.tileMatchArray addObject:currentTile];
+                                                    }
+                                                    Tile* tileBefore=_gridArray[currentTile.tileX-1][currentTile.tileY];
+                                                    if (tileBefore!=tile) {
+                                                        [tile.tileMatchArray addObject:tileBefore];
+                                                    }
+                                                    Tile* tileBeforeBefore=_gridArray[currentTile.tileX-2][currentTile.tileY];
+                                                    if (tileBeforeBefore!=tile) {
+                                                        [tile.tileMatchArray addObject:tileBeforeBefore];
+                                                    }
+                                                }
                                             }
                                         }
                                         else{
@@ -875,7 +926,7 @@ static const int GRID_SIZE=3;
     else if (possibleMatch==YES || [_tileMatchArray count]>0){
         possibleMatch=NO;
         [indicateTimer invalidate];
-        indicatedTile=[_tileMatchArray objectAtIndex:(arc4random()% [_tileMatchArray count])];
+        self.indicatedTile=[_tileMatchArray objectAtIndex:(arc4random()% [_tileMatchArray count])];
         indicateTimer=[NSTimer scheduledTimerWithTimeInterval:7 target:self selector:@selector(indicateMove) userInfo:nil repeats:NO];
         if (newGrid==YES) {
             newGrid=NO;
@@ -893,13 +944,13 @@ static const int GRID_SIZE=3;
 #pragma mark - Indicate Move
 
 -(void)indicateMove{
-    [indicatedTile.animationManager runAnimationsForSequenceNamed:(@"Animation")];
+    [self.indicatedTile.animationManager runAnimationsForSequenceNamed:(@"Animation")];
     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(resetAnimation) userInfo:nil repeats:NO];
     indicateTimer=[NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(indicateMove) userInfo:nil repeats:NO];
 }
 
 -(void)resetAnimation{
-    [indicatedTile.animationManager runAnimationsForSequenceNamed:(@"Default Timeline")];
+    [self.indicatedTile.animationManager runAnimationsForSequenceNamed:(@"Default Timeline")];
 }
 
 @end

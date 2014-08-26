@@ -37,7 +37,7 @@
     self.checking=NO;
     self.physicsBody.collisionMask=@[];
     
-    //[[OALSimpleAudio sharedInstance] preloadEffect:@"cardSlide1-2.mp3"];
+    self.tileMatchArray=[NSMutableArray array];
 }
 
 #pragma mark - Filling Tile with Dots
@@ -136,6 +136,14 @@
         self.tileArray=[self rotateColorMatrix:self.tileArray];
         
         [(Grid*)self.parent checkTile:self];
+        
+        Grid* grid=self.parent;
+        Tile* indicatedTile=grid.indicatedTile;
+        for (Tile* tile in indicatedTile.tileMatchArray){
+            if (tile==self) {
+                [grid checkForMoves];
+            }
+        }
     }
 }
 

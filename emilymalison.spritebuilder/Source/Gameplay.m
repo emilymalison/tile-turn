@@ -48,7 +48,7 @@
     [self schedule:@selector(updateScore) interval:0.5f];
     self.shuffling=NO;
     
-    NSURL *timerSoundURL=[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"zap2-3" ofType:@"mp3"]];
+    NSURL *timerSoundURL=[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"zap2" ofType:@"mp3"]];
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)timerSoundURL, &timerSound);
     
     NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
