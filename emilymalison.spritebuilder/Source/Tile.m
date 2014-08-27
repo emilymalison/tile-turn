@@ -126,15 +126,6 @@
             AudioServicesPlaySystemSound(turnSound);
         }
         CCActionCallBlock *resetTouch = [CCActionCallBlock actionWithBlock:^{
-            Grid* grid=self.parent;
-            Tile* indicatedTile=grid.indicatedTile;
-            NSMutableArray* tileMatchArray=indicatedTile.tileMatchArray;
-            for (Tile* tile in tileMatchArray){
-                if (tile==self) {
-                    grid.newHint=YES;
-                    [grid checkForMoves];
-                }
-            }
             canTouch= YES;
             self.physicsBody.collisionMask = nil;
         }];
@@ -145,6 +136,16 @@
         self.tileArray=[self rotateColorMatrix:self.tileArray];
         
         [(Grid*)self.parent checkTile:self];
+        Grid* grid=self.parent;
+        Tile* indicatedTile=grid.indicatedTile;
+        NSMutableArray* tileMatchArray=indicatedTile.tileMatchArray;
+        for (Tile* tile in tileMatchArray){
+            if (tile==self) {
+                grid.newHint=YES;
+                [grid resetAnimation];
+                [grid checkForMoves];
+            }
+        }
     }
 }
 

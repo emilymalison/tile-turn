@@ -971,10 +971,12 @@ static const int GRID_SIZE=3;
     }
 }
 -(void)indicateMove{
-    [self.indicatedTile.animationManager runAnimationsForSequenceNamed:(@"Animation")];
-    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(resetAnimation) userInfo:nil repeats:NO];
-    indicateTimer=[NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(indicateMove) userInfo:nil repeats:NO];
-    timeLeft=4;
+    if (falling==NO) {
+        [self.indicatedTile.animationManager runAnimationsForSequenceNamed:(@"Animation")];
+        [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(resetAnimation) userInfo:nil repeats:NO];
+        indicateTimer=[NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(indicateMove) userInfo:nil repeats:NO];
+        timeLeft=4;
+    }
 }
 
 -(void)resetAnimation{

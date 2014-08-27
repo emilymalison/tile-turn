@@ -22,6 +22,7 @@
 -(void)checkForMoves;
 -(void)disableUserInteraction;
 -(void)enableUserInteraction;
+-(void)resetAnimation;
 
 //@property(nonatomic, strong)NSMutableArray *gridArray;
 
