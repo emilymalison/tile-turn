@@ -23,7 +23,6 @@ static const int GRID_SIZE=3;
     CCSprite *tileSprite;
     NSMutableArray *_gridArray;
     Tile *tileRotated;
-    //Tile *indicatedTile;
     int score;
     BOOL possibleMatch;
     NSMutableArray *_tileMatchArray;
@@ -42,7 +41,10 @@ static const int GRID_SIZE=3;
     BOOL afterFalling;
     int tilesChecked;
     CCLabelTTF *comboText;
+    int timeLeft;
+    NSTimer *secondTimer;
 }
+
 - (void)onEnter
 {
     [super onEnter];
@@ -61,10 +63,11 @@ static const int GRID_SIZE=3;
     falling=NO;
     self.timerExpired=NO;
     tilesChecked=9;
+    timeLeft=0;
+    self.newHint=NO;
     
     NSURL *turnSoundURL=[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"jingles_PIZZA00-4" ofType:@"mp3"]];
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)turnSoundURL, &matchSound);
-    //[[OALSimpleAudio sharedInstance] preloadEffect:@"jingles_PIZZA00.mp3"];
     
     self.pause=NO;
 }
@@ -107,6 +110,10 @@ static const int GRID_SIZE=3;
                 }
             } delay:.3];
         }
+    }
+    if (self.timerExpired==YES || self.newHint==YES) {
+        [indicateTimer invalidate];
+        [secondTimer invalidate];
     }
 }
 
@@ -409,6 +416,8 @@ static const int GRID_SIZE=3;
         }
     }
     if (scoreAddOn>0) {
+        [indicateTimer invalidate];
+        [secondTimer invalidate];
         if (scoreAddOn>9 && falling==NO) {
             score=score+(2*scoreAddOn);
             [self scheduleBlock:^(CCTimer *timer) {
@@ -420,7 +429,6 @@ static const int GRID_SIZE=3;
             score=score+scoreAddOn;
         }
         _totalScore=score;
-        [indicateTimer invalidate];
         tilesChecked=0;
         [self disableUserInteraction];
        for (Tile* toBeRemoved in self.children){
@@ -928,9 +936,21 @@ static const int GRID_SIZE=3;
     
     else if (possibleMatch==YES || [_tileMatchArray count]>0){
         possibleMatch=NO;
-        [indicateTimer invalidate];
         self.indicatedTile=[_tileMatchArray objectAtIndex:(arc4random()% [_tileMatchArray count])];
-        indicateTimer=[NSTimer scheduledTimerWithTimeInterval:7 target:self selector:@selector(indicateMove) userInfo:nil repeats:NO];
+        if (self.newHint==NO) {
+            [indicateTimer invalidate];
+            [secondTimer invalidate];
+            indicateTimer=[NSTimer scheduledTimerWithTimeInterval:8 target:self selector:@selector(indicateMove) userInfo:nil repeats:NO];
+            timeLeft=8;
+            secondTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(second) userInfo:nil repeats:YES];
+        }
+        else if (self.newHint==YES){
+            [indicateTimer invalidate];
+            [secondTimer invalidate];
+            self.newHint=NO;
+            indicateTimer=[NSTimer scheduledTimerWithTimeInterval:timeLeft target:self selector:@selector(indicateMove) userInfo:nil repeats:NO];
+            secondTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(second) userInfo:nil repeats:YES];
+        }
         if (newGrid==YES) {
             newGrid=NO;
             self.visible=YES;
@@ -945,11 +965,16 @@ static const int GRID_SIZE=3;
 }
 
 #pragma mark - Indicate Move
-
+-(void)second{
+    if (timeLeft>0) {
+        timeLeft-=1;
+    }
+}
 -(void)indicateMove{
     [self.indicatedTile.animationManager runAnimationsForSequenceNamed:(@"Animation")];
     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(resetAnimation) userInfo:nil repeats:NO];
     indicateTimer=[NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(indicateMove) userInfo:nil repeats:NO];
+    timeLeft=5;
 }
 
 -(void)resetAnimation{

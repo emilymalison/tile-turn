@@ -29,5 +29,6 @@
 @property(nonatomic, assign)int totalScore;
 @property(nonatomic, assign)BOOL pause;
 @property(nonatomic, strong)Tile* indicatedTile;
+@property(nonatomic, assign)BOOL newHint;
 
 @end

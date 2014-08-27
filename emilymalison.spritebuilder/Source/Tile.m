@@ -131,6 +131,7 @@
             NSMutableArray* tileMatchArray=indicatedTile.tileMatchArray;
             for (Tile* tile in tileMatchArray){
                 if (tile==self) {
+                    grid.newHint=YES;
                     [grid checkForMoves];
                 }
             }
