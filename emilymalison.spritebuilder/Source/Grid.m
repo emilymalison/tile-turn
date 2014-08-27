@@ -48,6 +48,7 @@ static const int GRID_SIZE=3;
 - (void)onEnter
 {
     [super onEnter];
+    timeLeft=0;
     possibleMatch=NO;
     
     newGrid=YES;
@@ -63,7 +64,6 @@ static const int GRID_SIZE=3;
     falling=NO;
     self.timerExpired=NO;
     tilesChecked=9;
-    timeLeft=0;
     self.newHint=NO;
     
     NSURL *turnSoundURL=[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"jingles_PIZZA00-4" ofType:@"mp3"]];
@@ -940,8 +940,8 @@ static const int GRID_SIZE=3;
         if (self.newHint==NO) {
             [indicateTimer invalidate];
             [secondTimer invalidate];
-            indicateTimer=[NSTimer scheduledTimerWithTimeInterval:8 target:self selector:@selector(indicateMove) userInfo:nil repeats:NO];
             timeLeft=8;
+            indicateTimer=[NSTimer scheduledTimerWithTimeInterval:8 target:self selector:@selector(indicateMove) userInfo:nil repeats:NO];
             secondTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(second) userInfo:nil repeats:YES];
         }
         else if (self.newHint==YES){
@@ -973,8 +973,8 @@ static const int GRID_SIZE=3;
 -(void)indicateMove{
     [self.indicatedTile.animationManager runAnimationsForSequenceNamed:(@"Animation")];
     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(resetAnimation) userInfo:nil repeats:NO];
-    indicateTimer=[NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(indicateMove) userInfo:nil repeats:NO];
-    timeLeft=5;
+    indicateTimer=[NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(indicateMove) userInfo:nil repeats:NO];
+    timeLeft=4;
 }
 
 -(void)resetAnimation{
