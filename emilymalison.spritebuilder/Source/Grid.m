@@ -216,6 +216,9 @@ static const int GRID_SIZE=3;
         [self checkVerticallyTile:_gridArray[0][1]];
         [self checkVerticallyTile:_gridArray[0][2]];
         [self checkForMoves];
+    [self scheduleBlock:^(CCTimer *timer) {
+        [self enableUserInteraction];
+    } delay:.2];
 }
 
 #pragma mark - Checking for Matches

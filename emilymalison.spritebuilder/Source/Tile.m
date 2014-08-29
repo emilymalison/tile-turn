@@ -28,7 +28,6 @@
     NSURL *turnSoundURL=[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"cardSlide1-2-3" ofType:@"mp3"]];
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)turnSoundURL, &turnSound);
     
-    self.userInteractionEnabled = YES;
     canTouch = YES;
     
     self.remove=NO;
@@ -143,7 +142,9 @@
             if (tile==self) {
                 grid.newHint=YES;
                 [grid resetAnimation];
-                [grid checkForMoves];
+                [self scheduleBlock:^(CCTimer *timer) {
+                    [grid checkForMoves];
+                } delay:.41];
             }
         }
     }
