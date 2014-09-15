@@ -128,7 +128,7 @@
 
 -(void)resetSecondAnimation{
     [greatJob.animationManager runAnimationsForSequenceNamed:(@"Default Timeline")];
-    continueTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(continueButtonVisible) userInfo:nil repeats:NO];
+    continueTimer=[NSTimer scheduledTimerWithTimeInterval:.5 target:self selector:@selector(continueButtonVisible) userInfo:nil repeats:NO];
 }
 
 -(void) startGame{

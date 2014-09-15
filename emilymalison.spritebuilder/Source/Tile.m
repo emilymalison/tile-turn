@@ -183,11 +183,11 @@
 #pragma mark - Particle Effect When Removed
 - (void)tileRemoved{
     CCParticleSystem *tileRemoved = (CCParticleSystem *)[CCBReader load:@"Tile Removed"];
-    tileRemoved.autoRemoveOnFinish = TRUE;
-    tileRemoved.position = ccp(self.position.x, self.position.y);
-    Grid *_grid=self.parent;
+    CCNode *_grid=self.parent;
     CCNode *_node=_grid.parent;
     [_node addChild:tileRemoved];
+    tileRemoved.autoRemoveOnFinish = TRUE;
+    tileRemoved.position = ccp(self.position.x, self.position.y);
 }
 
 

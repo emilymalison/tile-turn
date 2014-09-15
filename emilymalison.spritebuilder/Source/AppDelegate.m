@@ -34,7 +34,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [MGWU loadMGWU:@"IamPoseidongirl7"];
-    //[MGWU setAppiraterAppId:appid andAppName:@"Tile Turn"];
+    [MGWU setAppiraterAppId:@"914075377" andAppName:@"Tile Turn"];
     [MGWU setReminderMessage:@"Come play Tile Turn for 60 seconds of brain-teasing excitement!"];
     
     [Crashlytics startWithAPIKey:@"285581153a5b0383ca99758d69228afa58cb761b"];
