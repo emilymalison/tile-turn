@@ -854,7 +854,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = emilymalison;
-				PROVISIONING_PROFILE = "3e3f210f-eecf-4311-81b2-936910743b86";
+				PROVISIONING_PROFILE = "145ff1b4-a469-4b38-a8eb-0968ca634816";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -893,7 +893,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = emilymalison;
-				PROVISIONING_PROFILE = "3e3f210f-eecf-4311-81b2-936910743b86";
+				PROVISIONING_PROFILE = "145ff1b4-a469-4b38-a8eb-0968ca634816";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
