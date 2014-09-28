@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		4F0A4F26196D7BC8002F1D4D /* Tile.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0A4F25196D7BC8002F1D4D /* Tile.m */; };
+		4F39108519D860150081D961 /* jingles_PIZZA00.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4F39108419D860150081D961 /* jingles_PIZZA00.mp3 */; };
+		4F39108819D8605F0081D961 /* cardSlide1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4F39108719D8605F0081D961 /* cardSlide1.mp3 */; };
 		4F5614691986899C00760A40 /* GameOver.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5614681986899C00760A40 /* GameOver.m */; };
 		4F5CB57619899A3F003767B9 /* Tutorial.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5CB57519899A3F003767B9 /* Tutorial.m */; };
 		4F5CB57A198ADC59003767B9 /* TutorialTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5CB579198ADC59003767B9 /* TutorialTile.m */; };
-		4F69611D199E9C4600DC54F7 /* zap2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4F69611C199E9C4600DC54F7 /* zap2.mp3 */; };
-		4F69612D199EA32D00DC54F7 /* cardSlide1-2-3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4F69612C199EA32D00DC54F7 /* cardSlide1-2-3.mp3 */; };
-		4F69612F199EA37100DC54F7 /* jingles_PIZZA00-4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4F69612E199EA37100DC54F7 /* jingles_PIZZA00-4.mp3 */; };
 		4F6FEFCA199E40B1004A4061 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F6FEFC9199E40B1004A4061 /* Crashlytics.framework */; };
+		4F9F2FA819D85D2D00196F18 /* zap2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4F9F2FA719D85D2D00196F18 /* zap2.mp3 */; };
 		4FA77402196C766D00B78702 /* Gameplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FA77401196C766D00B78702 /* Gameplay.m */; };
 		4FA7740A196C793800B78702 /* Grid.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FA77409196C793800B78702 /* Grid.m */; };
 		4FA79F67199BCB3E005ACCDC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FA79F66199BCB3E005ACCDC /* libz.dylib */; };
@@ -119,7 +119,7 @@
 		B77F1B3217B978D7009739AE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B3117B978D7009739AE /* QuartzCore.framework */; };
 		B77F1B3417B978D7009739AE /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B3317B978D7009739AE /* OpenGLES.framework */; };
 		B77F1B3617B978D7009739AE /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B3517B978D7009739AE /* OpenAL.framework */; };
-		B77F1B3817B978D7009739AE /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B3717B978D7009739AE /* AudioToolbox.framework */; };
+		B77F1B3817B978D7009739AE /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B3717B978D7009739AE /* AudioToolbox.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B77F1B3A17B978D7009739AE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B3917B978D7009739AE /* AVFoundation.framework */; };
 		B77F1B3C17B978D7009739AE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B3B17B978D7009739AE /* UIKit.framework */; };
 		B77F1B3E17B978D7009739AE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B3D17B978D7009739AE /* Foundation.framework */; };
@@ -147,16 +147,16 @@
 /* Begin PBXFileReference section */
 		4F0A4F24196D7BC8002F1D4D /* Tile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tile.h; path = Source/Tile.h; sourceTree = "<group>"; };
 		4F0A4F25196D7BC8002F1D4D /* Tile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Tile.m; path = Source/Tile.m; sourceTree = "<group>"; };
+		4F39108419D860150081D961 /* jingles_PIZZA00.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = jingles_PIZZA00.mp3; path = ../../jingles_PIZZA00.mp3; sourceTree = "<group>"; };
+		4F39108719D8605F0081D961 /* cardSlide1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cardSlide1.mp3; sourceTree = "<group>"; };
 		4F5614671986899C00760A40 /* GameOver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameOver.h; path = Source/GameOver.h; sourceTree = "<group>"; };
 		4F5614681986899C00760A40 /* GameOver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameOver.m; path = Source/GameOver.m; sourceTree = "<group>"; };
 		4F5CB57419899A3F003767B9 /* Tutorial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tutorial.h; path = Source/Tutorial.h; sourceTree = "<group>"; };
 		4F5CB57519899A3F003767B9 /* Tutorial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Tutorial.m; path = Source/Tutorial.m; sourceTree = "<group>"; };
 		4F5CB578198ADC59003767B9 /* TutorialTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TutorialTile.h; path = Source/TutorialTile.h; sourceTree = "<group>"; };
 		4F5CB579198ADC59003767B9 /* TutorialTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TutorialTile.m; path = Source/TutorialTile.m; sourceTree = "<group>"; };
-		4F69611C199E9C4600DC54F7 /* zap2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zap2.mp3; sourceTree = "<group>"; };
-		4F69612C199EA32D00DC54F7 /* cardSlide1-2-3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "cardSlide1-2-3.mp3"; sourceTree = "<group>"; };
-		4F69612E199EA37100DC54F7 /* jingles_PIZZA00-4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "jingles_PIZZA00-4.mp3"; sourceTree = "<group>"; };
 		4F6FEFC9199E40B1004A4061 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		4F9F2FA719D85D2D00196F18 /* zap2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = zap2.mp3; path = ../../zap2.mp3; sourceTree = "<group>"; };
 		4FA77400196C766D00B78702 /* Gameplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Gameplay.h; path = Source/Gameplay.h; sourceTree = "<group>"; };
 		4FA77401196C766D00B78702 /* Gameplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Gameplay.m; path = Source/Gameplay.m; sourceTree = "<group>"; };
 		4FA77408196C793800B78702 /* Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Grid.h; path = Source/Grid.h; sourceTree = "<group>"; };
@@ -282,6 +282,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B77F1B3817B978D7009739AE /* AudioToolbox.framework in Frameworks */,
 				4FA79F71199BCBF0005ACCDC /* Twitter.framework in Frameworks */,
 				4FA79F6F199BCBCD005ACCDC /* SystemConfiguration.framework in Frameworks */,
 				4F6FEFCA199E40B1004A4061 /* Crashlytics.framework in Frameworks */,
@@ -295,7 +296,6 @@
 				B77F1B3217B978D7009739AE /* QuartzCore.framework in Frameworks */,
 				B77F1B3417B978D7009739AE /* OpenGLES.framework in Frameworks */,
 				B77F1B3617B978D7009739AE /* OpenAL.framework in Frameworks */,
-				B77F1B3817B978D7009739AE /* AudioToolbox.framework in Frameworks */,
 				B77F1B3A17B978D7009739AE /* AVFoundation.framework in Frameworks */,
 				B77F1B3C17B978D7009739AE /* UIKit.framework in Frameworks */,
 				B77F1B3E17B978D7009739AE /* Foundation.framework in Frameworks */,
@@ -421,6 +421,7 @@
 				4F5CB57519899A3F003767B9 /* Tutorial.m */,
 				4F5CB578198ADC59003767B9 /* TutorialTile.h */,
 				4F5CB579198ADC59003767B9 /* TutorialTile.m */,
+				4F39108719D8605F0081D961 /* cardSlide1.mp3 */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -457,9 +458,6 @@
 		B77F1B2517B978D7009739AE = {
 			isa = PBXGroup;
 			children = (
-				4F69612E199EA37100DC54F7 /* jingles_PIZZA00-4.mp3 */,
-				4F69612C199EA32D00DC54F7 /* cardSlide1-2-3.mp3 */,
-				4F69611C199E9C4600DC54F7 /* zap2.mp3 */,
 				B737893C1807616C0076A88C /* Source */,
 				B77F1B4617B978D7009739AE /* Resources */,
 				9222E2B918734FF800A246C7 /* libs */,
@@ -506,6 +504,8 @@
 		B77F1B4617B978D7009739AE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4F39108419D860150081D961 /* jingles_PIZZA00.mp3 */,
+				4F9F2FA719D85D2D00196F18 /* zap2.mp3 */,
 				4FCB735D199CFD5400502609 /* Images-2.xcassets */,
 				4FF6D79D199CEEDF00F90D9C /* Images.xcassets */,
 				B73789911807667A0076A88C /* Icons */,
@@ -557,7 +557,7 @@
 				ORGANIZATIONNAME = Apportable;
 				TargetAttributes = {
 					B77F1B2D17B978D7009739AE = {
-						DevelopmentTeam = SBVP8ED765;
+						DevelopmentTeam = DS8K5NQLVD;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
 								enabled = 0;
@@ -624,7 +624,6 @@
 				4FCB735E199CFD5400502609 /* Images-2.xcassets in Resources */,
 				4FA79FEB199BCE6B005ACCDC /* MGWUClose.png in Resources */,
 				B71F5913188484E7003F4D28 /* iPad.png in Resources */,
-				4F69612F199EA37100DC54F7 /* jingles_PIZZA00-4.mp3 in Resources */,
 				B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */,
 				4FA79FC1199BCE6B005ACCDC /* FBLoginButton@2x.png in Resources */,
 				4FA79FD6199BCE6B005ACCDC /* MGWUAboutFooter-Landscape~iphone.png in Resources */,
@@ -640,6 +639,7 @@
 				4FA79FEA199BCE6B005ACCDC /* MGWUBackgroundDark-Portrait~iphone.png in Resources */,
 				4FA79FEF199BCE6B005ACCDC /* MGWUFacebookLoginPortrait.nib in Resources */,
 				4FA79FDA199BCE6B005ACCDC /* MGWUAboutFooter-Portrait~iphone.png in Resources */,
+				4F39108819D8605F0081D961 /* cardSlide1.mp3 in Resources */,
 				4FA79FEE199BCE6B005ACCDC /* MGWUFacebookLoginLandscapeDark.nib in Resources */,
 				4FA79FDD199BCE6B005ACCDC /* MGWUBackground-Landscape~ipad.png in Resources */,
 				4FA79FF1199BCE6B005ACCDC /* mgwuLogo.png in Resources */,
@@ -651,7 +651,6 @@
 				4FA79FED199BCE6B005ACCDC /* MGWUFacebookLoginLandscape.nib in Resources */,
 				4FA79FF0199BCE6B005ACCDC /* MGWUFacebookLoginPortraitDark.nib in Resources */,
 				4FA79FC8199BCE6B005ACCDC /* green.png in Resources */,
-				4F69612D199EA32D00DC54F7 /* cardSlide1-2-3.mp3 in Resources */,
 				4FA79FDC199BCE6B005ACCDC /* MGWUBackground-Landscape@2x~iphone.png in Resources */,
 				B71F591A188484E7003F4D28 /* Settings@2x.png in Resources */,
 				4FA79FF2199BCE6B005ACCDC /* mgwuLogo@2x.png in Resources */,
@@ -672,8 +671,10 @@
 				4FA79FD5199BCE6B005ACCDC /* MGWUAboutFooter-Landscape~ipad.png in Resources */,
 				4FA79FD7199BCE6B005ACCDC /* MGWUAboutFooter-Portrait@2x~ipad.png in Resources */,
 				B71F5915188484E7003F4D28 /* iPhone-old.png in Resources */,
+				4F39108519D860150081D961 /* jingles_PIZZA00.mp3 in Resources */,
 				4FA79FCC199BCE6B005ACCDC /* hipmobsend_field.png in Resources */,
 				B71F5917188484E7003F4D28 /* iPhone.png in Resources */,
+				4F9F2FA819D85D2D00196F18 /* zap2.mp3 in Resources */,
 				4FA79FEC199BCE6B005ACCDC /* MGWUClose@2x.png in Resources */,
 				B7378975180762440076A88C /* Default-568h@2x.png in Resources */,
 				4FA79FE6199BCE6B005ACCDC /* MGWUBackgroundDark-Landscape~iphone.png in Resources */,
@@ -683,7 +684,6 @@
 				4FA79FF6199BCE6B005ACCDC /* mgwuPlaceholderIcon@2x.png in Resources */,
 				B7378977180762440076A88C /* Default.png in Resources */,
 				4FA79FC2199BCE6B005ACCDC /* FBLoginButtonPressed.png in Resources */,
-				4F69611D199E9C4600DC54F7 /* zap2.mp3 in Resources */,
 				4FA79FD2199BCE6B005ACCDC /* MGWUAboutFooter-Landscape-568h@2x~iphone.png in Resources */,
 				4FA79FFA199BCE6B005ACCDC /* operator.connecting.png in Resources */,
 				4FF6D79E199CEEDF00F90D9C /* Images.xcassets in Resources */,
@@ -866,7 +866,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Robert Malison (DS8K5NQLVD)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Robert Malison (DS8K5NQLVD)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";

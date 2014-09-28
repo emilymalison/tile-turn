@@ -66,9 +66,6 @@ static const int GRID_SIZE=3;
     tilesChecked=9;
     self.newHint=NO;
     
-    NSURL *turnSoundURL=[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"jingles_PIZZA00-4" ofType:@"mp3"]];
-    AudioServicesCreateSystemSoundID((__bridge CFURLRef)turnSoundURL, &matchSound);
-    
     self.pause=NO;
 }
 
@@ -446,7 +443,8 @@ static const int GRID_SIZE=3;
                             [self scheduleBlock:^(CCTimer *timer) {
                                 [self dotAnimation:matchDot];
                                 if (toBeRemoved.sound==YES) {
-                                    AudioServicesPlaySystemSound(matchSound);
+                                    OALSimpleAudio *audio=[OALSimpleAudio sharedInstance];
+                                    [audio playEffect:@"jingles_PIZZA00.mp3"];
                                 }
                             } delay:.5];
                         }

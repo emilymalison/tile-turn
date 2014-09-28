@@ -65,12 +65,14 @@
     if (timeRemaining==10) {
         [_timer.animationManager runAnimationsForSequenceNamed:@"Animation"];
         if (self.sound==YES) {
-            AudioServicesPlaySystemSound(timerSound);
+            OALSimpleAudio *audio=[OALSimpleAudio sharedInstance];
+            [audio playEffect:@"zap2.mp3"];
         }
     }
     else if (timeRemaining<10 && timeRemaining>0){
         if (self.sound==YES) {
-            AudioServicesPlaySystemSound(timerSound);
+            OALSimpleAudio *audio=[OALSimpleAudio sharedInstance];
+            [audio playEffect:@"zap2.mp3"];
         }
     }
     else if (timeRemaining==0) {

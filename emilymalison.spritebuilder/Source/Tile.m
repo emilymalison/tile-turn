@@ -25,9 +25,6 @@
     [super onEnter];
     [self setUpTile];
     
-    NSURL *turnSoundURL=[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"cardSlide1-2-3" ofType:@"mp3"]];
-    AudioServicesCreateSystemSoundID((__bridge CFURLRef)turnSoundURL, &turnSound);
-    
     canTouch = YES;
     
     self.remove=NO;
@@ -122,7 +119,8 @@
         canTouch = NO;
         CCActionRotateBy *rotateTile= [CCActionRotateBy actionWithDuration:.4 angle:90];
         if (self.sound==YES) {
-            AudioServicesPlaySystemSound(turnSound);
+            OALSimpleAudio *audio=[OALSimpleAudio sharedInstance];
+            [audio playEffect:@"cardSlide1.mp3"];
         }
         CCActionCallBlock *resetTouch = [CCActionCallBlock actionWithBlock:^{
             canTouch= YES;
