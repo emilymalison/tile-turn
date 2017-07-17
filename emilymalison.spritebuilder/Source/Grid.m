@@ -13,39 +13,39 @@
 #import "Dot.h"
 #import "OALSimpleAudio.h"
 
-static const int GRID_SIZE=3;
+static const int GRID_SIZE=3; //size of the grid (3 by 3)
 
 @implementation Grid{
+    //grid dimension variables
     CGFloat _columnWidth;
     CGFloat _columnHeight;
     CGFloat _tileMarginVertical;
     CGFloat _tileMarginHorizontal;
+    
     CCSprite *tileSprite;
-    NSMutableArray *_gridArray;
-    Tile *tileRotated;
-    int score;
-    BOOL possibleMatch;
-    NSMutableArray *_tileMatchArray;
-    BOOL moveIndicated;
-    NSTimer* indicateTimer;
-    NSMutableArray *_newTileArray;
-    Gameplay *_gameplayScene;
-    BOOL shuffling;
-    NSTimer *shufflingTimer;
-    NSMutableArray *_newTileArray0;
-    NSMutableArray *_newTileArray1;
-    NSMutableArray *_newTileArray2;
-    int tilesNotMoving;
-    BOOL falling;
-    BOOL newGrid;
-    BOOL afterFalling;
-    int tilesChecked;
-    CCLabelTTF *comboText;
-    int timeLeft;
-    NSTimer *secondTimer;
+    NSMutableArray *_gridArray; //multidimensional array that stores the tile objects
+    Tile *tileRotated; //stores tile that was just rotated
+    int score; //stores score
+    BOOL possibleMatch; //whether there's a possible move or not
+    NSMutableArray *_tileMatchArray; //stores tiles that could be rotated to make a match, when user hasn't made a match in 10 seconds, game will give them a hint by animating one of these tiles
+    BOOL moveIndicated; //whether we've given the user a hint
+    NSTimer* indicateTimer; //times how long to wait in between hints
+    Gameplay *_gameplayScene; //gameplay scene
+    BOOL shuffling; //whether the board is shuffling or not
+    NSTimer *shufflingTimer; //shuffling timer
+    NSMutableArray *_newTileArray0; //stores new tiles that are falling into the first column
+    NSMutableArray *_newTileArray1; //stores new tiles that are falling into the second column
+    NSMutableArray *_newTileArray2; //stores new tiles that are falling into the third column
+    int tilesNotMoving; //counts the tiles that are not falling, when this integer equals zero, UI is enabled again and gameplay can resume
+    BOOL falling; //indicates whether there are tiles falling or not
+    BOOL newGrid; //indicates whether a new grid has just been created and needs to be set up
+    int tilesChecked; //counts number of tiles checked for possible moves
+    CCLabelTTF *comboText; //text that displays when user makes two matches at once
+    int timeLeft; //stores time left which displays on the Gameplay screen
+    NSTimer *secondTimer; //timer
 }
 
-- (void)onEnter
+- (void)onEnter //sets values of all variables and calls function to set up grid
 {
     [super onEnter];
     timeLeft=0;
@@ -55,7 +55,6 @@ static const int GRID_SIZE=3;
     [self setUpGrid];
     
     moveIndicated=NO;
-    _newTileArray=[NSMutableArray array];
     
     shuffling=NO;
     _newTileArray0=[NSMutableArray array];
@@ -69,18 +68,19 @@ static const int GRID_SIZE=3;
     self.pause=NO;
 }
 
--(void)update:(CCTime)delta{
+-(void)update:(CCTime)delta{ //called continuously throughout the game
     tilesNotMoving=0;
     CCNode *_node=self.parent;
     Gameplay* _gameplay=(Gameplay*)_node.parent;
-    for (Tile* tile in self.children) {
+    
+    for (Tile* tile in self.children) { //updates location of tiles, in case one falls down
         tile.sound=_gameplay.sound;
         tile.tileX=round((tile.position.y/tile.contentSize.height)/2);
         tile.tileY=round((tile.position.x/tile.contentSize.width)/2);
         if (tile.tileX<=2) {
             _gridArray[tile.tileX][tile.tileY]=tile;
         }
-        if (tile.physicsBody.affectedByGravity==NO && falling==YES) {
+        if (tile.physicsBody.affectedByGravity==NO && falling==YES) { //counting tiles that aren't moving
             tilesNotMoving+=1;
         }
         CCNode *_node=self.parent;
@@ -89,7 +89,7 @@ static const int GRID_SIZE=3;
             tile.userInteractionEnabled=NO;
         }
     }
-    if (tilesNotMoving==9 && falling==YES && self.pause==NO) {
+    if (tilesNotMoving==9 && falling==YES && self.pause==NO) { //determines that the tiles have stopped falling after a movie
         [self tilesDoneFalling];
         if (self.timerExpired==YES && shuffling==NO && tilesChecked==9) {
             CCNode *_node=self.parent;
@@ -114,7 +114,7 @@ static const int GRID_SIZE=3;
     }
 }
 
--(void)tilesDoneFalling{
+-(void)tilesDoneFalling{ //checks for possible moves after new tiles have fallen in
     tilesChecked=0;
     falling=NO;
     for (int x=0; x<GRID_SIZE; x++) {
@@ -130,7 +130,7 @@ static const int GRID_SIZE=3;
 }
 
 #pragma mark - UI and Gravity
--(void)disableUserInteraction{
+-(void)disableUserInteraction{ //disables user interaction with the tiles after a move is made, when the tiles are shuffling, when the screen is paused, and when the game is over
     for (int x=0; x<GRID_SIZE; x++) {
         for (int y=0; y<GRID_SIZE; y++) {
             Tile *tile=_gridArray[x][y];
@@ -148,7 +148,7 @@ static const int GRID_SIZE=3;
     }
 }
 
--(void)enableUserInteraction{
+-(void)enableUserInteraction{ //re-enables user interaction
     for (int x=0; x<GRID_SIZE; x++) {
         for (int y=0; y<GRID_SIZE; y++) {
             Tile *tile=_gridArray[x][y];
@@ -160,7 +160,7 @@ static const int GRID_SIZE=3;
 
 #pragma mark - Filling Grid with Tiles
 
--(void)setUpGrid{
+-(void)setUpGrid{ //sets up grid at the beginning of a game or when there are no more possible moves
     if (shuffling==YES) {
         for (int x=0; x<GRID_SIZE; x++) {
             for (int y=0; y<GRID_SIZE; y++) {
@@ -220,7 +220,7 @@ static const int GRID_SIZE=3;
 
 #pragma mark - Checking for Matches
 
--(void)checkTile:(Tile *)rotatedTile{
+-(void)checkTile:(Tile *)rotatedTile{ //checks for matches involving the tile that was just rotated
     [self disableUserInteraction];
     int match;
     BOOL firstDot;
@@ -460,7 +460,7 @@ static const int GRID_SIZE=3;
 
 #pragma mark - Remove Tiles
 
--(void)removeTiles{
+-(void)removeTiles{ //removes tiles that were involved in a match and replaces them with tiles that fall down from the top of the screen
     _newTileArray0=[NSMutableArray array];
     _newTileArray1=[NSMutableArray array];
     _newTileArray2=[NSMutableArray array];
@@ -494,7 +494,6 @@ static const int GRID_SIZE=3;
                     }
                 }
                 
-                // WARNING: MIGHT LEAD TO UNEXPECTED BEHAVIOR
                 if ([self.children containsObject:tile]) {
                     [self removeChild:tile];
                     [self scheduleBlock:^(CCTimer *timer) {
@@ -619,7 +618,7 @@ static const int GRID_SIZE=3;
     }
 }
 
--(void)dropNewTile:(NSTimer*)theTimer{
+-(void)dropNewTile:(NSTimer*)theTimer{ //drops new tiles to replace the ones removed after a match was made
     Tile *newTile = [theTimer userInfo];
     newTile.physicsBody.affectedByGravity=YES;
     newTile.physicsBody.collisionMask=nil;
@@ -637,20 +636,21 @@ static const int GRID_SIZE=3;
 
 
 #pragma mark - Match Animations
--(void)matchAnimationOnTile:(Tile*)removedTile{
+-(void)matchAnimationOnTile:(Tile*)removedTile{ //runs animation on tiles disappearing
     [removedTile.animationManager runAnimationsForSequenceNamed:(@"Match Timeline")];
     [removedTile tileRemoved];
     
     [NSTimer scheduledTimerWithTimeInterval:.5 target:self selector:@selector(removeTiles) userInfo:nil repeats:NO];
 }
 
--(void)dotAnimation:(Dot*)matchDot{
+
+-(void)dotAnimation:(Dot*)matchDot{ //runs animation on the dots that were involved in a match
     [matchDot.animationManager runAnimationsForSequenceNamed:(@"Animation")];
 }
 
 #pragma mark - Checking Original Grid For Matches
 
--(void)checkHorizontallyTile:(Tile*)tile{
+-(void)checkHorizontallyTile:(Tile*)tile{ //checks the original grid of tiles for horizontal matches
     int match;
     BOOL firstDot;
     for (int j=0; j<3; j++) {
@@ -696,7 +696,7 @@ static const int GRID_SIZE=3;
     }
 }
 
--(void)checkVerticallyTile:(Tile*)tile{
+-(void)checkVerticallyTile:(Tile*)tile{ //checks the original grid of tiles for vertical matches
     int match;
     BOOL firstDot;
     for (int j=0; j<3; j++) {
@@ -744,7 +744,7 @@ static const int GRID_SIZE=3;
 
 #pragma mark - Checking For Possible Moves
 
--(void)checkForMoves{
+-(void)checkForMoves{ //checks for possible moves, called whenever a new grid is created or when a match is made
     for (Tile* tile in self.children) {
         tile.tileMatchArray=[NSMutableArray array];
     }
@@ -959,19 +959,19 @@ static const int GRID_SIZE=3;
     }
 }
 
--(void)resetShuffling{
+-(void)resetShuffling{ //indicates that shuffling is done to Gameplay object
     shuffling=NO;
     CCNode *_node=self.parent;
     [(Gameplay*)_node.parent shufflingDone];
 }
 
 #pragma mark - Indicate Move
--(void)second{
+-(void)second{ //called every second to decrease the timer
     if (timeLeft>0) {
         timeLeft-=1;
     }
 }
--(void)indicateMove{
+-(void)indicateMove{ //animates a tile to give the user a hint
     if (falling==NO) {
         [self.indicatedTile.animationManager runAnimationsForSequenceNamed:(@"Animation")];
         [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(resetAnimation) userInfo:nil repeats:NO];
@@ -980,7 +980,7 @@ static const int GRID_SIZE=3;
     }
 }
 
--(void)resetAnimation{
+-(void)resetAnimation{ //stops hint animation
     [self.indicatedTile.animationManager runAnimationsForSequenceNamed:(@"Default Timeline")];
 }
 

@@ -8,7 +8,7 @@
 
 #import "CCNode.h"
 
-@interface GameOver : CCNode
+@interface GameOver : CCNode //game over screen
 
-@property (nonatomic, assign)int finalScore;
+@property (nonatomic, assign)int finalScore; //stores the user's final score
 @end

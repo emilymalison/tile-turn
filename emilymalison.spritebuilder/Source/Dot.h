@@ -8,17 +8,18 @@
 
 #import "CCNode.h"
 
-typedef enum {
+typedef enum { //the three different colors dots can be
     green,
-    blue,
-    white
+    white,
+    blue
 } DotColor;
 
-@interface Dot : CCNode
+@interface Dot : CCNode //defining the dot class
 
-@property (nonatomic, assign)NSUInteger DotColor;
-@property (nonatomic, assign)int dotX;
-@property (nonatomic, assign)int dotY;
-@property (nonatomic, assign)BOOL match;
+//defining dot properties
+@property (nonatomic, assign)NSUInteger DotColor; //color
+@property (nonatomic, assign)int dotX; //which column a dot is in
+@property (nonatomic, assign)int dotY; //which row a dot is in
+@property (nonatomic, assign)BOOL match; //whether a dot is part of a match or not
 
 @end

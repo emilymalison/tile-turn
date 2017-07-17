@@ -8,9 +8,9 @@
 
 #import "CCNode.h"
 
-@interface MainScene : CCNode <CCPhysicsCollisionDelegate>
+@interface MainScene : CCNode <CCPhysicsCollisionDelegate> //Main Scene class, the scene that shows up when the user opens the app, contains play button, sound button, and help button
 
--(void)startGame;
+-(void)startGame; //function that starts the game by switching to gameplay screen
 
 
 @end

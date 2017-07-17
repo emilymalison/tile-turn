@@ -12,15 +12,17 @@
 #import "OALSimpleAudio.h"
 
 @implementation Tile{
+    //dimensions of tile for dot placement
     CGFloat _dotMarginHorizontal;
     CGFloat _dotMarginVertical;
     CGFloat _tileColumnWidth;
     CGFloat _tileColumnHeight;
-    Dot *dot;
-    BOOL canTouch;
-    CCSprite *_tile;
+    
+    Dot *dot; //dot object that is placed on tile
+    BOOL canTouch; //whether UI is enabled with each tile
+    CCSprite *_tile; //Sprite that reflects appearance of tile
 }
-- (void)onEnter
+- (void)onEnter //sets up the tile
 {
     [super onEnter];
     [self setUpTile];
@@ -38,7 +40,7 @@
 
 #pragma mark - Filling Tile with Dots
 
--(void)setUpTile{
+-(void)setUpTile{ //adds dots to the tile and stores them and their colors in the respective arrays
     _tileColumnHeight=self.contentSize.height/3;
     _tileColumnWidth=self.contentSize.width/3;
     
@@ -113,7 +115,7 @@
 
 #pragma mark - Rotating Tile When Tapped
 
--(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
+-(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event{ //rotates tile when it is tapped
     if (canTouch) {
         self.physicsBody.collisionMask=@[];
         canTouch = NO;
@@ -149,13 +151,13 @@
 }
 
 
--(NSMutableArray*)rotateColorMatrix:(NSMutableArray*)matrix{
+-(NSMutableArray*)rotateColorMatrix:(NSMutableArray*)matrix{ //rotates the color matrix of dots when tile is rotated
     return [NSMutableArray arrayWithObjects:[NSMutableArray arrayWithObjects:matrix[0][2], matrix[1][2], matrix[2][2], nil], [NSMutableArray arrayWithObjects:matrix[0][1], matrix[1][1], matrix[2][1], nil], [NSMutableArray arrayWithObjects:matrix[0][0], matrix[1][0], matrix[2][0], nil], nil];
 }
 
 #pragma mark - Rotating Tile Backwards
 
--(void)rotateBackwards{
+-(void)rotateBackwards{ //rotates tile backwards, used when there is a match on the initial grid of tiles to get rid of that match so user doesn't start with any points
     self.rotation -= 90;
     self.rotationMeasure+=1;
     if (self.rotationMeasure==3) {
@@ -179,7 +181,7 @@
 }
 
 #pragma mark - Particle Effect When Removed
-- (void)tileRemoved{
+- (void)tileRemoved{ //loads particle effect animation when a tile is removed from the screen
     CCParticleSystem *tileRemoved = (CCParticleSystem *)[CCBReader load:@"Tile Removed"];
     CCNode *_grid=self.parent;
     CCNode *_node=_grid.parent;

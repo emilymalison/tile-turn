@@ -37,6 +37,7 @@
     [MGWU setAppiraterAppId:@"914075377" andAppName:@"Tile Turn"];
     [MGWU setReminderMessage:@"Come play Tile Turn for 60 seconds of brain-teasing excitement!"];
     
+    //Analytics Software
     [Crashlytics startWithAPIKey:@"285581153a5b0383ca99758d69228afa58cb761b"];
     
     // Configure Cocos2d with the options set in SpriteBuilder
@@ -55,9 +56,7 @@
     
     // Configure CCFileUtils to work with SpriteBuilder
     [CCBReader configureCCFileUtils];
-    
-    // Do any extra configuration of Cocos2d here (the example line changes the pixel format for faster rendering, but with less colors)
-    //[cocos2dSetup setObject:kEAGLColorFormatRGB565 forKey:CCConfigPixelFormat];
+
     
     [self setupCocos2dWithOptions:cocos2dSetup];
     

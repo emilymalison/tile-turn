@@ -11,13 +11,15 @@
 #import "Tutorial.h"
 
 @implementation TutorialTile{
-    BOOL canTouch;
+    BOOL canTouch; //whether a not UI is enabled (user can only rotate the tile that they're supposed to)
+    
+    //tile dimension variables
     CGFloat _tileColumnHeight;
     CGFloat _tileColumnWidth;
     CGFloat _dotMarginHorizontal;
     CGFloat _dotMarginVertical;
-    Dot *dot;
-    Tutorial *_tutorial;
+    Dot *dot; //dot on the tile
+    Tutorial *_tutorial; //tutorial object that the tile is a part of
 }
 
 
@@ -29,7 +31,7 @@
     self.rotation=0;
 }
 
--(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
+-(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event{ //rotates tile when it is tapped and when it is allowed to be rotated
     if (canTouch) {
         canTouch = NO;
         CCActionRotateBy *rotateTile= [CCActionRotateBy actionWithDuration:.4 angle:90];
@@ -44,11 +46,11 @@
     }
 }
 
--(NSMutableArray*)rotateColorMatrix:(NSMutableArray*)matrix{
+-(NSMutableArray*)rotateColorMatrix:(NSMutableArray*)matrix{ //rotates color matrix of dots on it
     return [NSMutableArray arrayWithObjects:[NSMutableArray arrayWithObjects:matrix[0][2], matrix[1][2], matrix[2][2], nil], [NSMutableArray arrayWithObjects:matrix[0][1], matrix[1][1], matrix[2][1], nil], [NSMutableArray arrayWithObjects:matrix[0][0], matrix[1][0], matrix[2][0], nil], nil];
 }
 
--(void)setUpTutorialTile{
+-(void)setUpTutorialTile{ //sets up dots on each tile with the specific color dots it is supposed to have
     _tileColumnHeight=self.contentSize.height/3;
     _tileColumnWidth=self.contentSize.width/3;
     

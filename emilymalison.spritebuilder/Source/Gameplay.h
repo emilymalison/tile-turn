@@ -8,18 +8,18 @@
 
 #import "CCNode.h"
 
-@interface Gameplay : CCNode <CCPhysicsCollisionDelegate>{
+@interface Gameplay : CCNode <CCPhysicsCollisionDelegate>{  //screen than contains all gameplay objects (grid, timer, buttons)
     SystemSoundID timerSound;
 }
 
 
--(void)timerExpired;
--(void)noPossibleMatches;
--(void)shufflingDone;
--(void)gameOver;
--(void)combo;
+-(void)timerExpired; //when time is up, disables user interaction
+-(void)noPossibleMatches; //when there are no more possible matches, redraw the grid of tiles
+-(void)shufflingDone; //allows gameplay to begin again when the grid has been reset
+-(void)gameOver; //makes Game Over screen appear
+-(void)combo; //when user makes more than one match at a time, they earn double points
 
-@property (nonatomic, assign) BOOL shuffling;
-@property (nonatomic, assign) BOOL sound;
+@property (nonatomic, assign) BOOL shuffling; //whether the board is being shuffled (redrawn) or not - when there are no more possible matches
+@property (nonatomic, assign) BOOL sound; //whether sound is on or off
 
 @end

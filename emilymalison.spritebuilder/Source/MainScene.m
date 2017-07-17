@@ -9,15 +9,15 @@
 #import "MainScene.h"
 
 @implementation MainScene{
-    CCButton *soundOnButton;
-    CCButton *soundOffButton;
-    CCPhysicsNode *_physicsNode;
-    CCButton *playButton;
-    CCSprite *playBackground;
+    CCButton *soundOnButton; //button displayed when sound is on
+    CCButton *soundOffButton; //button displayed when sound is off
+    CCPhysicsNode *_physicsNode; //enables physics on Main Screen
+    CCButton *playButton; //play button
+    CCSprite *playBackground; //background behind play button
 }
 
 #pragma mark - Loading Gameplay Scene
--(void)onEnter{
+-(void)onEnter{ //enables buttons and makes them visable, also sets up sounds
     [super onEnter];
     [self scheduleBlock:^(CCTimer *timer) {
         playBackground.position=playButton.position;
@@ -38,7 +38,7 @@
         soundOnButton.visible=NO;
     }
 }
--(void) startGame{
+-(void) startGame{ //called when play button is pressed, directs to the tutorial if the user has never played before, otherwise directs to gameplay screen
     NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
     if ([defaults objectForKey:@"hasPlayedTutorial"]==nil) {
         CCScene *tutorial=[CCBReader loadAsScene:@"Tutorial"];
@@ -53,12 +53,12 @@
 }
 
 
--(void)loadTutorial{
+-(void)loadTutorial{ //loads the tutorial when the help button is pressed
     CCScene *tutorial=[CCBReader loadAsScene:@"Tutorial"];
     [[CCDirector sharedDirector] replaceScene:tutorial];
 }
 
--(void)soundChange{
+-(void)soundChange{ //enables or disables sounds when sound button is pressed
     NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
     if ([[defaults objectForKey:@"sound"] boolValue]==YES) {
         [defaults setObject:[NSNumber numberWithBool:NO] forKey:@"sound"];
@@ -76,7 +76,7 @@
 
 #pragma mark - Collisions
 
--(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair playButton:(CCNode *)nodeA titleBottom:(CCNode *)nodeB {
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair playButton:(CCNode *)nodeA titleBottom:(CCNode *)nodeB { //sensed physics collision (so title and buttons can fall in when app is opened, and stop when the collide with an invisible node)
     return NO;
 }
 

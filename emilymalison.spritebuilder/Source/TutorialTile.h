@@ -10,9 +10,9 @@
 
 @interface TutorialTile : CCSprite
 
-@property(nonatomic, assign)int number;
-@property(nonatomic, assign)int rotationMeasure;
-@property(nonatomic, strong)NSMutableArray* tileArray;
+@property(nonatomic, assign)int number; //which number tile it is in the tutorial
+@property(nonatomic, assign)int rotationMeasure; //how rotated it is, same as the property in Tile.h
+@property(nonatomic, strong)NSMutableArray* tileArray; //array of dots on the tile
 
 -(void)setUpTutorialTile;
 @end

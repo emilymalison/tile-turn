@@ -11,7 +11,7 @@
 @interface Tutorial : CCNode
 
 
--(void)check;
+-(void)check; //checks to see if sample tiles in the tutorial have been rotated to make a match
 
 
 @end
